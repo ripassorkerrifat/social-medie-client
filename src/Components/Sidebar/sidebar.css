@@ -1,0 +1,53 @@
+.sideContainer {
+  flex: 3;
+  height: 100vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 50px;
+  overflow-y: scroll;
+}
+.sideContainer .sidebarWrapper {
+  padding: 12px;
+}
+.sideContainer .sidebarWrapper .sidebarList .sidebarListItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.sideContainer .sidebarWrapper .sidebarList .sidebarListItem:hover {
+  background: #cbd5e0;
+}
+.sideContainer .sidebarWrapper .sidebarList .sidebarListItem .sidebarIcon {
+  margin: 0px 10px;
+  font-size: 23px;
+  color: #ff059b;
+}
+.sideContainer .sidebarWrapper .sidebarList .sidebarListItem .sidebarText {
+  font-size: 18px;
+  color: #011631;
+  font-weight: 600;
+  color: #011631;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: gray;
+}
+
+@media only screen and (max-width: 968px) {
+  .sideContainer .sidebarListItem .sidebarText {
+    display: none;
+  }
+  .sidebarListItem:hover .sidebarText {
+    display: block;
+  }
+}/*# sourceMappingURL=sidebar.css.map */
