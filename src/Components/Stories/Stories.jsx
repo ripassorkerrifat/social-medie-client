@@ -9,6 +9,7 @@ const Stories = () => {
   return (
     <div className="stories">
       <div className="storyCard">
+        <div className="overlay"></div>
         <img className="storyProfile" src={user} alt="" />
         <img className="storyBg" src={user} alt="" />
         <img className="storyAdd" src={upload} alt="" />
