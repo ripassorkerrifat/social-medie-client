@@ -47,14 +47,10 @@
 
 @media only screen and (max-width: 968px) {
   .sideContainer {
-    flex: 1;
+    flex: 2;
     .sidebarWrapper {
       padding: 8px;
-      .sidebarListItem {
-        .sidebarText {
-          display: none;
-        }
-      }
+
       .pageItem {
         display: none;
       }
@@ -64,11 +60,6 @@
       .pageHr {
         display: none;
       }
-    }
-  }
-  .sidebarListItem:hover {
-    .sidebarText {
-      display: block;
     }
   }
 }

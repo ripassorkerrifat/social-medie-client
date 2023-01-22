@@ -9,7 +9,9 @@ const Navbar = () => {
   return (
     <div className="navContainer">
       <div className="leftside">
-        <div className="logo">Social Media</div>
+        <div className="font-semibold text-[#ff059b] lg:text-3xl md:text-2xl text-xl md:px-6 py-2">
+          Social Media
+        </div>
       </div>
       <div className="center hidden md:inline-block">
         <div class=" relative w-[90%] m-auto">
@@ -37,7 +39,12 @@ const Navbar = () => {
               12
             </p> */}
           </div>
-          <CgProfile className="link" />
+          {/* <CgProfile className="link" /> */}
+          <img
+            className="rounded-full w-[40px] h-[40px] ml-[10px]"
+            src="https://images.news18.com/ibnlive/uploads/2021/02/1612707348_tiger.jpg?im=Resize,width=360,aspect=fit,type=normal?im=Resize,width=320,aspect=fit,type=normal"
+            alt=""
+          />
         </div>
       </div>
     </div>

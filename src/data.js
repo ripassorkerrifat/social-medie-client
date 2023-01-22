@@ -118,7 +118,7 @@ export const Posts = [
     id: 1,
     title: "to make a blinded choice to reject or provident to task",
     body: "because he receives and accepts the accepted consequences unencumbered and when he finds the discomfort",
-    photo: "/assets/posts/post1.jpg",
+    photo: "/src/assets/posts/post1.jpg",
     date: "5 mins ago",
     like: "100",
     comment: "70",

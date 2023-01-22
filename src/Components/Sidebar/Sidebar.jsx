@@ -1,13 +1,9 @@
 import React from "react";
-import { AiFillHome } from "react-icons/ai";
+import { AiFillHome, AiFillSave } from "react-icons/ai";
 import { MdEventSeat } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { FaUserFriends } from "react-icons/fa";
-import {
-  BsFillChatLeftFill,
-  BsFillBookmarkStarFill,
-  BsFillCameraVideoFill,
-} from "react-icons/bs";
+import { BsFillChatLeftFill, BsFillCameraVideoFill } from "react-icons/bs";
 import "./sidebar.scss";
 
 const Sidebar = () => {
@@ -32,8 +28,8 @@ const Sidebar = () => {
             <span className="sidebarText">Friends</span>
           </li>
           <li className="sidebarListItem">
-            <BsFillBookmarkStarFill className="sidebarIcon" />
-            <span className="sidebarText">Bookmarks</span>
+            <AiFillSave className="sidebarIcon" />
+            <span className="sidebarText">Saved</span>
           </li>
           <li className="sidebarListItem">
             <MdEventSeat className="sidebarIcon" />

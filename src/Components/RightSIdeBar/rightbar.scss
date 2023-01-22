@@ -1,5 +1,21 @@
 .rightbarContainer {
   flex: 3;
-  background-color: rgb(121, 206, 31);
   height: 100vh;
+  position: sticky;
+  top: 50px;
+  overflow-y: scroll;
+}
+
+// @media only screen and (max-width: 968px) {
+//   .rightbarContainer {
+//     flex: 2;
+//     .wrapper {
+//       padding: 8px;
+//     }
+//   }
+// }
+@media only screen and (max-width: 968px) {
+  .rightbarContainer {
+    display: none;
+  }
 }

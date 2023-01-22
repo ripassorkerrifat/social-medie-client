@@ -1,5 +1,6 @@
 import React from "react";
 import CreatePost from "../CreatePost/CreatePost";
+import Post from "../Post/Post";
 import Stories from "../Stories/Stories";
 import "./feed.scss";
 
@@ -9,6 +10,7 @@ const Feed = () => {
       <div className="feedWrapper">
         <Stories />
         <CreatePost />
+        <Post />
       </div>
     </div>
   );

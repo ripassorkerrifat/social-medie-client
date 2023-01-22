@@ -1,8 +1,10 @@
 .feedContainer {
   flex: 6;
   height: 100vh;
+  background: white;
   overflow-y: scroll;
   .feedWrapper {
+    margin-top: 50px;
     padding: 20px;
   }
 }
