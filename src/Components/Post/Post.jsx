@@ -7,7 +7,6 @@ import {
 import { BiWorld, BiComment } from "react-icons/bi";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import { RiShareForwardLine } from "react-icons/ri";
-import "./post.css";
 import { Posts } from "../../data";
 
 const Post = () => {
@@ -15,7 +14,10 @@ const Post = () => {
     <div>
       <div className="post-container">
         {Posts.map((post, i) => (
-          <div className="post-wrapper border rounded shadow-lg my-6 mt-10">
+          <div
+            key={i}
+            className="post-wrapper border rounded shadow-lg my-6 mt-10"
+          >
             <div className="post-top my-3 px-2 flex justify-between items-center">
               <div className="flex items-center align-middle">
                 <img
@@ -48,7 +50,7 @@ const Post = () => {
                 alt=""
               />
             </div>
-            <div className="post-bottom py-2 md:px-4 px-2">
+            <div className="post-bottom py-2 md:px-4 px-1">
               <div className="flex justify-between align-middle">
                 <div className="flex">
                   <p className="bg-blue-500 rounded-full flex justify-center items-center  w-5 h-5">
@@ -66,26 +68,30 @@ const Post = () => {
               </div>
               <div className="border-b border-gray-500 pt-3"></div>
               <div className="flex justify-between items-center pt-2">
-                <div className="flex items-center hover:bg-slate-200 md:mx-3 mx-1 lg:px-9 md:px-4 px-2 rounded-lg">
+                <div className="flex items-center hover:bg-slate-200 lg:mx-3 md:mx-2 mx-1 lg:px-9 md:px-4 px-2 rounded-lg">
                   <span>
-                    <AiOutlineLike className="inline-block md:text-2xl text-lg mr-1" />
+                    <AiOutlineLike className="inline-block lg:text-2xl md:text-lg text-base sm:mr-1" />
                   </span>
-                  <span className="mt-1 md:text-lg font-semibold"> Like</span>
-                </div>
-                <div className="flex items-center hover:bg-slate-200 md:mx-3 mx-1 lg:px-7 md:px-4 px-2 rounded-lg">
-                  <span>
-                    <BiComment className="inline-block md:text-2xl text-lg mr-1" />
-                  </span>
-                  <span className="mt-1 md:text-lg font-semibold">
+                  <span className="mt-1 lg:text-lg text-base md:font-semibold">
                     {" "}
+                    Like
+                  </span>
+                </div>
+                <div className="flex items-center hover:bg-slate-200 lg:mx-3 md:mx-2 mx-1 lg:px-7 md:px-4 px-2 rounded-lg">
+                  <span>
+                    <BiComment className="inline-block lg:text-2xl md:text-lg text-base sm:mr-1" />
+                  </span>
+                  <span className="mt-1 lg:text-lg text-base md:font-semibold">
                     Commnent
                   </span>
                 </div>
-                <div className="flex items-center hover:bg-slate-200 md:mx-3 mx-1 lg:px-9 md:px-4 px-2 rounded-lg">
+                <div className="flex items-center hover:bg-slate-200 lg:mx-3 md:mx-2 mx-1 lg:px-9 md:px-4 px-2 rounded-lg">
                   <span>
-                    <RiShareForwardLine className="inline-block md:text-2xl text-lg mr-1" />
+                    <RiShareForwardLine className="inline-block lg:text-2xl md:text-lg text-base sm:mr-1" />
                   </span>
-                  <span className="mt-1 md:text-lg font-semibold"> Share</span>
+                  <span className="mt-1 lg:text-lg text-base md:font-semibold">
+                    Share
+                  </span>
                 </div>
               </div>
             </div>

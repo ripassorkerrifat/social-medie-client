@@ -43,7 +43,7 @@ const Sidebar = () => {
         <hr className="border-b border-gray-400 mt-5 opacity-60" />
 
         <div className="mt-6 pageItem">
-          <div className=" flex items-center mt-4">
+          <div className=" flex items-center hover:bg-slate-300 py-2  rounded">
             <img
               className="h-10 w-10 rounded-full ml-2"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJnuSzLJ_pnB1vY08vn3RSbsfT0KpmTGWkltv0G3g-RC0OQHjM61dQNkgs7y4KkbiBHE&usqp=CAU"
@@ -53,7 +53,7 @@ const Sidebar = () => {
               Ripas Sorker Rifat
             </h5>
           </div>
-          <div className=" flex items-center mt-4">
+          <div className=" flex items-center hover:bg-slate-300 py-2  rounded">
             <img
               className="h-10 w-10 rounded-full ml-2"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJnuSzLJ_pnB1vY08vn3RSbsfT0KpmTGWkltv0G3g-RC0OQHjM61dQNkgs7y4KkbiBHE&usqp=CAU"
@@ -63,7 +63,7 @@ const Sidebar = () => {
               Sohanur Rahaman
             </h5>
           </div>
-          <div className=" flex items-center mt-4">
+          <div className=" flex items-center hover:bg-slate-300 py-2  rounded">
             <img
               className="h-10 w-10 rounded-full ml-2"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJnuSzLJ_pnB1vY08vn3RSbsfT0KpmTGWkltv0G3g-RC0OQHjM61dQNkgs7y4KkbiBHE&usqp=CAU"
@@ -71,7 +71,7 @@ const Sidebar = () => {
             />
             <h5 className="ml-4 text-[#011631] font-semibold">Liton Sorker</h5>
           </div>
-          <div className=" flex items-center mt-4">
+          <div className=" flex items-center hover:bg-slate-300 py-2  rounded">
             <img
               className="h-10 w-10 rounded-full ml-2"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJnuSzLJ_pnB1vY08vn3RSbsfT0KpmTGWkltv0G3g-RC0OQHjM61dQNkgs7y4KkbiBHE&usqp=CAU"
@@ -85,7 +85,7 @@ const Sidebar = () => {
         <hr className="border-b pageHr border-gray-400 mt-5 opacity-60 hidden md:block" />
 
         <div className="mt-6 groupItem">
-          <div className=" flex items-center mt-4">
+          <div className=" flex items-center  hover:bg-slate-300 py-2  rounded">
             <img
               className="h-10 w-10 rounded-full ml-2"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJnuSzLJ_pnB1vY08vn3RSbsfT0KpmTGWkltv0G3g-RC0OQHjM61dQNkgs7y4KkbiBHE&usqp=CAU"
@@ -95,7 +95,7 @@ const Sidebar = () => {
               Ripas Sorker Rifat
             </h5>
           </div>
-          <div className=" flex items-center mt-4">
+          <div className=" flex items-center  hover:bg-slate-300 py-2  rounded">
             <img
               className="h-10 w-10 rounded-full ml-2"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJnuSzLJ_pnB1vY08vn3RSbsfT0KpmTGWkltv0G3g-RC0OQHjM61dQNkgs7y4KkbiBHE&usqp=CAU"
@@ -105,7 +105,7 @@ const Sidebar = () => {
               Sohanur Rahaman
             </h5>
           </div>
-          <div className="flex items-center mt-4">
+          <div className="flex items-center  hover:bg-slate-300 py-2  rounded">
             <img
               className="h-10 w-10 rounded-full ml-2"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJnuSzLJ_pnB1vY08vn3RSbsfT0KpmTGWkltv0G3g-RC0OQHjM61dQNkgs7y4KkbiBHE&usqp=CAU"
@@ -113,7 +113,7 @@ const Sidebar = () => {
             />
             <h5 className="ml-4 text-[#011631] font-semibold">Liton Sorker</h5>
           </div>
-          <div className="flex items-center mt-4">
+          <div className="flex items-center  hover:bg-slate-300 py-2  rounded">
             <img
               className="h-10 w-10 rounded-full ml-2"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJnuSzLJ_pnB1vY08vn3RSbsfT0KpmTGWkltv0G3g-RC0OQHjM61dQNkgs7y4KkbiBHE&usqp=CAU"

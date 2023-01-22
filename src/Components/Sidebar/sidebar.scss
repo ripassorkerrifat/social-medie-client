@@ -34,7 +34,8 @@
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  // width: 5px;
+  display: none;
 }
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
@@ -59,6 +60,13 @@
       }
       .pageHr {
         display: none;
+      }
+      .sidebarIcon {
+        font-size: 16px;
+      }
+      .sidebarText {
+        font-size: 14px;
+        color: blueviolet;
       }
     }
   }
