@@ -14,10 +14,10 @@ const Navbar = () => {
         </div>
       </div>
       <div className="center hidden md:inline-block">
-        <div class=" relative w-[90%] m-auto">
+        <div className=" relative w-[90%] m-auto">
           <input
             type="text"
-            class=" form-control block rounded-2xl w-full px-9 py-1.5 text-base font-normal text-gray-700 bg-gray-100 hover:bg-gray-200 bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:outline-none
+            className=" form-control block rounded-2xl w-full px-9 py-1.5 text-base font-normal text-gray-700 bg-gray-100 hover:bg-gray-200 bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:outline-none
         "
             placeholder="Search here......"
           />
