@@ -10,7 +10,7 @@ import "./content.css";
 const ProfileContent = () => {
   return (
     <div className="profile-content-container">
-      <div className="wrapper mt-8 px-5 md: pt-5">
+      <div className=" mt-8 px-5 md:pt-5">
         <ProfileTop />
         <div className="grid md:grid-cols-3 gap-5 mt-7">
           <div className="md:col-span-2 md:sticky md:h-screen post-section">

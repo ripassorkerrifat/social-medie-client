@@ -9,7 +9,7 @@ const FriendRequest = () => {
         <p className="text-[#ff059b]">See all</p>
       </div>
       {Users.map((user, i) => (
-        <div className="py-2 px-1 hover:bg-slate-200 rounded-md">
+        <div className="py-2 px-1 hover:bg-slate-300 rounded-md">
           <div className="flex justify-between">
             <div className="flex">
               <img

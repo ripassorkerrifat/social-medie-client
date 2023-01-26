@@ -7,7 +7,7 @@ import "./rightbar.scss";
 const RightSideBar = () => {
   return (
     <div className="rightbarContainer">
-      <div className="wrapper p-[12px] mt-[50px]">
+      <div className=" p-[12px] mt-[50px]">
         <FriendRequest />
         <Birhtday />
         <Online />

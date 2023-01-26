@@ -1,20 +1,30 @@
 import React from "react";
-import { AiFillHome, AiFillSave } from "react-icons/ai";
+import {
+  AiFillHome,
+  AiFillSave,
+  AiFillProfile,
+  AiFillSetting,
+} from "react-icons/ai";
 import { MdEventSeat } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { FaUserFriends } from "react-icons/fa";
 import { BsFillChatLeftFill, BsFillCameraVideoFill } from "react-icons/bs";
 import "./sidebar.scss";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
     <div className="sideContainer">
       <div className="sidebarWrapper">
         <ul className="sidebarList">
-          <li className="sidebarListItem">
+          <Link to={"/"} className="sidebarListItem">
             <AiFillHome className="sidebarIcon" />
             <span className="sidebarText">Home</span>
-          </li>
+          </Link>
+          <Link to={"/profile"} className="sidebarListItem">
+            <AiFillProfile className="sidebarIcon" />
+            <span className="sidebarText">Profile</span>
+          </Link>
           <li className="sidebarListItem">
             <BsFillChatLeftFill className="sidebarIcon" />
             <span className="sidebarText">Chat</span>
@@ -34,6 +44,10 @@ const Sidebar = () => {
           <li className="sidebarListItem">
             <MdEventSeat className="sidebarIcon" />
             <span className="sidebarText">Events</span>
+          </li>
+          <li className="sidebarListItem">
+            <AiFillSetting className="sidebarIcon" />
+            <span className="sidebarText"> Setting & privacy</span>
           </li>
           <li className="sidebarListItem">
             <FiLogOut className="sidebarIcon" />

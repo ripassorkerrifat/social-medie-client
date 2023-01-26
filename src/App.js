@@ -1,17 +1,12 @@
 import React from "react";
-import Home from "./Pages/Home/Home";
-import Login from "./Pages/Login/Login";
-import Profile from "./Pages/Profile/Profile";
-import Resister from "./Pages/Resister/Resister";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./Router/Router";
 
 const App = () => {
   return (
-    <div className=" flex flex-col justify-between bg-grdi">
-      {/* <Home /> */}
-      {/* <Profile /> */}
-      <Login />
-      {/* <Resister /> */}
-    </div>
+    <>
+      <RouterProvider router={router}></RouterProvider>
+    </>
   );
 };
 

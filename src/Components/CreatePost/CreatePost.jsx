@@ -3,8 +3,16 @@ import "./createPost.css";
 import { TbVideoPlus } from "react-icons/tb";
 import { FaPhotoVideo } from "react-icons/fa";
 import { GrEmoji } from "react-icons/gr";
+import { IoMdClose } from "react-icons/io";
+import { useState } from "react";
 
 const CreatePost = () => {
+  const [file, setFile] = useState(null);
+
+  const removeImage = () => {
+    setFile(null);
+  };
+
   return (
     <div className="createPost p-4">
       <div className="top-section flex w-full">
@@ -21,20 +29,47 @@ const CreatePost = () => {
         />
       </div>
       <hr className="border-b border-gray-400 mt-3 opacity-60" />
+
+      {file && (
+        <div className="mt-2 relative">
+          <img
+            src={URL.createObjectURL(file)}
+            className="object-fill max-h-[500px] w-full rounded-lg"
+            alt=""
+          />
+          <span className="bg-white h-7 w-7 rounded-full absolute top-1 right-1 flex justify-center items-center">
+            <IoMdClose
+              onClick={removeImage}
+              className="text-2xl font-semibold text-gray-800  inline-block"
+            />
+          </span>
+        </div>
+      )}
       <div className="bottom-section flex items-center justify-between mt:mx-4 mt-3">
-        <div className="flex items-center">
+        <div className="flex items-center hover:bg-gray-300 rounded-lg p-2">
           <TbVideoPlus className="inline-block md:text-3xl text-2xl text-[#ff059b]" />
           <span className="inline-block font-semibold ml-2 ">
             Live <span className="hidden md:inline-block">Video</span>
           </span>
         </div>
-        <div className="flex items-center">
+        <label
+          htmlFor="file"
+          className="flex items-center hover:bg-gray-300 rounded-lg p-2"
+        >
           <FaPhotoVideo className="inline-block md:text-3xl text-xl text-green-500" />
           <span className="inline-block font-semibold ml-2 ">
             Photo<span className="hidden md:inline-block">/Video</span>
           </span>
-        </div>
-        <div className="flex items-center">
+          <input
+            type="file"
+            name="file"
+            id="file"
+            accept=".png,.jpg,.jpeg"
+            className="hidden"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+        </label>
+        <div className="flex items-center hover:bg-gray-300 rounded-lg p-2">
           <GrEmoji className="inline-block md:text-3xl text-xl text-yellow-500" />
           <span className="inline-block font-semibold ml-2 ">
             Felling <span className="hidden md:inline-block">/Activity</span>

@@ -6,7 +6,7 @@
   overflow-y: scroll;
   .sidebarWrapper {
     padding: 12px;
-
+    margin-top: 40px;
     .sidebarList {
       .sidebarListItem {
         display: flex;
@@ -20,11 +20,11 @@
 
         .sidebarIcon {
           margin: 0px 10px;
-          font-size: 23px;
+          font-size: 21px;
           color: #ff059b;
         }
         .sidebarText {
-          font-size: 18px;
+          font-size: 16px;
           color: #011631;
           font-weight: 600;
         }
