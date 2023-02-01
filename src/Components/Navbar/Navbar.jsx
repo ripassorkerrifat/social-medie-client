@@ -8,8 +8,14 @@ import { CgProfile } from "react-icons/cg";
 import { FiLogIn } from "react-icons/fi";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Navbar = () => {
+  const { logout } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logout().then();
+  };
   return (
     <div className="navContainer">
       <div className="leftside">
@@ -141,6 +147,7 @@ const Navbar = () => {
                     <Menu.Item>
                       {({ active }) => (
                         <Link
+                          onClick={handleLogOut}
                           className={`${
                             active ? "bg-[#ff059b] text-white" : "text-gray-900"
                           } group flex w-full items-center rounded-md px-2 py-2 text-base`}

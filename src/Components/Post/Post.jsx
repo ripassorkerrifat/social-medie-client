@@ -79,7 +79,7 @@ const Post = () => {
               <div className="flex justify-between align-middle">
                 <div className="flex">
                   <div className="bg-blue-500 rounded-full flex justify-center items-center  w-5 h-5">
-                    <love className="inline-block text-white text-xs" />
+                    {/* <love className="inline-block text-white text-xs" /> */}
                     <img
                       src={like}
                       alt=""
@@ -110,10 +110,14 @@ const Post = () => {
                     btnClicked ? "block" : "hidden"
                   }`}
                 >
-                  {reactData.map((data) => (
-                    <figure>
+                  {reactData.map((data, i) => (
+                    <figure
+                      key={i}
+                      className="tooltip tooltip-top"
+                      data-tip={data.name}
+                    >
                       <img
-                        className="h-full hover:scale-150 duration-200"
+                        className="h-full hover:scale-150 duration-200 "
                         src={data.img}
                         alt=""
                         onClick={() => {

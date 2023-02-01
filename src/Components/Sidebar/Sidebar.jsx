@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   AiFillHome,
   AiFillSave,
@@ -6,13 +6,19 @@ import {
   AiFillSetting,
 } from "react-icons/ai";
 import { MdEventSeat } from "react-icons/md";
+import { IoIosPeople } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import { FaUserFriends } from "react-icons/fa";
 import { BsFillChatLeftFill, BsFillCameraVideoFill } from "react-icons/bs";
 import "./sidebar.scss";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Sidebar = () => {
+  const { logout } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logout().then();
+  };
   return (
     <div className="sideContainer">
       <div className="sidebarWrapper">
@@ -38,6 +44,10 @@ const Sidebar = () => {
             <span className="sidebarText">Friends</span>
           </li>
           <li className="sidebarListItem">
+            <IoIosPeople className="sidebarIcon" />
+            <span className="sidebarText">Peoples</span>
+          </li>
+          <li className="sidebarListItem">
             <AiFillSave className="sidebarIcon" />
             <span className="sidebarText">Saved</span>
           </li>
@@ -49,7 +59,7 @@ const Sidebar = () => {
             <AiFillSetting className="sidebarIcon" />
             <span className="sidebarText"> Setting & privacy</span>
           </li>
-          <li className="sidebarListItem">
+          <li onClick={handleLogOut} className="sidebarListItem">
             <FiLogOut className="sidebarIcon" />
             <span className="sidebarText">Logout</span>
           </li>

@@ -4,8 +4,11 @@ import { AiFillCamera } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
 import { MdAdd } from "react-icons/md";
 import { BsMessenger } from "react-icons/bs";
+import { useState } from "react";
 
 const ProfileTop = () => {
+  const [coverPhoto, setCoverPhoto] = useState(null);
+  const [profilePhoto, setProfilePhoto] = useState(null);
   return (
     <div className="profile-top-container border-b-2">
       {/* profile top cover photo  */}
@@ -15,10 +18,21 @@ const ProfileTop = () => {
           src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"
           alt=""
         />
-        <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-4 py-[6px] mr-4 rounded-md inline-block absolute bottom-3 right-0">
-          <AiFillCamera className="inline-block text-xl  mr-1" /> Edit cover
-          photo
-        </button>
+        <label htmlFor="">
+          {" "}
+          <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-4 py-[6px] mr-4 rounded-md inline-block absolute bottom-3 right-0">
+            <AiFillCamera className="inline-block text-xl  mr-1" /> Edit cover
+            photo
+          </button>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            accept=".png,.jpg,.jpeg"
+            className="hidden"
+            onChange={(e) => setCoverPhoto(e.target.files[0])}
+          />
+        </label>
       </div>
       {/* profile bottom profile edit/add/main section*/}
       <div className="my-4  lg:mx-12 md:flex justify-between items-center">

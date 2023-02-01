@@ -1,12 +1,30 @@
 import { useFormik } from "formik";
 import React from "react";
+import { useContext } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { saveUserAndsetToken } from "../../Api/auth";
+
+import SmallSpiner from "../../Components/Spiner/SmallSpiner";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import { loginSchema, resistationSchema } from "../../schemas";
 import "./login.css";
 
 const Login = () => {
   const [toggle, setToggle] = useState(true);
+  const {
+    login,
+    loading,
+    setLoading,
+    createUser,
+    // verifyEmail,
+    updateUserProfile,
+  } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const initialResisterValues = {
     name: "",
@@ -19,19 +37,66 @@ const Login = () => {
     password: "",
   };
 
-  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: initialResisterValues,
-    validationSchema: resistationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-    },
-  });
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: initialResisterValues,
+      validationSchema: resistationSchema,
+      onSubmit: (values, action) => {
+        const { name, email, password } = values;
+        createUser(email, password)
+          .then((result) => {
+            const user = result.user;
+            saveUserAndsetToken(user);
+            action.resetForm();
+            updateUserProfile(name)
+              .then((data) => {
+                saveUserAndsetToken(user);
+                toast.success("Created user succesfully..!!");
+                navigate("/");
+                setLoading(false);
+                // verifyEmail()
+                //   .then(() => {
+                //     toast.success(
+                //       "Please check your email, verify request sended..!!"
+                //     );
+                //     setLoading(false);
+                //   })
+                //   .catch((err) => {
+                //     toast.error(err.message);
+                //     setLoading(false);
+                //   });
+              })
+              .catch((err) => {
+                toast.error(err.message);
+                setLoading(false);
+              });
+          })
+          .catch((err) => {
+            toast.error(err.message);
+            setLoading(false);
+          });
+      },
+    });
 
   const loginFrom = useFormik({
     initialValues: initialLoginValues,
     validationSchema: loginSchema,
-    onSubmit: (values) => {
-      console.log(loginFrom.values);
+    onSubmit: (values, action) => {
+      const { email, password } = values;
+      login(email, password)
+        .then((result) => {
+          const user = result.user;
+          console.log(user);
+          saveUserAndsetToken(user);
+          action.resetForm();
+          setLoading(false);
+          navigate(from, { replace: true });
+          toast.success("Login succesfully..!!");
+        })
+        .catch((err) => {
+          toast.error(err.message);
+          setLoading(false);
+        });
     },
   });
 
@@ -73,7 +138,14 @@ const Login = () => {
               onSubmit={loginFrom.handleSubmit}
               className={`login ${toggle ? "ml-0" : "-ml-[50%]"}`}
             >
-              <div className="field">
+              <div
+                className={`field ${
+                  loginFrom.errors.email && loginFrom.touched.email
+                    ? "tooltip tooltip-top  tooltip-open "
+                    : ""
+                } `}
+                data-tip={`${loginFrom.errors.email}`}
+              >
                 <input
                   type="email"
                   name="email"
@@ -83,9 +155,15 @@ const Login = () => {
                   onBlur={loginFrom.handleBlur}
                 />
               </div>
-              <p className="text-red-600">{loginFrom.errors.email}</p>
 
-              <div className="field">
+              <div
+                className={`field ${
+                  loginFrom.errors.password && loginFrom.touched.password
+                    ? "tooltip tooltip-top  tooltip-open "
+                    : ""
+                } `}
+                data-tip={`${loginFrom.errors.password}`}
+              >
                 <input
                   type="password"
                   name="password"
@@ -95,20 +173,29 @@ const Login = () => {
                   onBlur={loginFrom.handleBlur}
                 />
               </div>
-              <p className="text-red-600">{loginFrom.errors.password}</p>
+
               <div className="pass-link">
                 <Link>Forgot password?</Link>
               </div>
               <div className="field btn2">
                 <div className="btn-layer"></div>
-                <input type="submit" value="Login" />
+                <button type="submit">
+                  {loading ? <SmallSpiner /> : <span>Login</span>}
+                </button>
               </div>
               <p className="pt-2 text-gray-800">
                 If you don't have any account ? Please SIgn Up frist.
               </p>
             </form>
             <form onSubmit={handleSubmit} className="signup">
-              <div className="field">
+              <div
+                className={`field ${
+                  errors.name && touched.name
+                    ? "tooltip tooltip-top  tooltip-open "
+                    : ""
+                } `}
+                data-tip={`${errors.name}`}
+              >
                 <input
                   type="text"
                   name="name"
@@ -118,8 +205,15 @@ const Login = () => {
                   onBlur={handleBlur}
                 />
               </div>
-              <p className="text-red-600">{errors.name}</p>
-              <div className="field">
+
+              <div
+                className={`field ${
+                  errors.email && touched.email
+                    ? "tooltip tooltip-top  tooltip-open "
+                    : ""
+                } `}
+                data-tip={`${errors.email}`}
+              >
                 <input
                   type="email"
                   name="email"
@@ -129,8 +223,15 @@ const Login = () => {
                   onBlur={handleBlur}
                 />
               </div>
-              <p className="text-red-600">{errors.email}</p>
-              <div className="field">
+
+              <div
+                className={`field ${
+                  errors.password && touched.password
+                    ? "tooltip tooltip-top  tooltip-open "
+                    : ""
+                } `}
+                data-tip={`${errors.password}`}
+              >
                 <input
                   type="password"
                   name="password"
@@ -140,8 +241,15 @@ const Login = () => {
                   onBlur={handleBlur}
                 />
               </div>
-              <p className="text-red-600">{errors.password}</p>
-              <div className="field">
+
+              <div
+                className={`field ${
+                  errors.confirmPassword && touched.confirmPassword
+                    ? "tooltip tooltip-top  tooltip-open "
+                    : ""
+                } `}
+                data-tip={`${errors.confirmPassword}`}
+              >
                 <input
                   type="password"
                   name="confirmPassword"
@@ -151,10 +259,12 @@ const Login = () => {
                   onBlur={handleBlur}
                 />
               </div>
-              <p className="text-red-600">{errors.confirmPassword}</p>
+
               <div className="field btn2">
                 <div className="btn-layer"></div>
-                <input type="submit" value="Signup" />
+                <button type="submit">
+                  {loading ? <SmallSpiner /> : <span>Signup</span>}
+                </button>
               </div>
             </form>
           </div>

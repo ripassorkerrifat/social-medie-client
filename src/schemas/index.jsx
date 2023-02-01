@@ -5,7 +5,7 @@ export const resistationSchema = Yup.object({
   email: Yup.string().email().required("Please enter your email."),
   password: Yup.string()
     .required("No password provided.")
-    .min(8, "Password is too short - should be 6 chars minimum.")
+    .min(6, "Password is too short - should be 6 chars minimum.")
     .max(16, "Password is too long - should be 16 chars maximum."),
   confirmPassword: Yup.string()
     .required("No password provided.")
@@ -16,5 +16,6 @@ export const loginSchema = Yup.object({
   email: Yup.string().email().required("Please enter your email."),
   password: Yup.string()
     .min(6, "Password is too short - should be 6 chars minimum.")
+    .max(16, "Password is too long - should be 16 chars maximum.")
     .required("No password provided."),
 });

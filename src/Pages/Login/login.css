@@ -164,7 +164,7 @@ form .btn2 .btn-layer {
 form .btn2:hover .btn-layer {
   left: 0;
 }
-form .btn2 input[type="submit"] {
+form .btn2 button {
   height: 100%;
   width: 100%;
   z-index: 1;
