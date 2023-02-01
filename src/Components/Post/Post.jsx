@@ -20,6 +20,7 @@ import laughing from "../../assets/reaction/laughing.svg";
 import soaked from "../../assets/reaction/soaked.svg";
 import sad from "../../assets/reaction/sad.svg";
 import angry from "../../assets/reaction/angry.svg";
+import TimeAgo from "timeago-react";
 
 const Post = () => {
   const [btnClicked, setBtnClicked] = useState(false);
@@ -53,7 +54,7 @@ const Post = () => {
                 <div className="ml-3 leading-3">
                   <h4 className="mb-2 font-semibold">Ripas Sorker Rifat</h4>
                   <p>
-                    3 hours
+                    <TimeAgo datetime={"2023-2-2 0:48:08"} />
                     <span>
                       <BiWorld className="inline-block ml-1" />
                     </span>
