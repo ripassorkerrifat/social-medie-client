@@ -5,10 +5,11 @@ import { CiEdit } from "react-icons/ci";
 import { MdAdd } from "react-icons/md";
 import { BsMessenger } from "react-icons/bs";
 import { useState } from "react";
+import CoverAndProfileModal from "../CoverAndProfileModal/CoverAndProfileModal";
 
 const ProfileTop = () => {
-  const [coverPhoto, setCoverPhoto] = useState(null);
-  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [photoTitle, setPhotoTitle] = useState("");
+
   return (
     <div className="profile-top-container border-b-2">
       {/* profile top cover photo  */}
@@ -18,20 +19,13 @@ const ProfileTop = () => {
           src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"
           alt=""
         />
-        <label htmlFor="">
-          {" "}
-          <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-4 py-[6px] mr-4 rounded-md inline-block absolute bottom-3 right-0">
-            <AiFillCamera className="inline-block text-xl  mr-1" /> Edit cover
-            photo
-          </button>
-          <input
-            type="file"
-            name="file"
-            id="file"
-            accept=".png,.jpg,.jpeg"
-            className="hidden"
-            onChange={(e) => setCoverPhoto(e.target.files[0])}
-          />
+        <label
+          htmlFor="cover-photo-modal"
+          onClick={() => setPhotoTitle("coverPhoto")}
+          className=" inline-block absolute bottom-3 right-0 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-2 md:px-4 py-1 md:py-[6px] mr-4 rounded-md "
+        >
+          <AiFillCamera className="inline-block text-xl  mr-1" /> Edit cover
+          photo
         </label>
       </div>
       {/* profile bottom profile edit/add/main section*/}
@@ -42,14 +36,19 @@ const ProfileTop = () => {
             src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"
             alt=""
           />
-          <span className="md:w-7 md:h-7 w-5 h-5 rounded-full bg-gray-300 items-center flex justify-center absolute bottom-10 md:bottom-1 left-9 md:left-[78px]">
-            <AiFillCamera className="inline-block md:text-xl text-base  " />
-          </span>
+          <label
+            htmlFor="cover-photo-modal"
+            onClick={() => setPhotoTitle("profilePhoto")}
+          >
+            <span className="md:w-7 md:h-7 w-5 h-5 rounded-full bg-gray-300 items-center flex justify-center absolute bottom-14 md:bottom-1 left-8 md:left-[78px]">
+              <AiFillCamera className="inline-block md:text-xl text-base  " />
+            </span>
+          </label>
           <div className="md:ml-3 ml-1  leading-5">
-            <h4 className="lg:text-2xl md:text-xl w-full text-base font-semibold">
+            <h4 className="lg:text-2xl md:text-xl w-full text-base font-semibold mt-3">
               Ripas Sorker Rifat
             </h4>
-            <span>1200 friends & {""}</span>
+            <span>1200 friends &</span>
             <span>34 mutuals </span>
             <div className="md:flex hidden">
               <img
@@ -105,6 +104,12 @@ const ProfileTop = () => {
           </button>
         </div>
       </div>
+      {photoTitle && (
+        <CoverAndProfileModal
+          photoTitle={photoTitle}
+          setPhotoTitle={setPhotoTitle}
+        />
+      )}
     </div>
   );
 };

@@ -42,7 +42,7 @@ const Post = () => {
         {Posts.map((post, i) => (
           <div
             key={i}
-            className="post-wrapper border rounded shadow-lg my-6 mt-10"
+            className="post-wrapper border rounded shadow-md my-6 mt-10"
           >
             <div className="post-top my-3 px-2 flex justify-between items-center">
               <div className="flex items-center align-middle">
@@ -134,7 +134,9 @@ const Post = () => {
               <div className="border-b border-gray-500 pt-3"></div>
               <div className="flex justify-between items-center pt-1">
                 <div
-                  onClick={() => setBtnClicked(true)}
+                  onClick={() => {
+                    currentReact ? setCurrentReact(null) : setBtnClicked(true);
+                  }}
                   className="flex md:h-10 h-8 items-center hover:bg-slate-200 lg:mx-3 md:mx-2 mx-1 lg:px-9 md:px-4 px-1 rounded-lg"
                 >
                   {currentReact ? (

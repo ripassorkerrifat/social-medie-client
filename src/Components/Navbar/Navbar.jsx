@@ -10,12 +10,33 @@ import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import ChatBox from "../ChatBox/ChatBox";
+import Chat from "../Chat/Chat";
 
 const Navbar = () => {
   const { logout } = useContext(AuthContext);
   const handleLogOut = () => {
     logout().then();
   };
+
+  const manuItem = [
+    {
+      link: "/",
+      name: "Home",
+      icon: <AiFillHome className="mr-2 h-5 w-5" aria-hidden="true" />,
+    },
+    {
+      link: "/profile",
+      name: "Profile",
+      icon: <CgProfile className="mr-2 h-5 w-5" aria-hidden="true" />,
+    },
+    {
+      link: "",
+      name: "Setting & privacy",
+      icon: <AiFillSetting className="mr-2 h-5 w-5" aria-hidden="true" />,
+    },
+  ];
+
   return (
     <div className="navContainer">
       <div className="leftside">
@@ -41,30 +62,10 @@ const Navbar = () => {
       <div className="rightside">
         <div className="navkinks">
           <div className="relative">
-            <BsMessenger className="link" />
-            {/* <p className="absolute -top-2 -right-0 text-[14px] font-bold  text-[#ff059b]">
-              2
-            </p> */}
-          </div>
-          <div className="relative">
-            <IoMdNotifications className="link" />
-            {/* <p className="absolute -top-2 -right-0 text-[14px] font-bold  text-[#ff059b] ">
-              12
-            </p> */}
-          </div>
-
-          <div className="ml-[5px]">
             <Menu as="div" className="relative inline-block mt-[6px]">
-              <div>
-                <Menu.Button className="">
-                  {/* <CgProfile className="link" aria-hidden="true" /> */}
-                  <img
-                    className="rounded-full   w-[37px] h-[37px] ml-[10px]"
-                    src="https://images.news18.com/ibnlive/uploads/2021/02/1612707348_tiger.jpg?im=Resize,width=360,aspect=fit,type=normal?im=Resize,width=320,aspect=fit,type=normal"
-                    alt=""
-                  />
-                </Menu.Button>
-              </div>
+              <Menu.Button className="">
+                <BsMessenger className="link" />
+              </Menu.Button>
               <Transition
                 as={Fragment}
                 enter="transition ease-out duration-100"
@@ -74,76 +75,63 @@ const Navbar = () => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg shadow-[#080808] focus:outline-none">
+                <Menu.Items className="absolute -right-[100px] top-[38px]  mt-2 md: md:w-[350px] w-[300px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg shadow-[#080808] focus:outline-none">
+                  <Menu.Item>
+                    <div className="h-[93vh] overflow-scroll p-3">
+                      <ChatBox />
+                    </div>
+                  </Menu.Item>
+                </Menu.Items>
+              </Transition>
+            </Menu>
+          </div>
+          <div className="relative">
+            <IoMdNotifications className="link" />
+          </div>
+
+          <div className="ml-[5px]">
+            <Menu as="div" className="relative inline-block mt-[6px]">
+              <Menu.Button className="">
+                {/* <CgProfile className="link" aria-hidden="true" /> */}
+                <img
+                  className="rounded-full   w-[37px] h-[37px] ml-[10px]"
+                  src="https://images.news18.com/ibnlive/uploads/2021/02/1612707348_tiger.jpg?im=Resize,width=360,aspect=fit,type=normal?im=Resize,width=320,aspect=fit,type=normal"
+                  alt=""
+                />
+              </Menu.Button>
+
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="absolute right-0 top-9  mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg shadow-[#080808] focus:outline-none">
                   <div className="px-1 py-1 ">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link
-                          to={"/profile"}
-                          className={`${
-                            active ? "bg-[#ff059b] text-white" : "text-gray-900"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-base`}
-                        >
-                          {active ? (
-                            <CgProfile
-                              className="mr-2 h-5 w-5"
-                              aria-hidden="true"
-                            />
-                          ) : (
-                            <CgProfile
-                              className="mr-2 h-5 w-5"
-                              aria-hidden="true"
-                            />
-                          )}
-                          Profile
-                        </Link>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link
-                          to={"/"}
-                          className={`${
-                            active ? "bg-[#ff059b] text-white" : "text-gray-900"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-base`}
-                        >
-                          {active ? (
-                            <AiFillHome
-                              className="mr-2 h-5 w-5"
-                              aria-hidden="true"
-                            />
-                          ) : (
-                            <AiFillHome
-                              className="mr-2 h-5 w-5"
-                              aria-hidden="true"
-                            />
-                          )}
-                          Home
-                        </Link>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link
-                          className={`${
-                            active ? "bg-[#ff059b] text-white" : "text-gray-900"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-base`}
-                        >
-                          {active ? (
-                            <AiFillSetting
-                              className="mr-2 h-5 w-5"
-                              aria-hidden="true"
-                            />
-                          ) : (
-                            <AiFillSetting
-                              className="mr-2 h-5 w-5"
-                              aria-hidden="true"
-                            />
-                          )}
-                          Setting & privacy
-                        </Link>
-                      )}
-                    </Menu.Item>
+                    {manuItem?.map((item, i) => (
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            to={`${item.link}`}
+                            className={`${
+                              active
+                                ? "bg-[#ff059b] text-white"
+                                : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-base`}
+                          >
+                            {active ? (
+                              <span>{item.icon}</span>
+                            ) : (
+                              <span>{item.icon}</span>
+                            )}
+                            {item.name}
+                          </Link>
+                        )}
+                      </Menu.Item>
+                    ))}
                     <Menu.Item>
                       {({ active }) => (
                         <Link
@@ -174,6 +162,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <Chat />
     </div>
   );
 };

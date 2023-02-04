@@ -19,6 +19,7 @@
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
     "sass": "^1.57.1",
+    "swiper": "^9.0.2",
     "timeago-react": "^3.0.5",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"

@@ -61,9 +61,22 @@ const PostModal = ({ setOpenModal }) => {
           <label
             htmlFor="post-modal"
             onClick={() => setPostText("")}
-            className="btn btn-sm btn-circle absolute right-2 top-2"
+            class="inline-flex bg-gray-300 rounded-full p-1 absolute right-3 top-3"
           >
-            ✕
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-gray-800"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
           </label>
           <h3 className="text-lg text-center font-bold pb-2">Create post</h3>
           <hr />
@@ -90,7 +103,7 @@ const PostModal = ({ setOpenModal }) => {
                 ref={textRef}
                 value={postText}
                 onChange={(e) => setPostText(e.target.value)}
-                className="w-full border-2 h-m-16 p-2 rounded md:placeholder:text-lg placeholder:text-gray-600 focus:outline-none focus:border-gray-300 resize-none"
+                className="w-full border-b-2 h-m-16 p-2  md:placeholder:text-lg placeholder:text-gray-600 focus:outline-none focus:border-gray-300 resize-none"
                 placeholder="What's on your mind, Ripas Sorker....."
               />
             </div>
