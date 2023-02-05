@@ -28,19 +28,19 @@ const ProfileEditModal = ({ setOpenModal }) => {
         <div className="modal-box relative">
           <label
             htmlFor="profile-edit-modal"
-            class="inline-flex bg-gray-300 rounded-full p-1 absolute right-3 top-3"
+            className="inline-flex bg-gray-300 rounded-full p-1 absolute right-3 top-3"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 text-gray-800"
+              className="h-5 w-5 text-gray-800"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>

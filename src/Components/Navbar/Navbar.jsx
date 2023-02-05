@@ -112,7 +112,7 @@ const Navbar = () => {
                 <Menu.Items className="absolute right-0 top-9  mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg shadow-[#080808] focus:outline-none">
                   <div className="px-1 py-1 ">
                     {manuItem?.map((item, i) => (
-                      <Menu.Item>
+                      <Menu.Item key={i}>
                         {({ active }) => (
                           <Link
                             to={`${item.link}`}

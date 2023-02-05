@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import { ImSearch } from "react-icons/im";
+import React from "react";
 import { GoPrimitiveDot } from "react-icons/go";
 import { Usersonline } from "../../data";
 
@@ -7,20 +6,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper";
-import { Popover, Transition } from "@headlessui/react";
+
 const ChatBox = () => {
   return (
     <div>
       <h4 className="text-lg font-semibold inline-block border-b-2">Chatbox</h4>
-      {/* <div className=" relative  mt-4">
-        <input
-          type="text"
-          className=" form-control block rounded-2xl w-full px-9 py-1.5 text-base font-normal text-gray-700 bg-gray-100 hover:bg-gray-200 border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:outline-none
-        "
-          placeholder="Search massenger...."
-        />
-        <ImSearch className="absolute top-2.5 left-2 text-black" />
-      </div> */}
       {/* slider  */}
       <div className="mt-4">
         <h4 className="font-semibold pb-1 ">Online friends</h4>
@@ -38,8 +28,8 @@ const ChatBox = () => {
           }}
           className="mySwiper"
         >
-          {Usersonline.map((user) => (
-            <SwiperSlide>
+          {Usersonline.map((user, i) => (
+            <SwiperSlide key={i}>
               <label htmlFor="chat-modal" className="relative">
                 <img
                   className="h-12 w-12 rounded-full border-2 border-[#ff059b]"

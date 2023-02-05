@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FiUploadCloud } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
 import { getImageLink } from "../../Api/getImageLink";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const CoverModal = ({ setPhotoTitle, photoTitle }) => {
+  const { user, loading, updateUserProfile } = useContext(AuthContext);
   const [image, setImage] = useState(null);
 
   const removeImage = () => {
@@ -15,6 +17,7 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
     if (photoTitle === "profilePhoto") {
       getImageLink(image).then((data) => {
         const uploadPhoto = {
+          displayName: user?.displayName,
           profilePhoto: data,
         };
         console.log(uploadPhoto);
@@ -42,19 +45,19 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
         <div className="modal-box relative">
           <label
             htmlFor="cover-photo-modal"
-            class="inline-flex bg-gray-300 rounded-full p-1 absolute right-3 top-3"
+            className="inline-flex bg-gray-300 rounded-full p-1 absolute right-3 top-3"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 text-gray-800"
+              className="h-5 w-5 text-gray-800"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
@@ -106,12 +109,14 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
               Upload
             </button>
           </div>
-          <button
-            onClick={handleDelete}
-            className=" bg-gray-300 hover:bg-gray-400 duration-300  text-gray-800 text-sm px-4 py-[8px] mt-4 w-full rounded-md inline-block"
-          >
-            Remove <MdDeleteForever className="inline-block mb-1" size={18} />
-          </button>
+          {user?.photoURL && (
+            <button
+              onClick={handleDelete}
+              className=" bg-gray-300 hover:bg-gray-400 duration-300  text-gray-800 text-sm px-4 py-[8px] mt-4 w-full rounded-md inline-block"
+            >
+              Remove <MdDeleteForever className="inline-block mb-1" size={18} />
+            </button>
+          )}
         </div>
       </div>
     </div>

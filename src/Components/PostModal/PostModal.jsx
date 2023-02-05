@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BiWorld } from "react-icons/bi";
 import { BsEmojiFrown } from "react-icons/bs";
 import { FiUploadCloud } from "react-icons/fi";
@@ -6,13 +6,20 @@ import { IoMdClose } from "react-icons/io";
 import Picker from "emoji-picker-react";
 import { useRef } from "react";
 import { useEffect } from "react";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import { useAddPostMutation } from "../../app/fetures/postApi/postSlice";
+import { toast } from "react-hot-toast";
 
 const PostModal = ({ setOpenModal }) => {
+  const { user } = useContext(AuthContext);
   const [file, setFile] = useState(null);
+
   const [picker, setPicker] = useState(false);
   const [postText, setPostText] = useState("");
   const [cursorPosition, setCursorPosition] = useState();
   const textRef = useRef(null);
+
+  const [postPost, { isError, isSuccess }] = useAddPostMutation();
 
   useEffect(() => {
     textRef.current.selectionEnd = cursorPosition;
@@ -42,17 +49,57 @@ const PostModal = ({ setOpenModal }) => {
 
   const handlePost = (event) => {
     event.preventDefault();
-    const postInfo = {
-      postText,
-      currentDate,
-      currentTime,
-    };
-    console.log(postInfo);
-    setPicker(false);
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("image", file);
+      fetch(
+        `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMG_BB_API_KEY}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          const postInfo = {
+            postText,
+            currentDate,
+            postImage: data.data.display_url,
+            currentTime,
+            posterName: user?.displayName,
+            posterEmail: user?.email,
+            posterImg: user?.photoURL,
+          };
+          postPost(postInfo);
+          console.log(postInfo);
+        });
+    } else {
+      const postInfo = {
+        postText,
+        currentDate,
+        postImage: "",
+        currentTime,
+        posterName: user?.displayName,
+        posterEmail: user?.email,
+        posterImg: user?.photoURL,
+      };
+      postPost(postInfo);
+    }
+
+    if (isSuccess) {
+      return toast.success("Post added succesfully");
+    }
+
     setOpenModal(false);
+    setPicker(false);
     setPostText("");
   };
-
+  if (isError) {
+    return (
+      <p className="mt-20 text-center">Some went wrong in upload post ....</p>
+    );
+  }
   return (
     <div>
       <input type="checkbox" id="post-modal" className="modal-toggle" />
@@ -61,19 +108,19 @@ const PostModal = ({ setOpenModal }) => {
           <label
             htmlFor="post-modal"
             onClick={() => setPostText("")}
-            class="inline-flex bg-gray-300 rounded-full p-1 absolute right-3 top-3"
+            className="inline-flex bg-gray-300 rounded-full p-1 absolute right-3 top-3"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 text-gray-800"
+              className="h-5 w-5 text-gray-800"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
@@ -155,7 +202,6 @@ const PostModal = ({ setOpenModal }) => {
             </div>
             <button
               type="submit"
-              // onClick={handlePost}
               className="bg-[#eb0890] hover:bg-[#fd0298] text-gray-100 text-sm px-4 py-[8px] mt-4 w-full rounded-md inline-block"
             >
               Post
