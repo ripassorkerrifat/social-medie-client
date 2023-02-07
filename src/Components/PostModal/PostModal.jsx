@@ -10,7 +10,10 @@ import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import { useAddPostMutation } from "../../app/fetures/postApi/postSlice";
 import { toast } from "react-hot-toast";
 
+import SmallSpiner from "../Spiner/SmallSpiner";
+
 const PostModal = ({ setOpenModal }) => {
+  const [uploadLoading, setUploadLoading] = useState(false);
   const { user } = useContext(AuthContext);
   const [file, setFile] = useState(null);
 
@@ -19,7 +22,7 @@ const PostModal = ({ setOpenModal }) => {
   const [cursorPosition, setCursorPosition] = useState();
   const textRef = useRef(null);
 
-  const [postPost, { isError, isSuccess }] = useAddPostMutation();
+  const [postPost, { isError, isSuccess, isLoading }] = useAddPostMutation();
 
   useEffect(() => {
     textRef.current.selectionEnd = cursorPosition;
@@ -45,12 +48,13 @@ const PostModal = ({ setOpenModal }) => {
   let year = date.getFullYear();
 
   let currentDate = `${year}-${month}-${day}`;
-  var currentTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  let currentTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 
   const handlePost = (event) => {
     event.preventDefault();
 
     if (file) {
+      setUploadLoading(true);
       const formData = new FormData();
       formData.append("image", file);
       fetch(
@@ -70,9 +74,14 @@ const PostModal = ({ setOpenModal }) => {
             posterName: user?.displayName,
             posterEmail: user?.email,
             posterImg: user?.photoURL,
+            reacts: [],
+            comments: [],
           };
           postPost(postInfo);
-          console.log(postInfo);
+          setUploadLoading(false);
+          setOpenModal(false);
+          setPicker(false);
+          setPostText("");
         });
     } else {
       const postInfo = {
@@ -83,17 +92,18 @@ const PostModal = ({ setOpenModal }) => {
         posterName: user?.displayName,
         posterEmail: user?.email,
         posterImg: user?.photoURL,
+        reacts: [],
+        comments: [],
       };
       postPost(postInfo);
+      setOpenModal(false);
+      setPicker(false);
+      setPostText("");
     }
 
     if (isSuccess) {
       return toast.success("Post added succesfully");
     }
-
-    setOpenModal(false);
-    setPicker(false);
-    setPostText("");
   };
   if (isError) {
     return (
@@ -204,7 +214,7 @@ const PostModal = ({ setOpenModal }) => {
               type="submit"
               className="bg-[#eb0890] hover:bg-[#fd0298] text-gray-100 text-sm px-4 py-[8px] mt-4 w-full rounded-md inline-block"
             >
-              Post
+              {isLoading || uploadLoading ? <SmallSpiner /> : "Post"}
             </button>
           </form>
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./profileTop.css";
 import { AiFillCamera } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
@@ -6,8 +6,10 @@ import { MdAdd } from "react-icons/md";
 import { BsMessenger } from "react-icons/bs";
 import { useState } from "react";
 import CoverAndProfileModal from "../CoverAndProfileModal/CoverAndProfileModal";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const ProfileTop = () => {
+  const { user } = useContext(AuthContext);
   const [photoTitle, setPhotoTitle] = useState("");
 
   return (
@@ -33,7 +35,7 @@ const ProfileTop = () => {
         <div className="md:flex items-center relative ">
           <img
             className="lg:h-28 lg:w-28 md:h-24 md:w-24 w-14 h-14 rounded-full"
-            src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"
+            src={user?.photoURL}
             alt=""
           />
           <label
@@ -46,7 +48,7 @@ const ProfileTop = () => {
           </label>
           <div className="md:ml-3 ml-1  leading-5">
             <h4 className="lg:text-2xl md:text-xl w-full text-base font-semibold mt-3">
-              Ripas Sorker Rifat
+              {user?.displayName}
             </h4>
             <span>1200 friends &</span>
             <span>34 mutuals </span>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   BsThreeDots,
   BsSuitHeartFill,
@@ -22,15 +22,19 @@ import angry from "../../assets/reaction/angry.svg";
 import TimeAgo from "timeago-react";
 import {
   useAddPostMutation,
+  useAddReactMutation,
   useGetAllPostQuery,
+  useRemoveReactMutation,
 } from "../../app/fetures/postApi/postSlice";
 import Loader from "../Spiner/Loader";
 import { toast } from "react-hot-toast";
+import Comments from "./Comments";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Post = () => {
+  const { user } = useContext(AuthContext);
   const [btnClicked, setBtnClicked] = useState(false);
-  const [currentReact, setCurrentReact] = useState(null);
-  const [currentReactName, setCurrentReactName] = useState("");
+  const [showReact, setShowReact] = useState(null);
 
   const reactData = [
     { name: "Like", img: like1, id: "1" },
@@ -43,6 +47,11 @@ const Post = () => {
 
   const { data: posts, isLoading, isError } = useGetAllPostQuery();
 
+  useEffect(() => {});
+
+  const [addReact] = useAddReactMutation();
+  const [removeReact] = useRemoveReactMutation();
+
   if (isLoading) {
     return <Loader />;
   }
@@ -53,8 +62,42 @@ const Post = () => {
     );
   }
 
+  const handleAddReact = (reactImg, reactName, id) => {
+    const reactData = {
+      id,
+      reactImg,
+      reactName,
+      userId: user.uid,
+      reactorName: user.displayName,
+    };
+    addReact(reactData);
+  };
+
+  const handleRemoveReact = (id) => {
+    const reactData = {
+      id,
+      userId: user.uid,
+    };
+    removeReact(reactData);
+  };
+
+  const handleShowReact = () => {
+    if (!btnClicked) {
+      setTimeout(() => {
+        setBtnClicked(true);
+      }, 1000);
+    }
+  };
+  const handleHideReact = () => {
+    if (btnClicked) {
+      setTimeout(() => {
+        setBtnClicked(false);
+      }, 2000);
+    }
+  };
+
   return (
-    <div onClick={() => btnClicked === true && setBtnClicked(false)}>
+    <div onMouseOver={handleHideReact}>
       {posts.length ? (
         <div className="post-container">
           {posts.map((post, i) => (
@@ -67,7 +110,7 @@ const Post = () => {
                   {post.posterImg ? (
                     <img
                       className="w-12 h-12 rounded-full"
-                      src="https://pixlr.com/images/index/collage.webp"
+                      src={post.posterImg}
                       alt=""
                     />
                   ) : (
@@ -98,7 +141,7 @@ const Post = () => {
                 <p className="px-2 pb-2">{post?.postText}</p>
                 {post?.postImage && (
                   <img
-                    className="md:max-h-[500px] h-[350] w-full bg-cover"
+                    className="md:max-h-[700px] h-[350] w-full bg-cover"
                     src={post?.postImage}
                     alt=""
                   />
@@ -108,7 +151,6 @@ const Post = () => {
                 <div className="flex justify-between align-middle">
                   <div className="flex">
                     <div className="bg-blue-500 rounded-full flex justify-center items-center  w-5 h-5">
-                      {/* <love className="inline-block text-white text-xs" /> */}
                       <img
                         src={like}
                         alt=""
@@ -129,14 +171,33 @@ const Post = () => {
                         className="inline-block text-white text-xs"
                       />
                     </div>
-                    <span className="ml-2">You and 25 others</span>
+                    <span className="ml-2">
+                      {post?.reacts?.length ? (
+                        <span>
+                          {post?.reacts?.length}
+                          {""} reacts
+                        </span>
+                      ) : (
+                        <span> 0 react</span>
+                      )}
+                    </span>
                   </div>
-                  <p>4 comments</p>
+                  <p>
+                    {post?.comments?.length ? (
+                      <span>
+                        {post?.comments?.length}
+                        {""} comments
+                      </span>
+                    ) : (
+                      <span> 0 comment</span>
+                    )}
+                  </p>
                 </div>
-                <div className="absolute md:top-0 top-7 left-0 ">
+
+                <div className="absolute md:top-0 top-2 left-0 ">
                   <div
                     className={`flex rounded-3xl border border-gray-300 bg-white md:h-12 h-10 ${
-                      btnClicked ? "block" : "hidden"
+                      btnClicked && showReact === post._id ? "block" : "hidden"
                     }`}
                   >
                     {reactData.map((data, i) => (
@@ -151,8 +212,7 @@ const Post = () => {
                           alt=""
                           onClick={() => {
                             setBtnClicked(false);
-                            setCurrentReact(data.img);
-                            setCurrentReactName(data.name);
+                            handleAddReact(data.img, data.name, post._id);
                           }}
                         />
                       </figure>
@@ -161,47 +221,73 @@ const Post = () => {
                 </div>
                 <div className="border-b border-gray-500 pt-3"></div>
                 <div className="flex justify-between items-center pt-1">
-                  <div
-                    onClick={() => {
-                      currentReact
-                        ? setCurrentReact(null)
-                        : setBtnClicked(true);
-                    }}
-                    className="flex md:h-10 h-8 items-center hover:bg-slate-200 lg:mx-3 md:mx-2 mx-1 lg:px-9 md:px-4 px-1 rounded-lg"
-                  >
-                    {currentReact ? (
-                      <>
-                        <img
-                          className="inline-block md:h-10 h-8 text-base sm:mr-1"
-                          src={currentReact}
-                          alt=""
-                        />
-                        {currentReactName && (
-                          <span
-                            className={`mt-1 mr-3  text-base ${
-                              currentReactName === "Like" && "text-blue-700"
-                            } ${
-                              currentReactName === "Love" && "text-rose-500"
-                            } ${
-                              currentReactName === "Haha" && "text-yellow-400"
-                            } ${currentReactName === "Sad" && "text-yellow-400"}
-                        ${currentReactName === "Wow" && "text-yellow-500"} ${
-                              currentReactName === "Angry" && "text-red-700"
-                            }`}
-                          >
-                            {currentReactName}
+                  <div onMouseOver={handleShowReact}>
+                    <div
+                      onMouseOver={() => {
+                        setShowReact(post._id);
+                      }}
+                      className="flex md:h-10 h-8 items-center hover:bg-slate-200 lg:mx-3 md:mx-2 mx-1 lg:px-9 md:px-4 px-1 rounded-lg"
+                    >
+                      {post?.reacts.length ? (
+                        <div onClick={() => handleRemoveReact(post._id)}>
+                          {post?.reacts?.find((r) => r.userId === user.uid) ? (
+                            <>
+                              {post.reacts.map(
+                                (react) =>
+                                  react.userId === user.uid && (
+                                    <>
+                                      <img
+                                        className="inline-block md:h-10 h-8 text-base sm:mr-1"
+                                        src={react?.reactImg}
+                                        alt=""
+                                      />
+                                      <span
+                                        className={`mt-1 mr-3  text-base ${
+                                          react.reactName === "Like" &&
+                                          "text-blue-700"
+                                        } ${
+                                          react.reactName === "Love" &&
+                                          "text-rose-500"
+                                        } ${
+                                          react.reactName === "Haha" &&
+                                          "text-yellow-400"
+                                        } ${
+                                          react.reactName === "Sad" &&
+                                          "text-yellow-400"
+                                        }
+                              ${
+                                react.reactName === "Wow" && "text-yellow-500"
+                              } ${
+                                          react.reactName === "Angry" &&
+                                          "text-red-700"
+                                        }`}
+                                      >
+                                        {react.reactName}
+                                      </span>
+                                    </>
+                                  )
+                              )}
+                            </>
+                          ) : (
+                            <div className="flex items-center">
+                              <span>
+                                <AiOutlineLike className="inline-block lg:text-2xl md:text-lg text-base sm:mr-1" />
+                              </span>
+                              <span className="mt-1  text-base  ">Like</span>
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="flex items-center">
+                          <span>
+                            <AiOutlineLike className="inline-block lg:text-2xl md:text-lg text-base sm:mr-1" />
                           </span>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        <span>
-                          <AiOutlineLike className="inline-block lg:text-2xl md:text-lg text-base sm:mr-1" />
-                        </span>
-                        <span className="mt-1  text-base ">Like</span>
-                      </>
-                    )}
+                          <span className="mt-1  text-base  ">Like</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
+
                   <div className="flex md:h-10 h-8 items-center hover:bg-slate-200 lg:mx-3 md:mx-2 mx-1 lg:px-7 md:px-4 px-2 rounded-lg">
                     <span>
                       <BiComment className="inline-block  md:text-lg text-base sm:mr-1" />
@@ -216,6 +302,7 @@ const Post = () => {
                   </div>
                 </div>
                 <div className="border-b border-gray-500 pt-1"></div>
+                <Comments id={post._id} comments={post?.comments} />
               </div>
             </div>
           ))}

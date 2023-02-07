@@ -25,7 +25,49 @@ export const postsApi = createApi({
       }),
       invalidatesTags: ["Posts"],
     }),
+
+    addComment: builder.mutation({
+      query: (commemt) => ({
+        url: `comment/${commemt.id}`,
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: commemt,
+      }),
+      invalidatesTags: ["Posts"],
+    }),
+
+    addReact: builder.mutation({
+      query: (react) => ({
+        url: `react/${react.id}`,
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: react,
+      }),
+      invalidatesTags: ["Posts"],
+    }),
+
+    removeReact: builder.mutation({
+      query: (react) => ({
+        url: `delete/${react.id}`,
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: react,
+      }),
+      invalidatesTags: ["Posts"],
+    }),
   }),
 });
 
-export const { useGetAllPostQuery, useAddPostMutation } = postsApi;
+export const {
+  useGetAllPostQuery,
+  useAddPostMutation,
+  useAddCommentMutation,
+  useAddReactMutation,
+  useRemoveReactMutation,
+} = postsApi;

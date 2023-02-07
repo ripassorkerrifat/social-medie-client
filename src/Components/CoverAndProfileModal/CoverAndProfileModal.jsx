@@ -2,37 +2,57 @@ import React, { useContext, useState } from "react";
 import { FiUploadCloud } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
-import { getImageLink } from "../../Api/getImageLink";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import SmallSpiner from "../Spiner/SmallSpiner";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CoverModal = ({ setPhotoTitle, photoTitle }) => {
   const { user, loading, updateUserProfile } = useContext(AuthContext);
   const [image, setImage] = useState(null);
+  const [uploadLoading, setUploadLoading] = useState(false);
+  const navigate = useNavigate();
 
   const removeImage = () => {
     setImage(null);
   };
 
   const handleUpload = (photoTitle) => {
-    if (photoTitle === "profilePhoto") {
-      getImageLink(image).then((data) => {
-        const uploadPhoto = {
-          displayName: user?.displayName,
-          profilePhoto: data,
-        };
-        console.log(uploadPhoto);
-        setPhotoTitle("");
+    setUploadLoading(true);
+    const formData = new FormData();
+    formData.append("image", image);
+
+    fetch(
+      `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMG_BB_API_KEY}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.data.display_url, uploadLoading);
+        setUploadLoading(false);
+
+        if (photoTitle === "profilePhoto") {
+          updateUserProfile(user?.displayName, data.data.display_url).then(
+            (data) => {
+              toast.success("Profile Photo uploaded....");
+              navigate("/profile");
+              setPhotoTitle("");
+            }
+          );
+        }
+        if (photoTitle === "coverPhoto") {
+          // getImageLink(image).then((data) => {
+          //   const uploadPhoto = {
+          //     coverPhoto: data,
+          //   };
+          //   console.log(uploadPhoto);
+          //   setPhotoTitle("");
+          // });
+        }
       });
-    }
-    if (photoTitle === "coverPhoto") {
-      getImageLink(image).then((data) => {
-        const uploadPhoto = {
-          coverPhoto: data,
-        };
-        console.log(uploadPhoto);
-        setPhotoTitle("");
-      });
-    }
   };
   const handleDelete = () => {
     setPhotoTitle("");
@@ -106,7 +126,7 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
               onClick={() => handleUpload(photoTitle)}
               className="bg-[#eb0890] hover:bg-[#fd0298] text-gray-100 text-sm px-4 py-[8px] mt-4 w-full rounded-md inline-block"
             >
-              Upload
+              {uploadLoading || loading ? <SmallSpiner /> : "Upload"}
             </button>
           </div>
           {user?.photoURL && (

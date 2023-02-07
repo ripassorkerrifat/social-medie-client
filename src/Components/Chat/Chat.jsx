@@ -167,23 +167,6 @@ const Chat = () => {
               </button>
             </div>
           </div>
-          <div className="fixed bottom-0 right-0 m-6 p-6 bg-white rounded-lg shadow-lg">
-            <div className="flex justify-between items-center">
-              <p className="text-lg font-bold">Chat</p>
-              <button className="text-sm font-bold">X</button>
-            </div>
-            <div className="h-32 overflow-y-scroll">{/* chat messages */}</div>
-            <form className="flex">
-              <input
-                className="w-full p-2 border border-gray-300 rounded-lg"
-                type="text"
-                placeholder="Type your message..."
-              />
-              <button className="bg-blue-500 text-white p-2 rounded-lg">
-                Send
-              </button>
-            </form>
-          </div>
         </div>
       </div>
     </div>
