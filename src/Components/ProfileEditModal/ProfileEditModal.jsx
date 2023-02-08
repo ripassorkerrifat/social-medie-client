@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useAddProfileOrCoverPhotoOrInfoMutation } from "../../app/fetures/userApi/userSlice";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import Loader from "../Spiner/Loader";
 
-const ProfileEditModal = ({ setOpenModal }) => {
+const ProfileEditModal = ({ setOpenModal, data }) => {
+  const { user } = useContext(AuthContext);
+  const [addPersonalInfo, { isError, isLoading }] =
+    useAddProfileOrCoverPhotoOrInfoMutation();
+
   const handleUpdateInfo = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -16,10 +23,19 @@ const ProfileEditModal = ({ setOpenModal }) => {
       university,
       currentLocation,
       parmanentLocation,
+      email: user.email,
     };
-    console.log(personalInfo);
+    addPersonalInfo(personalInfo);
     setOpenModal(false);
   };
+
+  if (isError) {
+    return (
+      <>
+        <p>Soemthing went wrong in updated personal information...</p>
+      </>
+    );
+  }
 
   return (
     <div>
@@ -55,6 +71,7 @@ const ProfileEditModal = ({ setOpenModal }) => {
             <input
               type="text"
               name="bio"
+              defaultValue={data?.bio}
               placeholder="Write your bio..."
               className="input  focus:border-secondary input-bordered w-full focus:outline-none"
             />
@@ -67,6 +84,7 @@ const ProfileEditModal = ({ setOpenModal }) => {
               type="text"
               name="collage"
               placeholder="Collage name...."
+              defaultValue={data?.collage}
               className="input  focus:border-secondary input-bordered w-full focus:outline-none"
             />
           </div>
@@ -78,6 +96,7 @@ const ProfileEditModal = ({ setOpenModal }) => {
               type="text"
               name="university"
               placeholder="University name...."
+              defaultValue={data?.university}
               className="input  focus:border-secondary input-bordered w-full focus:outline-none"
             />
           </div>
@@ -89,6 +108,7 @@ const ProfileEditModal = ({ setOpenModal }) => {
               type="text"
               name="currentLocation"
               placeholder="Current location...."
+              defaultValue={data?.currentLocation}
               className="input  focus:border-secondary input-bordered w-full focus:outline-none"
             />
           </div>
@@ -100,6 +120,7 @@ const ProfileEditModal = ({ setOpenModal }) => {
               type="text"
               name="parmanentLocation"
               placeholder="Parmanent location...."
+              defaultValue={data?.parmanentLocation}
               className="input  focus:border-secondary input-bordered w-full focus:outline-none"
             />
           </div>
@@ -107,7 +128,7 @@ const ProfileEditModal = ({ setOpenModal }) => {
             type="submit"
             className="bg-[#ff059b]  text-center w-full mt-3 text-gray-200 text-sm px-4 py-[8px]  rounded-md inline-block "
           >
-            Add/Edit Info
+            {isLoading ? <Loader /> : " Add/Edit Info"}
           </button>
         </div>
       </form>

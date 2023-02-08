@@ -33,6 +33,18 @@ export const postsApi = createApi({
       invalidatesTags: ["Posts", "ProfilePosts"],
     }),
 
+    updateProfilePhoto: builder.mutation({
+      query: (post) => ({
+        url: "post",
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: post,
+      }),
+      invalidatesTags: ["Posts", "ProfilePosts"],
+    }),
+
     deletePost: builder.mutation({
       query: (id) => ({
         url: `post/${id}`,

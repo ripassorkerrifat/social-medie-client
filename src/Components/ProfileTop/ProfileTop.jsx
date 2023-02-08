@@ -8,7 +8,7 @@ import { useState } from "react";
 import CoverAndProfileModal from "../CoverAndProfileModal/CoverAndProfileModal";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
-const ProfileTop = () => {
+const ProfileTop = ({ data }) => {
   const { user } = useContext(AuthContext);
   const [photoTitle, setPhotoTitle] = useState("");
 
@@ -16,11 +16,20 @@ const ProfileTop = () => {
     <div className="profile-top-container border-b-2">
       {/* profile top cover photo  */}
       <div className="relative">
-        <img
-          className="w-full lg:h-[350px] md:h-[300px] h-[200px] rounded-md"
-          src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"
-          alt=""
-        />
+        {data?.coverImg ? (
+          <img
+            className="w-full lg:h-[350px] md:h-[300px] h-[200px] rounded-md"
+            src={data.coverImg}
+            alt=""
+          />
+        ) : (
+          <div className="relative bg-gray-800 lg:h-[350px] md:h-[300px] h-[200px] flex justify-center items-center">
+            <h4 className="text-[#ff059b] font-semibold lg:text-5xl md:text-3xl">
+              Add your cover photo
+            </h4>
+          </div>
+        )}
+
         <label
           htmlFor="cover-photo-modal"
           onClick={() => setPhotoTitle("coverPhoto")}
@@ -33,16 +42,25 @@ const ProfileTop = () => {
       {/* profile bottom profile edit/add/main section*/}
       <div className="my-4  lg:mx-12 md:flex justify-between items-center">
         <div className="md:flex items-center relative ">
-          <img
-            className="lg:h-28 lg:w-28 md:h-24 md:w-24 w-14 h-14 rounded-full"
-            src={user?.photoURL}
-            alt=""
-          />
+          {data?.profileImg ? (
+            <img
+              className="lg:h-28 lg:w-28 md:h-24 md:w-24 w-14 h-14 rounded-full"
+              src={data?.profileImg}
+              alt=""
+            />
+          ) : (
+            <img
+              className="lg:h-28 lg:w-28 md:h-24 md:w-24 w-14 h-14 rounded-full"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
+              alt=""
+            />
+          )}
+
           <label
             htmlFor="cover-photo-modal"
             onClick={() => setPhotoTitle("profilePhoto")}
           >
-            <span className="md:w-7 md:h-7 w-5 h-5 rounded-full bg-gray-300 items-center flex justify-center absolute bottom-14 md:bottom-1 left-8 md:left-[78px]">
+            <span className="md:w-7 md:h-7 w-5 h-5 rounded-full bg-gray-300 items-center flex justify-center absolute bottom-14 md:bottom-1 left-8 md:left-[74px]">
               <AiFillCamera className="inline-block md:text-xl text-base  " />
             </span>
           </label>
@@ -53,16 +71,6 @@ const ProfileTop = () => {
             <span>1200 friends &</span>
             <span>34 mutuals </span>
             <div className="md:flex hidden">
-              <img
-                className="h-6 w-6 rounded-full bg-cover -mr-1"
-                src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"
-                alt=""
-              />
-              <img
-                className="h-6 w-6 rounded-full bg-cover -mr-1"
-                src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"
-                alt=""
-              />
               <img
                 className="h-6 w-6 rounded-full bg-cover -mr-1"
                 src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"

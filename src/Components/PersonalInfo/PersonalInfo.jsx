@@ -4,58 +4,89 @@ import { FaHome } from "react-icons/fa";
 import ProfileEditModal from "../ProfileEditModal/ProfileEditModal";
 import { useState } from "react";
 
-const PersonalInfo = () => {
+const PersonalInfo = ({ data }) => {
   const [openModal, setOpenModal] = useState(false);
+  console.log(data);
   return (
     <div>
       <div className="">
         <div className="">
           <h4 className="text-lg font-semibold">Bio</h4>
-          <p className="text-center text-base text-gray-800">
-            "লা ইলাহা ইল্লাল্লাহু মুহাম্মাদুর রাসুলুল্লাহ (সাঃ)
-          </p>
-          <p className="text-base text-gray-800">No bio available</p>
+          {data?.bio ? (
+            <p className=" text-base text-gray-800">{data.bio}</p>
+          ) : (
+            <p className="text-base text-gray-800">Add bio </p>
+          )}
+
           <hr className="border-b pageHr border-gray-400 my-2 opacity-60" />
         </div>
 
         <div>
           <h4 className="text-lg font-semibold">Education</h4>
           <div className="flex mt-2">
-            <span>
-              <MdCastForEducation className="inline-block text-gray-800 text-xl lg:text-2xl mr-2" />
-            </span>
-            <p className="lg:text-base text-sm text-gray-800">
-              Studied at B.Sc in Computer Science & Engineering (CSE) Department
-              at Dhaka International University
-            </p>
+            {data?.collage ? (
+              <>
+                <span>
+                  <MdCastForEducation className="inline-block text-gray-800 text-xl lg:text-2xl mr-2" />
+                </span>
+
+                <p className="lg:text-base text-sm text-gray-800">
+                  {data.collage}
+                </p>
+              </>
+            ) : (
+              <p className="text-base text-gray-800">Add collage </p>
+            )}
           </div>
           <div className="flex mt-2">
-            <span>
-              <MdCastForEducation className="inline-block text-gray-800 text-xl lg:text-2xl mr-2" />
-            </span>
-            <p className="lg:text-base text-sm text-gray-800">
-              Studied at M R Govt College Panchagarh
-            </p>
+            {data?.university ? (
+              <>
+                <span>
+                  <MdCastForEducation className="inline-block text-gray-800 text-xl lg:text-2xl mr-2" />
+                </span>
+
+                <p className="lg:text-base text-sm text-gray-800">
+                  {data.university}
+                </p>
+              </>
+            ) : (
+              <p className="text-base text-gray-800">Add university </p>
+            )}
           </div>
           <hr className="border-b pageHr border-gray-400 my-2 opacity-60" />
         </div>
         <div>
           <h4 className="text-lg font-semibold border-b-2">Location</h4>
           <div className="flex mt-2">
-            <span>
-              <FaHome className="inline-block text-gray-800 text-xl lg:text-2xl mr-2" />
-            </span>
-            <p className="lg:text-base text-sm text-gray-800">
-              Lives in Dhaka, Bangladesh
-            </p>
+            {data?.currentLocation ? (
+              <>
+                <span>
+                  <FaHome className="inline-block text-gray-800 text-xl lg:text-2xl mr-2" />
+                </span>
+                <p className="lg:text-base text-sm text-gray-800">
+                  {data?.currentLocation}
+                </p>
+              </>
+            ) : (
+              <p className="text-base text-gray-800"> Add current location </p>
+            )}
           </div>
           <div className="flex mt-2">
-            <span>
-              <MdLocationPin className="inline-block text-gray-800 text-xl lg:text-2xl mr-2" />
-            </span>
-            <p className="lg:text-base text-sm text-gray-800">
-              From Panchagarh, Rājshāhi, Bangladesh
-            </p>
+            {data?.parmanentLocation ? (
+              <>
+                <span>
+                  <MdLocationPin className="inline-block text-gray-800 text-xl lg:text-2xl mr-2" />
+                </span>
+                <p className="lg:text-base text-sm text-gray-800">
+                  {data?.parmanentLocation}
+                </p>
+              </>
+            ) : (
+              <p className="text-base text-gray-800">
+                {" "}
+                Add parmanent location{" "}
+              </p>
+            )}
           </div>
         </div>
         {/* The button to open modal */}
@@ -69,7 +100,9 @@ const PersonalInfo = () => {
       </div>
 
       <hr className="border-b pageHr border-gray-400 mt-5 opacity-60" />
-      {openModal && <ProfileEditModal setOpenModal={setOpenModal} />}
+      {openModal && (
+        <ProfileEditModal data={data} setOpenModal={setOpenModal} />
+      )}
     </div>
   );
 };

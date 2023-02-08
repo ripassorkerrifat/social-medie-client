@@ -1,21 +1,34 @@
 import React, { useContext, useState } from "react";
 import { FiUploadCloud } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
-import { MdDeleteForever } from "react-icons/md";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import SmallSpiner from "../Spiner/SmallSpiner";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useAddProfileOrCoverPhotoOrInfoMutation } from "../../app/fetures/userApi/userSlice";
+import { useAddPostMutation } from "../../app/fetures/postApi/postSlice";
 
 const CoverModal = ({ setPhotoTitle, photoTitle }) => {
-  const { user, loading, updateUserProfile } = useContext(AuthContext);
+  const { user, loading, setLoading, updateUserProfile } =
+    useContext(AuthContext);
   const [image, setImage] = useState(null);
   const [uploadLoading, setUploadLoading] = useState(false);
-  const navigate = useNavigate();
+
+  const [postPost, { isLoading }] = useAddPostMutation();
 
   const removeImage = () => {
     setImage(null);
   };
+
+  const date = new Date();
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  let currentDate = `${year}-${month}-${day}`;
+  let currentTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+
+  const [addProfileInfo, { isError }] =
+    useAddProfileOrCoverPhotoOrInfoMutation();
 
   const handleUpload = (photoTitle) => {
     setUploadLoading(true);
@@ -31,32 +44,61 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data.display_url, uploadLoading);
         setUploadLoading(false);
+        const updateProfilePhoto = {
+          email: user?.email,
+          profileImg: data?.data?.display_url,
+        };
 
         if (photoTitle === "profilePhoto") {
+          const postInfo = {
+            currentDate,
+            currentTime,
+            photoType: "profile",
+            postImage: data.data.display_url,
+            posterName: user?.displayName,
+            posterEmail: user?.email,
+            posterImg: data.data.display_url,
+            reacts: [],
+            comments: [],
+          };
+
           updateUserProfile(user?.displayName, data.data.display_url).then(
             (data) => {
+              addProfileInfo(updateProfilePhoto);
+              postPost(postInfo);
               toast.success("Profile Photo uploaded....");
-              navigate("/profile");
               setPhotoTitle("");
+              setLoading(false);
             }
           );
         }
         if (photoTitle === "coverPhoto") {
-          // getImageLink(image).then((data) => {
-          //   const uploadPhoto = {
-          //     coverPhoto: data,
-          //   };
-          //   console.log(uploadPhoto);
-          //   setPhotoTitle("");
-          // });
+          const postInfo = {
+            currentDate,
+            currentTime,
+            photoType: "cover",
+            postImage: data.data.display_url,
+            posterName: user?.displayName,
+            posterEmail: user?.email,
+            posterImg: user?.photoURL,
+            reacts: [],
+            comments: [],
+          };
+          const updateCoverPhoto = {
+            email: user?.email,
+            coverImg: data?.data?.display_url,
+          };
+          addProfileInfo(updateCoverPhoto);
+          postPost(postInfo);
+          toast.success("Cover Photo uploaded....");
+          setPhotoTitle("");
         }
       });
   };
-  const handleDelete = () => {
-    setPhotoTitle("");
-  };
+  if (isError) {
+    return <p>Something went wrong....</p>;
+  }
 
   return (
     <div>
@@ -126,17 +168,13 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
               onClick={() => handleUpload(photoTitle)}
               className="bg-[#eb0890] hover:bg-[#fd0298] text-gray-100 text-sm px-4 py-[8px] mt-4 w-full rounded-md inline-block"
             >
-              {uploadLoading || loading ? <SmallSpiner /> : "Upload"}
+              {uploadLoading || isLoading || loading ? (
+                <SmallSpiner />
+              ) : (
+                "Upload"
+              )}
             </button>
           </div>
-          {user?.photoURL && (
-            <button
-              onClick={handleDelete}
-              className=" bg-gray-300 hover:bg-gray-400 duration-300  text-gray-800 text-sm px-4 py-[8px] mt-4 w-full rounded-md inline-block"
-            >
-              Remove <MdDeleteForever className="inline-block mb-1" size={18} />
-            </button>
-          )}
         </div>
       </div>
     </div>

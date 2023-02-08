@@ -71,6 +71,7 @@ const PostModal = ({ setOpenModal }) => {
             currentDate,
             postImage: data.data.display_url,
             currentTime,
+            photoType: "normal",
             posterName: user?.displayName,
             posterEmail: user?.email,
             posterImg: user?.photoURL,
@@ -88,6 +89,7 @@ const PostModal = ({ setOpenModal }) => {
         postText,
         currentDate,
         postImage: "",
+
         currentTime,
         posterName: user?.displayName,
         posterEmail: user?.email,
