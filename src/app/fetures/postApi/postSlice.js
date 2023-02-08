@@ -5,13 +5,20 @@ export const postsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000/",
   }),
-  tagTypes: ["Posts"],
+  tagTypes: ["Posts", "ProfilePosts"],
   endpoints: (builder) => ({
     getAllPost: builder.query({
       query: () => ({
         url: "posts",
       }),
       providesTags: ["Posts"],
+    }),
+
+    getPostByEmail: builder.query({
+      query: (email) => ({
+        url: `posts/${email}`,
+      }),
+      providesTags: ["ProfilePosts"],
     }),
 
     addPost: builder.mutation({
@@ -23,7 +30,15 @@ export const postsApi = createApi({
         },
         body: post,
       }),
-      invalidatesTags: ["Posts"],
+      invalidatesTags: ["Posts", "ProfilePosts"],
+    }),
+
+    deletePost: builder.mutation({
+      query: (id) => ({
+        url: `post/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["ProfilePosts"],
     }),
 
     addComment: builder.mutation({
@@ -35,7 +50,7 @@ export const postsApi = createApi({
         },
         body: commemt,
       }),
-      invalidatesTags: ["Posts"],
+      invalidatesTags: ["Posts", "ProfilePosts"],
     }),
 
     addReact: builder.mutation({
@@ -47,7 +62,7 @@ export const postsApi = createApi({
         },
         body: react,
       }),
-      invalidatesTags: ["Posts"],
+      invalidatesTags: ["Posts", "ProfilePosts"],
     }),
 
     removeReact: builder.mutation({
@@ -59,14 +74,16 @@ export const postsApi = createApi({
         },
         body: react,
       }),
-      invalidatesTags: ["Posts"],
+      invalidatesTags: ["Posts", "ProfilePosts"],
     }),
   }),
 });
 
 export const {
   useGetAllPostQuery,
+  useGetPostByEmailQuery,
   useAddPostMutation,
+  useDeletePostMutation,
   useAddCommentMutation,
   useAddReactMutation,
   useRemoveReactMutation,

@@ -1,11 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  BsThreeDots,
-  BsSuitHeartFill,
-  BsFillEmojiAngryFill,
-} from "react-icons/bs";
 import { BiWorld, BiComment } from "react-icons/bi";
-import { AiFillLike, AiOutlineLike } from "react-icons/ai";
+import { AiOutlineLike } from "react-icons/ai";
 import { RiShareForwardLine } from "react-icons/ri";
 import like1 from "../../assets/reaction/like1.gif";
 import love1 from "../../assets/reaction/love1.gif";
@@ -21,20 +16,21 @@ import sad from "../../assets/reaction/sad.svg";
 import angry from "../../assets/reaction/angry.svg";
 import TimeAgo from "timeago-react";
 import {
-  useAddPostMutation,
   useAddReactMutation,
-  useGetAllPostQuery,
   useRemoveReactMutation,
 } from "../../app/fetures/postApi/postSlice";
-import Loader from "../Spiner/Loader";
-import { toast } from "react-hot-toast";
 import Comments from "./Comments";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import { useLocation } from "react-router-dom";
+import PostActions from "../PostActions/PostActions";
 
-const Post = () => {
+const Post = ({ posts, isError }) => {
   const { user } = useContext(AuthContext);
   const [btnClicked, setBtnClicked] = useState(false);
   const [showReact, setShowReact] = useState(null);
+
+  const location = useLocation();
+  const path = location.pathname;
 
   const reactData = [
     { name: "Like", img: like1, id: "1" },
@@ -45,22 +41,10 @@ const Post = () => {
     { name: "Angry", img: angry1, id: "6" },
   ];
 
-  const { data: posts, isLoading, isError } = useGetAllPostQuery();
-
   useEffect(() => {});
 
   const [addReact] = useAddReactMutation();
   const [removeReact] = useRemoveReactMutation();
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (isError) {
-    return (
-      <p className="mt-20 text-center">Some went wrong in fetching post ....</p>
-    );
-  }
 
   const handleAddReact = (reactImg, reactName, id) => {
     const reactData = {
@@ -95,6 +79,12 @@ const Post = () => {
       }, 2000);
     }
   };
+
+  if (isError) {
+    return (
+      <p className="mt-20 text-center">Some went wrong in fetching post ....</p>
+    );
+  }
 
   return (
     <div onMouseOver={handleHideReact}>
@@ -135,7 +125,9 @@ const Post = () => {
                     </p>
                   </div>
                 </div>
-                <BsThreeDots className="inline-block text-2xl mr-2" />
+                <div className="z-40">
+                  {path === "/profile" && <PostActions post={post} />}
+                </div>
               </div>
               <div className="post-center">
                 <p className="px-2 pb-2">{post?.postText}</p>
@@ -150,37 +142,152 @@ const Post = () => {
               <div className="post-bottom py-2 md:px-4 px-1 relative">
                 <div className="flex justify-between align-middle">
                   <div className="flex">
-                    <div className="bg-blue-500 rounded-full flex justify-center items-center  w-5 h-5">
-                      <img
-                        src={like}
-                        alt=""
-                        className="inline-block text-white text-xs"
-                      />
-                    </div>
-                    <div className="bg-rose-500 rounded-full flex justify-center items-center 1 w-5 h-5">
-                      <img
-                        src={love}
-                        alt=""
-                        className="inline-block text-white text-xs"
-                      />
-                    </div>
-                    <div className="bg-red-800 rounded-full flex justify-center items-center  w-5 h-5">
-                      <img
-                        src={soaked}
-                        alt=""
-                        className="inline-block text-white text-xs"
-                      />
-                    </div>
-                    <span className="ml-2">
-                      {post?.reacts?.length ? (
-                        <span>
-                          {post?.reacts?.length}
-                          {""} reacts
-                        </span>
-                      ) : (
-                        <span> 0 react</span>
-                      )}
-                    </span>
+                    {post.reacts.length ? (
+                      <>
+                        <>
+                          {post?.reacts?.filter((r) => r.reactName === "Like")
+                            .length ? (
+                            <div className="flex items-center mr-1">
+                              <div className=" rounded-full flex justify-center items-center mr-1 w-5 h-5">
+                                <img
+                                  src={like}
+                                  alt=""
+                                  className="inline-block text-white text-xs"
+                                />
+                              </div>
+                              <p className="ml-0.5 text-base">
+                                {
+                                  post.reacts.filter(
+                                    (r) => r.reactName === "Like"
+                                  ).length
+                                }
+                              </p>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+                        <>
+                          {post?.reacts?.filter((r) => r.reactName === "Love")
+                            .length ? (
+                            <div className="flex items-center mr-1">
+                              <div className=" rounded-full flex justify-center items-center mr-1 w-5 h-5">
+                                <img
+                                  src={love}
+                                  alt=""
+                                  className="inline-block text-white text-xs"
+                                />
+                              </div>
+                              <p className="ml-0.5 text-base">
+                                {
+                                  post.reacts.filter(
+                                    (r) => r.reactName === "Love"
+                                  ).length
+                                }
+                              </p>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+                        <>
+                          {post?.reacts?.filter((r) => r.reactName === "Haha")
+                            .length ? (
+                            <div className="flex items-center mr-1">
+                              <div className=" rounded-full flex justify-center items-center mr-1 w-5 h-5">
+                                <img
+                                  src={laughing}
+                                  alt=""
+                                  className="inline-block text-white text-xs"
+                                />
+                              </div>
+                              <p className="ml-0.5 text-base">
+                                {
+                                  post.reacts.filter(
+                                    (r) => r.reactName === "Haha"
+                                  ).length
+                                }
+                              </p>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+                        <>
+                          {post?.reacts?.filter((r) => r.reactName === "Wow")
+                            .length ? (
+                            <div className="flex items-center mr-1">
+                              <div className=" rounded-full flex justify-center items-center mr-1 w-5 h-5">
+                                <img
+                                  src={soaked}
+                                  alt=""
+                                  className="inline-block text-white text-xs"
+                                />
+                              </div>
+                              <p className="ml-0.5 text-base">
+                                {
+                                  post.reacts.filter(
+                                    (r) => r.reactName === "Wow"
+                                  ).length
+                                }
+                              </p>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+                        <>
+                          {post?.reacts?.filter((r) => r.reactName === "Sad")
+                            .length ? (
+                            <div className="flex items-center mr-1">
+                              <div className=" rounded-full flex justify-center items-center mr-1 w-5 h-5">
+                                <img
+                                  src={sad}
+                                  alt=""
+                                  className="inline-block text-white text-xs"
+                                />
+                              </div>
+                              <p className="ml-0.5 text-base">
+                                {
+                                  post.reacts.filter(
+                                    (r) => r.reactName === "Sad"
+                                  ).length
+                                }
+                              </p>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+                        <>
+                          {post?.reacts?.filter((r) => r.reactName === "Angry")
+                            .length ? (
+                            <div className="flex items-center mr-1">
+                              <div className=" rounded-full flex justify-center items-center mr-1 w-5 h-5">
+                                <img
+                                  src={angry}
+                                  alt=""
+                                  className="inline-block text-white text-xs"
+                                />
+                              </div>
+                              <p className="ml-0.5 text-base">
+                                {
+                                  post.reacts.filter(
+                                    (r) => r.reactName === "Angry"
+                                  ).length
+                                }
+                              </p>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+                      </>
+                    ) : (
+                      <>
+                        <p>0 react</p>
+                      </>
+                    )}
                   </div>
                   <p>
                     {post?.comments?.length ? (
@@ -233,9 +340,9 @@ const Post = () => {
                           {post?.reacts?.find((r) => r.userId === user.uid) ? (
                             <>
                               {post.reacts.map(
-                                (react) =>
+                                (react, i) =>
                                   react.userId === user.uid && (
-                                    <>
+                                    <div key={i}>
                                       <img
                                         className="inline-block md:h-10 h-8 text-base sm:mr-1"
                                         src={react?.reactImg}
@@ -264,7 +371,7 @@ const Post = () => {
                                       >
                                         {react.reactName}
                                       </span>
-                                    </>
+                                    </div>
                                   )
                               )}
                             </>

@@ -139,15 +139,22 @@ const PostModal = ({ setOpenModal }) => {
           <hr />
           <form onSubmit={handlePost} className="">
             <div className="flex items-center align-middle my-3">
-              <img
-                className="w-12 h-12 rounded-full"
-                src="https://pixlr.com/images/index/collage.webp"
-                alt=""
-              />
+              {user.photoURL ? (
+                <img
+                  src={user?.photoURL}
+                  className="h-12 w-12 rounded-full inline-block"
+                  alt=""
+                />
+              ) : (
+                <img
+                  className="h-12 w-12 rounded-full inline-block"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
+                  alt=""
+                />
+              )}
               <div className="ml-3 leading-3">
-                <h4 className="mb-2 font-semibold">Ripas Sorker Rifat</h4>
+                <h4 className="mb-2 font-semibold">{user?.displayName}</h4>
                 <p>
-                  3 hours
                   <span>
                     <BiWorld className="inline-block ml-1" />
                   </span>
@@ -161,7 +168,9 @@ const PostModal = ({ setOpenModal }) => {
                 value={postText}
                 onChange={(e) => setPostText(e.target.value)}
                 className="w-full border-b-2 h-m-16 p-2  md:placeholder:text-lg placeholder:text-gray-600 focus:outline-none focus:border-gray-300 resize-none"
-                placeholder="What's on your mind, Ripas Sorker....."
+                placeholder={`What's on your mind? ${
+                  user?.displayName && user.displayName.slice(0, 12)
+                }....`}
               />
             </div>
             <label className="flex justify-end">
