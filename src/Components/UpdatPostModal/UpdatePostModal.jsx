@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import { useUpdatePostMutation } from "../../app/fetures/postApi/postSlice";
+import Loader from "../Spiner/Loader";
 
-const UpdatePostModal = ({ post }) => {
-  //   console.log(post);
+const UpdatePostModal = ({ post, setShowUpdateModal }) => {
+  const [postText, setPostText] = useState("");
+  const [updatePost, { isLoading }] = useUpdatePostMutation();
+  const handleUpdate = () => {
+    const updatePostInfo = {
+      _id: post._id,
+      postText,
+    };
+    updatePost(updatePostInfo);
+    setShowUpdateModal(false);
+  };
+
   return (
     <div>
       <input type="checkbox" id="update-post" className="modal-toggle" />
@@ -26,10 +38,23 @@ const UpdatePostModal = ({ post }) => {
               />
             </svg>
           </label>
-          <h3 className="text-lg font-bold">
-            Congratulations random Internet user!
-          </h3>
-          <p className="py-4">Are you sure? You want to delete this post...</p>
+          <h3 className="text-lg text-center font-bold">Update post</h3>
+
+          <input
+            type="text"
+            value={postText}
+            onChange={(e) => setPostText(e.target.value)}
+            className="w-full pt-5 p-2 md:placeholder:text-lg placeholder:text-gray-600 focus:outline-none focus:border-gray-300"
+            placeholder="Update post......."
+          />
+          <div className="border-b-2"> </div>
+          <button
+            onClick={handleUpdate}
+            type="submit"
+            className="bg-[#eb0890] hover:bg-[#fd0298] text-gray-100 text-sm px-4 py-[8px] mt-4 w-full rounded-md inline-block"
+          >
+            {isLoading ? <Loader /> : "Update"}
+          </button>
         </div>
       </div>
     </div>

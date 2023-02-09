@@ -44,6 +44,17 @@ export const postsApi = createApi({
       }),
       invalidatesTags: ["Posts", "ProfilePosts"],
     }),
+    updatePost: builder.mutation({
+      query: (post) => ({
+        url: `update/${post._id}`,
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: post,
+      }),
+      invalidatesTags: ["Posts", "ProfilePosts"],
+    }),
 
     deletePost: builder.mutation({
       query: (id) => ({
@@ -94,6 +105,7 @@ export const postsApi = createApi({
 export const {
   useGetAllPostQuery,
   useGetPostByEmailQuery,
+  useUpdatePostMutation,
   useAddPostMutation,
   useDeletePostMutation,
   useAddCommentMutation,

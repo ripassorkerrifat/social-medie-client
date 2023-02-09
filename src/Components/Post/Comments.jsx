@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 
 import TimeAgo from "timeago-react";
 import { useAddCommentMutation } from "../../app/fetures/postApi/postSlice";
@@ -23,6 +24,7 @@ const Comments = ({ id, comments }) => {
     const comment = {
       commenter: user?.displayName,
       commenterPhoto: user?.photoURL,
+      commenterEmail: user?.email,
       currentDate,
       currentTime,
       comment: commtentText,
@@ -73,27 +75,66 @@ const Comments = ({ id, comments }) => {
         </form>
         {comments?.map(
           (
-            { commenterPhoto, commenter, comment, currentDate, currentTime },
+            {
+              commenterEmail,
+              commenterPhoto,
+              commenter,
+              comment,
+              currentDate,
+              currentTime,
+            },
             i
           ) => (
             <div className="mt-2 flex" key={i}>
-              {commenterPhoto ? (
-                <img
-                  src={commenterPhoto}
-                  className="h-10 w-10 rounded-full inline-block ml-1"
-                  alt=""
-                />
+              {commenterEmail === user.email ? (
+                <Link to={`/my-profile`}>
+                  {commenterPhoto ? (
+                    <img
+                      className="w-10 h-10 rounded-full"
+                      src={commenterPhoto}
+                      alt=""
+                    />
+                  ) : (
+                    <img
+                      className="w-10 h-10 rounded-full"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
+                      alt=""
+                    />
+                  )}
+                </Link>
               ) : (
-                <img
-                  className="h-10 w-10 rounded-full inline-block ml-1"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
-                  alt=""
-                />
+                <Link to={`/profile/${commenterEmail}`}>
+                  {commenterPhoto ? (
+                    <img
+                      className="w-10 h-10 rounded-full"
+                      src={commenterPhoto}
+                      alt=""
+                    />
+                  ) : (
+                    <img
+                      className="w-10 h-10 rounded-full"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
+                      alt=""
+                    />
+                  )}
+                </Link>
               )}
 
               <div className="leading-4 ml-3">
                 <div className="bg-slate-200 inline-block p-2 rounded-lg">
-                  <h4 className="font-semibold hover:underline">{commenter}</h4>
+                  {commenterEmail === user.email ? (
+                    <Link to={`/my-profile`}>
+                      <h4 className=" font-semibold hover:underline">
+                        {commenter}
+                      </h4>
+                    </Link>
+                  ) : (
+                    <Link to={`/profile/${commenterEmail}`}>
+                      <h4 className=" font-semibold hover:underline">
+                        {commenter}
+                      </h4>
+                    </Link>
+                  )}
                   <p>{comment}.</p>
                 </div>
                 <div className="text-sm flex w-[250px]">

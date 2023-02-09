@@ -5,25 +5,23 @@ const AllPhotos = ({ posts }) => {
 
   return (
     <div className="mt-6">
-      <div className="flex justify-between items-center">
-        <h4 className="text-lg font-semibold">Photos</h4>
-      </div>
-      <div className="grid lg:grid-cols-3 grid-cols-2 gap-1 rounded-md mt-2 overflow-hidden">
-        {photos.length ? (
-          <>
-            {photos?.map((photo, i) => (
-              <img
-                key={i}
-                className="lg:h-20 md:h-16  w-full"
-                src={photo.postImage}
-                alt=""
-              />
-            ))}
-          </>
-        ) : (
-          <p>No photo uploaded</p>
-        )}
-      </div>
+      <h4 className="text-lg font-semibold">Photos</h4>
+
+      {photos.length ? (
+        <div className="grid lg:grid-cols-3 grid-cols-2 gap-1 rounded-md mt-2 overflow-hidden">
+          {photos?.map((photo, i) => (
+            <img
+              key={i}
+              className="lg:h-20 md:h-16  w-full"
+              src={photo.postImage}
+              alt=""
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="mt-2">No photos uploaded</p>
+      )}
+
       <hr className="border-b pageHr border-gray-400 mt-5 opacity-60" />
     </div>
   );

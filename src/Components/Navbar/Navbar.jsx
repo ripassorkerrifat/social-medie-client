@@ -14,7 +14,7 @@ import ChatBox from "../ChatBox/ChatBox";
 import Chat from "../Chat/Chat";
 
 const Navbar = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
   const handleLogOut = () => {
     logout().then();
   };
@@ -63,7 +63,10 @@ const Navbar = () => {
         <div className="navkinks">
           <div className="relative">
             <Menu as="div" className="relative inline-block mt-[6px]">
-              <Menu.Button className="">
+              <Menu.Button
+                className="tooltip tooltip-left"
+                data-tip="Messenger"
+              >
                 <BsMessenger className="link" />
               </Menu.Button>
               <Transition
@@ -86,18 +89,31 @@ const Navbar = () => {
             </Menu>
           </div>
           <div className="relative">
-            <IoMdNotifications className="link" />
+            <IoMdNotifications
+              className="link tooltip tooltip-left"
+              data-tip=" "
+            />
           </div>
 
           <div className="ml-[5px]">
             <Menu as="div" className="relative inline-block mt-[6px]">
-              <Menu.Button className="">
-                {/* <CgProfile className="link" aria-hidden="true" /> */}
-                <img
-                  className="rounded-full   w-[37px] h-[37px] ml-[10px]"
-                  src="https://images.news18.com/ibnlive/uploads/2021/02/1612707348_tiger.jpg?im=Resize,width=360,aspect=fit,type=normal?im=Resize,width=320,aspect=fit,type=normal"
-                  alt=""
-                />
+              <Menu.Button
+                className="tooltip tooltip-left"
+                data-tip={user.displayName}
+              >
+                {user.photoURL ? (
+                  <img
+                    src={user.photoURL}
+                    className="rounded-full   w-[37px] h-[37px] ml-[10px]"
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    className="rounded-full   w-[37px] h-[37px] ml-[10px]"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
+                    alt=""
+                  />
+                )}
               </Menu.Button>
 
               <Transition

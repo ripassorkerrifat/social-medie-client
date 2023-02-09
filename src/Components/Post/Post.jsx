@@ -97,28 +97,55 @@ const Post = ({ posts, isError }) => {
             >
               <div className="post-top my-3 px-2 flex justify-between items-center">
                 <div className="flex items-center align-middle">
-                  {post.posterImg ? (
-                    <Link to={`/profile/${post.posterEmail}`}>
-                      {" "}
-                      <img
-                        className="w-12 h-12 rounded-full"
-                        src={post.posterImg}
-                        alt=""
-                      />
+                  {post.posterEmail === user.email ? (
+                    <Link to={`/my-profile`}>
+                      {post.posterImg ? (
+                        <img
+                          className="w-12 h-12 rounded-full"
+                          src={post.posterImg}
+                          alt=""
+                        />
+                      ) : (
+                        <img
+                          className="w-12 h-12 rounded-full"
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
+                          alt=""
+                        />
+                      )}
                     </Link>
                   ) : (
                     <Link to={`/profile/${post.posterEmail}`}>
-                      <img
-                        className="w-12 h-12 rounded-full"
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
-                        alt=""
-                      />
+                      {post.posterImg ? (
+                        <img
+                          className="w-12 h-12 rounded-full"
+                          src={post.posterImg}
+                          alt=""
+                        />
+                      ) : (
+                        <img
+                          className="w-12 h-12 rounded-full"
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
+                          alt=""
+                        />
+                      )}
                     </Link>
                   )}
 
                   <div className="ml-3 leading-4">
                     <div className="flex items-center">
-                      <h4 className=" font-semibold">{post?.posterName}</h4>
+                      {post.posterEmail === user.email ? (
+                        <Link to={`/my-profile`}>
+                          <h4 className=" font-semibold hover:underline">
+                            {post?.posterName}
+                          </h4>
+                        </Link>
+                      ) : (
+                        <Link to={`/profile/${post.posterEmail}`}>
+                          <h4 className=" font-semibold hover:underline">
+                            {post?.posterName}
+                          </h4>
+                        </Link>
+                      )}
                       <>
                         {post.postImage && post.photoType === "normal" ? (
                           <p className="text-sm ml-2">uploaded a photo.</p>
@@ -154,7 +181,7 @@ const Post = ({ posts, isError }) => {
                   </div>
                 </div>
                 <div className="z-40">
-                  {path === "/profile" &&
+                  {path === "/my-profile" &&
                   post.photoType !== "cover" &&
                   post.photoType !== "profile" ? (
                     <PostActions post={post} />
@@ -333,14 +360,17 @@ const Post = ({ posts, isError }) => {
                               {post.reacts.map(
                                 (react, i) =>
                                   react.userId === user.uid && (
-                                    <div key={i}>
+                                    <div
+                                      key={i}
+                                      className="flex items-center justify-center"
+                                    >
                                       <img
                                         className="inline-block md:h-10 h-8 text-base sm:mr-1"
                                         src={react?.reactImg}
                                         alt=""
                                       />
                                       <span
-                                        className={`mt-1 mr-3  text-base ${
+                                        className={`mt-1 mr-3  md:text-base  ${
                                           react.reactName === "Like" &&
                                           "text-blue-700"
                                         } ${

@@ -1,0 +1,6 @@
+.feedContainer {
+  flex: 6;
+  height: 100vh;
+  background: white;
+  overflow-y: auto;
+}

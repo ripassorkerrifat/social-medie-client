@@ -14,7 +14,7 @@ const AllFriend = () => {
             src="https://c8.alamy.com/zooms/9/e7c17aab10d648e28b1f6dccbf4c3527/t1xrxj.jpg"
             alt=""
           />
-          <h5>Ripas Sorker </h5>
+          <h5>Ripas So.... </h5>
         </div>
         <div>
           <img
