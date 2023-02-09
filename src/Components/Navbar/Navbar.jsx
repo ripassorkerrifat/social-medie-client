@@ -26,7 +26,7 @@ const Navbar = () => {
       icon: <AiFillHome className="mr-2 h-5 w-5" aria-hidden="true" />,
     },
     {
-      link: "/profile",
+      link: "/my-profile",
       name: "Profile",
       icon: <CgProfile className="mr-2 h-5 w-5" aria-hidden="true" />,
     },

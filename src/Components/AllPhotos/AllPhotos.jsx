@@ -1,58 +1,28 @@
 import React from "react";
 
-const AllPhotos = () => {
+const AllPhotos = ({ posts }) => {
+  const photos = posts?.filter((p) => p.postImage);
+
   return (
     <div className="mt-6">
       <div className="flex justify-between items-center">
         <h4 className="text-lg font-semibold">Photos</h4>
-        <p className="text-[#ff065b]">See all</p>
       </div>
-      <div className="grid grid-cols-3 gap-1 rounded-md mt-2 overflow-hidden">
-        <img
-          className=""
-          src="https://c8.alamy.com/zooms/9/e7c17aab10d648e28b1f6dccbf4c3527/t1xrxj.jpg"
-          alt=""
-        />
-        <img
-          className=""
-          src="https://c8.alamy.com/zooms/9/e7c17aab10d648e28b1f6dccbf4c3527/t1xrxj.jpg"
-          alt=""
-        />
-        <img
-          className=""
-          src="https://c8.alamy.com/zooms/9/e7c17aab10d648e28b1f6dccbf4c3527/t1xrxj.jpg"
-          alt=""
-        />
-        <img
-          className=""
-          src="https://c8.alamy.com/zooms/9/e7c17aab10d648e28b1f6dccbf4c3527/t1xrxj.jpg"
-          alt=""
-        />
-        <img
-          className=""
-          src="https://c8.alamy.com/zooms/9/e7c17aab10d648e28b1f6dccbf4c3527/t1xrxj.jpg"
-          alt=""
-        />
-        <img
-          className=""
-          src="https://c8.alamy.com/zooms/9/e7c17aab10d648e28b1f6dccbf4c3527/t1xrxj.jpg"
-          alt=""
-        />
-        <img
-          className=""
-          src="https://c8.alamy.com/zooms/9/e7c17aab10d648e28b1f6dccbf4c3527/t1xrxj.jpg"
-          alt=""
-        />
-        <img
-          className=""
-          src="https://c8.alamy.com/zooms/9/e7c17aab10d648e28b1f6dccbf4c3527/t1xrxj.jpg"
-          alt=""
-        />
-        <img
-          className=""
-          src="https://c8.alamy.com/zooms/9/e7c17aab10d648e28b1f6dccbf4c3527/t1xrxj.jpg"
-          alt=""
-        />
+      <div className="grid lg:grid-cols-3 grid-cols-2 gap-1 rounded-md mt-2 overflow-hidden">
+        {photos.length ? (
+          <>
+            {photos?.map((photo, i) => (
+              <img
+                key={i}
+                className="lg:h-20 md:h-16  w-full"
+                src={photo.postImage}
+                alt=""
+              />
+            ))}
+          </>
+        ) : (
+          <p>No photo uploaded</p>
+        )}
       </div>
       <hr className="border-b pageHr border-gray-400 mt-5 opacity-60" />
     </div>

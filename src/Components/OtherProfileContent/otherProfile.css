@@ -1,0 +1,23 @@
+.profile-content-container {
+  flex: 10;
+  height: 100vh;
+  background: white;
+  overflow-y: auto;
+}
+.post-section {
+  height: 100vh;
+  overflow-y: auto;
+}
+.personal-info {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+@media only screen and (max-width: 767px) {
+  .profile-content-container {
+    height: 100%;
+  }
+  .post-section {
+    height: 100%;
+  }
+}

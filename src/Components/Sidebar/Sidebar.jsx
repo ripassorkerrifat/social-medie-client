@@ -1,11 +1,7 @@
 import React, { useContext } from "react";
-import {
-  AiFillHome,
-  AiFillSave,
-  AiFillProfile,
-  AiFillSetting,
-} from "react-icons/ai";
+import { AiFillHome, AiFillSave, AiFillSetting } from "react-icons/ai";
 import { MdEventSeat } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 import { IoIosPeople } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import { FaUserFriends } from "react-icons/fa";
@@ -27,8 +23,8 @@ const Sidebar = () => {
             <AiFillHome className="sidebarIcon" />
             <span className="sidebarText">Home</span>
           </Link>
-          <Link to={"/profile"} className="sidebarListItem">
-            <AiFillProfile className="sidebarIcon" />
+          <Link to={"/my-profile"} className="sidebarListItem">
+            <CgProfile className="sidebarIcon" />
             <span className="sidebarText">Profile</span>
           </Link>
           <li className="sidebarListItem">

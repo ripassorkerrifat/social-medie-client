@@ -3,7 +3,6 @@ import "./profileTop.css";
 import { AiFillCamera } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
 import { MdAdd } from "react-icons/md";
-import { BsMessenger } from "react-icons/bs";
 import { useState } from "react";
 import CoverAndProfileModal from "../CoverAndProfileModal/CoverAndProfileModal";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
@@ -40,7 +39,7 @@ const ProfileTop = ({ data }) => {
         </label>
       </div>
       {/* profile bottom profile edit/add/main section*/}
-      <div className="my-4  lg:mx-12 md:flex justify-between items-center">
+      <div className="my-7  lg:mx-12 md:flex justify-between items-center">
         <div className="md:flex items-center relative ">
           {data?.profileImg ? (
             <img
@@ -94,13 +93,7 @@ const ProfileTop = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="text-end inline-block">
-          {/* <button className="bg-[#ff059b]  text-gray-200 text-sm px-4 py-[6px] mr-4 rounded-md inline-block ">
-             <MdAdd className="inline-block text-xl  mr-1" /> Add Friend
-          </button>
-          <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-4 py-[6px] mr-4 rounded-md inline-block ">
-           <BsMessenger className="inline-block text-xl  mr-1" />   Message
-          </button> */}
+        {/* <div className="text-end inline-block">
           <button className="bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:py-[6px] md:mr-4 rounded-md inline-block mr-2">
             <MdAdd className="inline-block md:text-xl text-lg  mr-1" /> Add
             Story
@@ -112,7 +105,7 @@ const ProfileTop = ({ data }) => {
             <CiEdit className="inline-block md:text-xl text-lg mr-1 " /> Edit
             Profile
           </button>
-        </div>
+        </div> */}
       </div>
       {photoTitle && (
         <CoverAndProfileModal

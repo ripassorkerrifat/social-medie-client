@@ -21,7 +21,7 @@ import {
 } from "../../app/fetures/postApi/postSlice";
 import Comments from "./Comments";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import PostActions from "../PostActions/PostActions";
 
 const Post = ({ posts, isError }) => {
@@ -98,17 +98,22 @@ const Post = ({ posts, isError }) => {
               <div className="post-top my-3 px-2 flex justify-between items-center">
                 <div className="flex items-center align-middle">
                   {post.posterImg ? (
-                    <img
-                      className="w-12 h-12 rounded-full"
-                      src={post.posterImg}
-                      alt=""
-                    />
+                    <Link to={`/profile/${post.posterEmail}`}>
+                      {" "}
+                      <img
+                        className="w-12 h-12 rounded-full"
+                        src={post.posterImg}
+                        alt=""
+                      />
+                    </Link>
                   ) : (
-                    <img
-                      className="w-12 h-12 rounded-full"
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
-                      alt=""
-                    />
+                    <Link to={`/profile/${post.posterEmail}`}>
+                      <img
+                        className="w-12 h-12 rounded-full"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
+                        alt=""
+                      />
+                    </Link>
                   )}
 
                   <div className="ml-3 leading-4">

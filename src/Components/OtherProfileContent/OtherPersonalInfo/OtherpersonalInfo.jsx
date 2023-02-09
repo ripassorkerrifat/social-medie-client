@@ -1,11 +1,8 @@
 import React from "react";
-import { MdCastForEducation, MdLocationPin } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
-import ProfileEditModal from "../ProfileEditModal/ProfileEditModal";
-import { useState } from "react";
+import { MdCastForEducation, MdLocationPin } from "react-icons/md";
 
-const PersonalInfo = ({ data }) => {
-  const [openModal, setOpenModal] = useState(false);
+const OtherpersonalInfo = ({ data }) => {
   return (
     <div>
       <div className="">
@@ -14,7 +11,7 @@ const PersonalInfo = ({ data }) => {
           {data?.bio ? (
             <p className=" text-base text-gray-800">{data.bio}</p>
           ) : (
-            <p className="text-base text-gray-800">Add bio </p>
+            <p className="text-base text-gray-800"> Bio not available </p>
           )}
 
           <hr className="border-b pageHr border-gray-400 my-2 opacity-60" />
@@ -34,7 +31,7 @@ const PersonalInfo = ({ data }) => {
                 </p>
               </>
             ) : (
-              <p className="text-base text-gray-800">Add collage </p>
+              <p className="text-base text-gray-800">Not added collage </p>
             )}
           </div>
           <div className="flex mt-2">
@@ -49,7 +46,7 @@ const PersonalInfo = ({ data }) => {
                 </p>
               </>
             ) : (
-              <p className="text-base text-gray-800">Add university </p>
+              <p className="text-base text-gray-800">Not added university </p>
             )}
           </div>
           <hr className="border-b pageHr border-gray-400 my-2 opacity-60" />
@@ -67,7 +64,10 @@ const PersonalInfo = ({ data }) => {
                 </p>
               </>
             ) : (
-              <p className="text-base text-gray-800"> Add current location </p>
+              <p className="text-base text-gray-800">
+                {" "}
+                Not given current location{" "}
+              </p>
             )}
           </div>
           <div className="flex mt-2">
@@ -82,28 +82,16 @@ const PersonalInfo = ({ data }) => {
               </>
             ) : (
               <p className="text-base text-gray-800">
-                {" "}
-                Add parmanent location{" "}
+                Not given parmanent location...
               </p>
             )}
           </div>
         </div>
-        {/* The button to open modal */}
-        <label
-          htmlFor="profile-edit-modal"
-          onClick={() => setOpenModal(true)}
-          className="bg-[#ff059b]  text-center w-full mt-3 text-gray-200 text-sm px-4 py-[6px] mr-4 rounded-md inline-block "
-        >
-          Add/Edit Info
-        </label>
       </div>
 
       <hr className="border-b pageHr border-gray-400 mt-5 opacity-60" />
-      {openModal && (
-        <ProfileEditModal data={data} setOpenModal={setOpenModal} />
-      )}
     </div>
   );
 };
 
-export default PersonalInfo;
+export default OtherpersonalInfo;
