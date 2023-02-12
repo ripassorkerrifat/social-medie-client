@@ -10,7 +10,7 @@ const ProfileRight = ({ data, posts }) => {
       <div className="mt-12 p-4">
         <PersonalInfo data={data} />
         <AllPhotos posts={posts} />
-        <AllFriend />
+        <AllFriend data={data} />
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ const OtherProfileTop = ({ data }) => {
           )}
         </div>
         {/* profile bottom profile edit/add/main section*/}
-        <div className="my-4  lg:mx-12 md:flex justify-between items-center">
+        <div className="my-4  lg:mx-10 md:flex justify-between items-center">
           <div className="md:flex items-center relative ">
             {data?.profileImg ? (
               <img
@@ -43,15 +43,7 @@ const OtherProfileTop = ({ data }) => {
               <h4 className="lg:text-2xl md:text-xl w-full text-base font-semibold mt-3">
                 {data?.name}
               </h4>
-              <span>1200 friends &</span>
-              <span>34 mutuals </span>
-              {/* <div className="md:flex hidden">
-                <img
-                  className="h-6 w-6 rounded-full bg-cover -mr-1"
-                  src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"
-                  alt=""
-                />
-              </div> */}
+              <span>Web Developer</span>
             </div>
           </div>
           <div className="text-end inline-block">

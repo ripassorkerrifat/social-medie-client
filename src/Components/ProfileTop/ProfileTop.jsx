@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import "./profileTop.css";
 import { AiFillCamera } from "react-icons/ai";
-import { CiEdit } from "react-icons/ci";
-import { MdAdd } from "react-icons/md";
 import { useState } from "react";
 import CoverAndProfileModal from "../CoverAndProfileModal/CoverAndProfileModal";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
@@ -67,45 +65,9 @@ const ProfileTop = ({ data }) => {
             <h4 className="lg:text-2xl md:text-xl w-full text-base font-semibold mt-3">
               {user?.displayName}
             </h4>
-            <span>1200 friends &</span>
-            <span>34 mutuals </span>
-            <div className="md:flex hidden">
-              <img
-                className="h-6 w-6 rounded-full bg-cover -mr-1"
-                src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"
-                alt=""
-              />
-              <img
-                className="h-6 w-6 rounded-full bg-cover -mr-1"
-                src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"
-                alt=""
-              />
-              <img
-                className="h-6 w-6 rounded-full bg-cover -mr-1"
-                src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"
-                alt=""
-              />
-              <img
-                className="h-6 w-6 rounded-full bg-cover -mr-1"
-                src="https://similarworlds.com/facebookcovers/facebook-cover-photos-timeline/fb/places/Colorful-New-York-City-Facebook-Cover.jpg"
-                alt=""
-              />
-            </div>
+            <span>MERN Stack Developer</span>
           </div>
         </div>
-        {/* <div className="text-end inline-block">
-          <button className="bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:py-[6px] md:mr-4 rounded-md inline-block mr-2">
-            <MdAdd className="inline-block md:text-xl text-lg  mr-1" /> Add
-            Story
-          </button>
-          <button
-            className="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
-          md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2"
-          >
-            <CiEdit className="inline-block md:text-xl text-lg mr-1 " /> Edit
-            Profile
-          </button>
-        </div> */}
       </div>
       {photoTitle && (
         <CoverAndProfileModal

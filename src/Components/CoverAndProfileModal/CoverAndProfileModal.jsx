@@ -39,9 +39,6 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
       `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMG_BB_API_KEY}`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: formData,
       }
     )

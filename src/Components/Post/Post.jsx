@@ -191,7 +191,7 @@ const Post = ({ posts, isError }) => {
                 </div>
               </div>
               <div className="post-center">
-                <p className="px-2 pb-2">{post?.postText}</p>
+                <p className="px-4 pb-2">{post?.postText}</p>
                 {post?.postImage && (
                   <img
                     className="md:max-h-[700px] h-[350] w-full bg-cover"

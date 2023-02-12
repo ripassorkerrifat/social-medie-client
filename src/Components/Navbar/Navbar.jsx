@@ -44,7 +44,7 @@ const Navbar = () => {
           to={"/"}
           className="font-semibold text-[#ff059b] lg:text-3xl md:text-2xl text-xl md:px-6 py-2"
         >
-          Social Media
+          R<span className="text-gray-400">S</span>R Media
         </Link>
       </div>
       <div className="center hidden md:inline-block">

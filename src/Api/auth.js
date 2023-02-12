@@ -1,5 +1,8 @@
 export const saveUserAndsetToken = (user) => {
-  const currentUser = { email: user.email, name: user.displayName };
+  const currentUser = {
+    email: user.email,
+    name: user.displayName,
+  };
   fetch(`http://localhost:5000/user/${user.email}`, {
     method: "PUT",
     headers: {

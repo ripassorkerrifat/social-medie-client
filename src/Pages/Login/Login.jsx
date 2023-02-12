@@ -86,7 +86,6 @@ const Login = () => {
       login(email, password)
         .then((result) => {
           const user = result.user;
-          console.log(user);
           saveUserAndsetToken(user);
           action.resetForm();
           setLoading(false);
@@ -105,9 +104,11 @@ const Login = () => {
       <div className="wrapper">
         <div className="title-text ">
           <div className={`title login ${toggle ? "ml-0" : "-ml-[50%]"}`}>
-            Social Media
+            R<span className="text-gray-400">S</span>R Media
           </div>
-          <div className="title signup">Social Media</div>
+          <div className="title signup">
+            R<span className="text-gray-400">S</span>R Media
+          </div>
         </div>
         <div className="form-container">
           <div className="slide-controls">

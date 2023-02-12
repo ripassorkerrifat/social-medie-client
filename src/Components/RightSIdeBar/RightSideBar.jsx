@@ -1,5 +1,6 @@
 import React from "react";
 import Birhtday from "../Birthday/Birhtday";
+import CancleRequest from "../CancleRequest/CancleRequest";
 import FriendRequest from "../FriendRequest/FriendRequest";
 import Online from "../Online/Online";
 import "./rightbar.scss";
@@ -11,6 +12,7 @@ const RightSideBar = () => {
         <FriendRequest />
         <Birhtday />
         <Online />
+        <CancleRequest />
       </div>
     </div>
   );

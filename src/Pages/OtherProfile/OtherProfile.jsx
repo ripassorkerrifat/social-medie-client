@@ -11,9 +11,9 @@ const OtherProfile = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const email = pathname.split("/")[2];
-
-  const { data: posts, isError, isLoading } = useGetPostByEmailQuery(email);
   const { data } = useGetUserByEmailQuery(email);
+  const { data: posts, isError, isLoading } = useGetPostByEmailQuery(email);
+
   if (isLoading) {
     return <Loader />;
   }

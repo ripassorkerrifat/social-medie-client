@@ -7,7 +7,7 @@ const AllPhotos = ({ posts }) => {
     <div className="mt-6">
       <h4 className="text-lg font-semibold">Photos</h4>
 
-      {photos.length ? (
+      {photos?.length ? (
         <div className="grid lg:grid-cols-3 grid-cols-2 gap-1 rounded-md mt-2 overflow-hidden">
           {photos?.map((photo, i) => (
             <img
