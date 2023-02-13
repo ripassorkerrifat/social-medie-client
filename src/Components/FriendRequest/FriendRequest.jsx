@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import {
   useAcceptRequestMutation,
   useDeleteRequestMutation,
@@ -50,21 +51,28 @@ const FriendRequest = () => {
               <div className="flex justify-between">
                 <div className="flex">
                   {user?.profileImg ? (
-                    <img
-                      className="h-12 w-12 rounded-full"
-                      src={user?.profileImg}
-                      alt=""
-                    />
+                    <Link to={`/profile/${user?.email}`}>
+                      <img
+                        className="h-12 w-12 rounded-full"
+                        src={user?.profileImg}
+                        alt=""
+                      />
+                    </Link>
                   ) : (
-                    <img
-                      className="h-12 w-12 rounded-full"
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
-                      alt=""
-                    />
+                    <Link to={`/profile/${user?.email}`}>
+                      <img
+                        className="h-12 w-12 rounded-full"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
+                        alt=""
+                      />
+                    </Link>
                   )}
 
                   <div className="ml-3">
-                    <p className="font-semibold">{user.name}</p>
+                    <Link to={`/profile/${user?.email}`}>
+                      <p className="font-semibold">{user.name}</p>
+                    </Link>
+
                     <div className="text-xs flex items-center">
                       <img
                         className="w-4 h-4 rounded-full mr-2"
@@ -95,7 +103,7 @@ const FriendRequest = () => {
           ))}
         </>
       ) : (
-        <p className="py-1">No friend request available...</p>
+        <p className="py-1 text-center">No friend request available...</p>
       )}
     </>
   );

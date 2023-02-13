@@ -101,108 +101,64 @@ const AddFriend = () => {
     <div className="mt-6">
       <hr className="border-b border-gray-400 my-5 opacity-60" />
       <h4 className="font-semibold pl-2 text-lg">Peoples you may know</h4>
-      {restPeople?.map((user, i) => (
-        <div key={i} className="py-4 px-1 hover:bg-slate-300 rounded-md">
-          <div className="flex justify-between items-center">
-            <div className="flex">
-              {user?.profileImg ? (
-                <Link to={`/profile/${user.email}`}>
-                  <img
-                    className="lg:h-12 lg:w-12 h-10 w-10 rounded-full"
-                    src={user?.profileImg}
-                    alt=""
-                  />
-                </Link>
-              ) : (
-                <Link to={`/profile/${user.email}`}>
-                  <img
-                    className="lg:h-12 lg:w-12 h-10 w-10 rounded-full"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
-                    alt=""
-                  />
-                </Link>
-              )}
+      {restPeople?.length ? (
+        <>
+          {" "}
+          {restPeople?.map((user, i) => (
+            <div key={i} className="py-4 px-1 hover:bg-slate-300 rounded-md">
+              <div className="flex justify-between items-center">
+                <div className="flex">
+                  {user?.profileImg ? (
+                    <Link to={`/profile/${user.email}`}>
+                      <img
+                        className="lg:h-12 lg:w-12 h-10 w-10 rounded-full"
+                        src={user?.profileImg}
+                        alt=""
+                      />
+                    </Link>
+                  ) : (
+                    <Link to={`/profile/${user.email}`}>
+                      <img
+                        className="lg:h-12 lg:w-12 h-10 w-10 rounded-full"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
+                        alt=""
+                      />
+                    </Link>
+                  )}
 
-              <div className="ml-3">
-                <Link to={`/profile/${user.email}`}>
-                  <p className="text-base font-semibold hover:underline">
-                    {user?.name?.length > 20
-                      ? `${user?.name.slice(0, 20)}...`
-                      : user.name}
-                  </p>
-                </Link>
-                <div className="text-xs flex items-center">
-                  <img
-                    className="w-4 h-4 rounded-full mr-2"
-                    src={user?.profileImg}
-                    alt=""
-                  />
-                  <p>1 mutual friend</p>
+                  <div className="ml-3">
+                    <Link to={`/profile/${user.email}`}>
+                      <p className="text-base font-semibold hover:underline">
+                        {user?.name?.length > 20
+                          ? `${user?.name.slice(0, 20)}...`
+                          : user.name}
+                      </p>
+                    </Link>
+                    <div className="text-xs flex items-center">
+                      <img
+                        className="w-4 h-4 rounded-full mr-2"
+                        src={user?.profileImg}
+                        alt=""
+                      />
+                      <p>1 mutual friend</p>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    onClick={() => handleAddFriend(user?._id)}
+                    className="bg-[#ff059b] text-gray-100 text-sm px-2 py-[6px] mr-2 rounded-md inline-block"
+                  >
+                    Add friend
+                  </button>
                 </div>
               </div>
             </div>
-            <div>
-              <button
-                onClick={() => handleAddFriend(user?._id)}
-                className="bg-[#ff059b] text-gray-100 text-sm px-2 py-[6px] mr-2 rounded-md inline-block"
-              >
-                Add friend
-              </button>
-            </div>
-          </div>
-        </div>
-      ))}
-      {/* {otherPeaople?.map((user, i) => (
-        <div key={i} className="py-4 px-1 hover:bg-slate-300 rounded-md">
-          <div className="flex justify-between items-center">
-            <div className="flex">
-              {user?.profileImg ? (
-                <Link to={`/profile/${user.email}`}>
-                  <img
-                    className="lg:h-12 lg:w-12 h-10 w-10 rounded-full"
-                    src={user?.profileImg}
-                    alt=""
-                  />
-                </Link>
-              ) : (
-                <Link to={`/profile/${user.email}`}>
-                  <img
-                    className="lg:h-12 lg:w-12 h-10 w-10 rounded-full"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
-                    alt=""
-                  />
-                </Link>
-              )}
-
-              <div className="ml-3">
-                <Link to={`/profile/${user.email}`}>
-                  <p className="text-base font-semibold hover:underline">
-                    {user?.name?.length > 20
-                      ? `${user?.name.slice(0, 20)}...`
-                      : user.name}
-                  </p>
-                </Link>
-                <div className="text-xs flex items-center">
-                  <img
-                    className="w-4 h-4 rounded-full mr-2"
-                    src={user?.profileImg}
-                    alt=""
-                  />
-                  <p>1 mutual friend</p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <button
-                onClick={() => handleAddFriend(user?._id)}
-                className="bg-[#ff059b] text-gray-100 text-sm px-2 py-[6px] mr-2 rounded-md inline-block"
-              >
-                Add friend
-              </button>
-            </div>
-          </div>
-        </div>
-      ))} */}
+          ))}
+        </>
+      ) : (
+        <p className="p-1 text-center">No pleople available</p>
+      )}
     </div>
   );
 };

@@ -79,6 +79,18 @@ export const usersApi = createApi({
       }),
       invalidatesTags: ["Users"],
     }),
+
+    deleteFriend: builder.mutation({
+      query: (sender) => ({
+        url: `deleteFrn/${sender.receiverId}`,
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: sender,
+      }),
+      invalidatesTags: ["Users"],
+    }),
   }),
 });
 
@@ -89,5 +101,6 @@ export const {
   useAcceptRequestMutation,
   useCancleRequestMutation,
   useDeleteRequestMutation,
+  useDeleteFriendMutation,
   useAddProfileOrCoverPhotoOrInfoMutation,
 } = usersApi;

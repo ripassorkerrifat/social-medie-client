@@ -18,7 +18,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sideContainer">
+    <div className="sideContainer max-w-[370px]">
       <div className="sidebarWrapper">
         <ul className="sidebarList">
           <Link to={"/"} className="sidebarListItem">

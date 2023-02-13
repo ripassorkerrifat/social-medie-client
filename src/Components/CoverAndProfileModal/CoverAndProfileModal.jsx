@@ -4,16 +4,24 @@ import { IoMdClose } from "react-icons/io";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import SmallSpiner from "../Spiner/SmallSpiner";
 import { toast } from "react-hot-toast";
-import { useAddProfileOrCoverPhotoOrInfoMutation } from "../../app/fetures/userApi/userSlice";
+import {
+  useAddProfileOrCoverPhotoOrInfoMutation,
+  useGetUserByEmailQuery,
+} from "../../app/fetures/userApi/userSlice";
 import { useAddPostMutation } from "../../app/fetures/postApi/postSlice";
 
 const CoverModal = ({ setPhotoTitle, photoTitle }) => {
   const { user, loading, setLoading, updateUserProfile } =
     useContext(AuthContext);
+
+  const { data: currentUser } = useGetUserByEmailQuery(user.email);
   const [image, setImage] = useState(null);
+
   const [uploadLoading, setUploadLoading] = useState(false);
 
   const [postPost, { isLoading }] = useAddPostMutation();
+  const [name, setName] = useState(user?.displayName);
+  const [designation, setDesignation] = useState(currentUser?.designation);
 
   const removeImage = () => {
     setImage(null);
@@ -35,66 +43,90 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
     const formData = new FormData();
     formData.append("image", image);
 
-    fetch(
-      `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMG_BB_API_KEY}`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setUploadLoading(false);
-        const updateProfilePhoto = {
-          email: user?.email,
-          profileImg: data?.data?.display_url,
-        };
-
-        if (photoTitle === "profilePhoto") {
-          const postInfo = {
-            currentDate,
-            currentTime,
-            photoType: "profile",
-            postImage: data.data.display_url,
-            posterName: user?.displayName,
-            posterEmail: user?.email,
-            posterImg: data.data.display_url,
-            reacts: [],
-            comments: [],
-          };
-
-          updateUserProfile(user?.displayName, data.data.display_url).then(
-            (data) => {
-              addProfileInfo(updateProfilePhoto);
-              postPost(postInfo);
-              toast.success("Profile Photo uploaded....");
-              setPhotoTitle("");
-              setLoading(false);
-            }
-          );
+    if (formData) {
+      fetch(
+        `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMG_BB_API_KEY}`,
+        {
+          method: "POST",
+          body: formData,
         }
-        if (photoTitle === "coverPhoto") {
-          const postInfo = {
-            currentDate,
-            currentTime,
-            photoType: "cover",
-            postImage: data.data.display_url,
-            posterName: user?.displayName,
-            posterEmail: user?.email,
-            posterImg: user?.photoURL,
-            reacts: [],
-            comments: [],
-          };
-          const updateCoverPhoto = {
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setUploadLoading(false);
+          const updateProfileInfo = {
             email: user?.email,
-            coverImg: data?.data?.display_url,
+            profileImg: data?.data?.display_url || currentUser?.profileImg,
+            designation,
+            name,
           };
-          addProfileInfo(updateCoverPhoto);
-          postPost(postInfo);
-          toast.success("Cover Photo uploaded....");
-          setPhotoTitle("");
-        }
-      });
+          const userName = name || user?.displayName;
+
+          if (photoTitle === "profilePhoto") {
+            if (data?.data?.display_url) {
+              const postInfo = {
+                currentDate,
+                currentTime,
+                photoType: "profile",
+                postImage: data.data.display_url,
+                posterName: user?.displayName,
+                posterEmail: user?.email,
+                posterImg: data.data.display_url,
+                reacts: [],
+                comments: [],
+              };
+
+              updateUserProfile(userName, data?.data?.display_url).then(
+                (data) => {
+                  addProfileInfo(updateProfileInfo);
+                  postPost(postInfo);
+                  toast.success("Updated profile info....");
+                  setPhotoTitle("");
+                  setLoading(false);
+                }
+              );
+            } else {
+              if (name) {
+                updateUserProfile(userName, currentUser.profileImg).then(
+                  (data) => {
+                    addProfileInfo(updateProfileInfo);
+                    toast.success("Updated profile info....");
+                    setPhotoTitle("");
+                    setLoading(false);
+                  }
+                );
+              } else {
+                return toast.success("Please add name...");
+              }
+            }
+          }
+
+          if (photoTitle === "coverPhoto") {
+            if (!data?.data?.display_url) {
+              return toast.success("Please added photo....");
+            }
+            const postInfo = {
+              currentDate,
+              currentTime,
+              photoType: "cover",
+              postImage: data.data.display_url,
+              posterName: user?.displayName,
+              posterEmail: user?.email,
+              posterImg: user?.photoURL,
+              reacts: [],
+              comments: [],
+            };
+            const updateCoverPhoto = {
+              email: user?.email,
+              coverImg: data?.data?.display_url,
+            };
+            addProfileInfo(updateCoverPhoto);
+            postPost(postInfo);
+            toast.success("Cover Photo uploaded....");
+            setPhotoTitle("");
+          }
+        });
+    }
   };
   if (isError) {
     return <p>Something went wrong....</p>;
@@ -126,10 +158,40 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
           </label>
           <h3 className="text-lg text-center font-bold pb-2">
             Upload{" "}
-            {photoTitle === "coverPhoto" ? "Cover Photo" : "Profile Photo"}{" "}
+            {photoTitle === "coverPhoto" ? "Cover Photo" : "Profile Info"}{" "}
           </h3>
           <hr />
-          <div className=" pt-4">
+          <div className=" pt-2 ">
+            {photoTitle === "profilePhoto" && (
+              <>
+                <div className="form-control w-full mt-2">
+                  <label className="label">
+                    <span className="text-base">Full Name</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Full name....."
+                    className="input  focus:border-secondary input-bordered w-full focus:outline-none"
+                  />
+                </div>
+                <div className="form-control w-full my-3">
+                  <label className="label">
+                    <span className="text-base">Designation</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="dasignation"
+                    value={designation}
+                    onChange={(e) => setDesignation(e.target.value)}
+                    placeholder="Designation....."
+                    className="input  focus:border-secondary input-bordered w-full focus:outline-none"
+                  />
+                </div>
+              </>
+            )}
             <div className=" bg-white  m-auto border-2 border-dashed border-[#ff059b] rounded-lg">
               {image ? (
                 <div className=" relative">
@@ -164,6 +226,7 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
                 </div>
               )}
             </div>
+
             <button
               onClick={() => handleUpload(photoTitle)}
               className="bg-[#eb0890] hover:bg-[#fd0298] text-gray-100 text-sm px-4 py-[8px] mt-4 w-full rounded-md inline-block"
@@ -171,7 +234,7 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
               {uploadLoading || isLoading || loading ? (
                 <SmallSpiner />
               ) : (
-                "Upload"
+                "Submit"
               )}
             </button>
           </div>

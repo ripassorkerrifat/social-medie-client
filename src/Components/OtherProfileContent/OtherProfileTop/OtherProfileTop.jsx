@@ -1,8 +1,91 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BsMessenger } from "react-icons/bs";
-import { MdAdd } from "react-icons/md";
+import { FcAcceptDatabase } from "react-icons/fc";
+import { MdDelete, MdOutlineCancel, MdPersonAdd } from "react-icons/md";
+import { useLocation } from "react-router-dom";
+import {
+  useAcceptRequestMutation,
+  useAddFriendMutation,
+  useCancleRequestMutation,
+  useDeleteFriendMutation,
+  useGetUserByEmailQuery,
+} from "../../../app/fetures/userApi/userSlice";
+import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
 const OtherProfileTop = ({ data }) => {
+  const { user } = useContext(AuthContext);
+  const { data: currentUser } = useGetUserByEmailQuery(user?.email);
+
+  const location = useLocation();
+  const pathname = location.pathname;
+  const email = pathname.split("/")[2];
+
+  const [addFriend] = useAddFriendMutation();
+  const [cancleReq] = useCancleRequestMutation();
+  const [accpetReq] = useAcceptRequestMutation();
+  const [deleteFrn] = useDeleteFriendMutation();
+
+  const isFriend = currentUser?.friends?.find((u) => u?.email === data?.email);
+
+  const isFollowers = currentUser?.followers?.find(
+    (u) => u?.email === data?.email
+  );
+  const isFollowing = currentUser?.following?.find(
+    (u) => u?.email === data?.email
+  );
+
+  const date = new Date();
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  let currentDate = `${year}-${month}-${day}`;
+  let currentTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+
+  const handleAddFriend = (receiverId) => {
+    const sender = {
+      name: currentUser?.name,
+      email: currentUser?.email,
+      id: currentUser?._id,
+      profileImg: currentUser?.profileImg,
+      receiverId,
+      currentDate,
+      currentTime,
+    };
+    addFriend(sender);
+  };
+
+  const handleCancleRequest = (receiverId) => {
+    const sender = {
+      name: currentUser?.name,
+      email: currentUser?.email,
+      id: currentUser?._id,
+      profileImg: currentUser?.profileImg,
+      receiverId,
+    };
+    cancleReq(sender);
+  };
+
+  const handleAcceptRequest = (receiverId) => {
+    const sender = {
+      name: currentUser?.name,
+      email: currentUser?.email,
+      id: currentUser?._id,
+      profileImg: currentUser?.profileImg,
+      receiverId,
+    };
+    accpetReq(sender);
+  };
+  const handleDeleteFriend = (receiverId) => {
+    const sender = {
+      name: currentUser?.name,
+      email: currentUser?.email,
+      id: currentUser?._id,
+      profileImg: currentUser?.profileImg,
+      receiverId,
+    };
+    deleteFrn(sender);
+  };
+
   return (
     <div>
       <div className="profile-top-container border-b-2">
@@ -43,20 +126,93 @@ const OtherProfileTop = ({ data }) => {
               <h4 className="lg:text-2xl md:text-xl w-full text-base font-semibold mt-3">
                 {data?.name}
               </h4>
-              <span>Web Developer</span>
+              <span>{data?.designation}</span>
             </div>
           </div>
           <div className="text-end inline-block">
-            <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
+            {isFollowers || isFollowing || isFriend ? (
+              <></>
+            ) : (
+              <>
+                {email !== currentUser?.email && (
+                  <>
+                    {" "}
+                    <button
+                      className="inline-flex  bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
+      md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
+                    >
+                      <BsMessenger className="inline-block md:text-xl text-lg mr-1" />{" "}
+                      Message
+                    </button>
+                    <button
+                      onClick={() => handleAddFriend(data._id)}
+                      className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md  mr-2"
+                    >
+                      <MdPersonAdd className="inline-block md:text-xl text-lg  " />{" "}
+                      Add Friend
+                    </button>
+                  </>
+                )}
+              </>
+            )}
+
+            {isFriend && email !== currentUser?.email ? (
+              <>
+                <button
+                  className="inline-flex  bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
           md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
-            >
-              <BsMessenger className="inline-block md:text-xl text-lg mr-1" />{" "}
-              Message
-            </button>
-            <button className="bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md inline-block mr-2">
-              <MdAdd className="inline-block md:text-xl text-lg  " /> Add Friend
-            </button>
+                >
+                  <BsMessenger className="inline-block md:text-xl text-lg mr-1" />{" "}
+                  Message
+                </button>
+                <button
+                  onClick={() => handleDeleteFriend(data._id)}
+                  className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
+                >
+                  <MdDelete className="inline-block md:text-xl text-lg  " />
+                  Delete Friend
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
+            {isFollowing && (
+              <>
+                <button
+                  className="inline-flex  bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
+          md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
+                >
+                  <BsMessenger className="inline-block md:text-xl text-lg mr-1" />{" "}
+                  Message
+                </button>
+
+                <button
+                  onClick={() => handleCancleRequest(data._id)}
+                  className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
+                >
+                  <MdOutlineCancel className="inline-block md:text-xl text-lg  " />
+                  Cancel
+                </button>
+              </>
+            )}
+            {isFollowers && (
+              <>
+                <button
+                  className="inline-flex  bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
+          md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
+                >
+                  <BsMessenger className="inline-block md:text-xl text-lg mr-1" />{" "}
+                  Message
+                </button>
+                <button
+                  onClick={() => handleAcceptRequest(data._id)}
+                  className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
+                >
+                  <FcAcceptDatabase className="inline-block md:text-xl text-lg  " />
+                  Accept
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

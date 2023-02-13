@@ -91,7 +91,7 @@ const CancleRequest = () => {
           ))}
         </>
       ) : (
-        <p className="pt-1">No requested...</p>
+        <p className="pt-1 text-center">No requested...</p>
       )}
     </>
   );

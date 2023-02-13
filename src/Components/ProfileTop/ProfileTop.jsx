@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "./profileTop.css";
 import { AiFillCamera } from "react-icons/ai";
+import { CiEdit } from "react-icons/ci";
 import { useState } from "react";
 import CoverAndProfileModal from "../CoverAndProfileModal/CoverAndProfileModal";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
@@ -53,20 +54,22 @@ const ProfileTop = ({ data }) => {
             />
           )}
 
-          <label
-            htmlFor="cover-photo-modal"
-            onClick={() => setPhotoTitle("profilePhoto")}
-          >
-            <span className="md:w-7 md:h-7 w-5 h-5 rounded-full bg-gray-300 items-center flex justify-center absolute bottom-14 md:bottom-1 left-8 md:left-[74px]">
-              <AiFillCamera className="inline-block md:text-xl text-base  " />
-            </span>
-          </label>
           <div className="md:ml-3 ml-1  leading-5">
             <h4 className="lg:text-2xl md:text-xl w-full text-base font-semibold mt-3">
               {user?.displayName}
             </h4>
-            <span>MERN Stack Developer</span>
+            <span>{data?.designation}</span>
           </div>
+        </div>
+        <div className="text-end inline-block">
+          <label
+            htmlFor="cover-photo-modal"
+            onClick={() => setPhotoTitle("profilePhoto")}
+            className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
+          >
+            <CiEdit className="inline-block md:text-xl text-lg  " />
+            Edit profile
+          </label>
         </div>
       </div>
       {photoTitle && (
