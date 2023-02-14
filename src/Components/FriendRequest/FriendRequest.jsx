@@ -41,12 +41,12 @@ const FriendRequest = () => {
 
   return (
     <>
-      <div>
-        <h5 className="text-gray-800 font-semibold text-lg">Freind Request</h5>
-      </div>
       {currentUser?.followers?.length ? (
         <>
-          {currentUser?.followers?.map((user, i) => (
+          <h5 className="text-gray-800 font-semibold text-lg">
+            Freind Request
+          </h5>
+          {currentUser?.followers?.slice(0, 3)?.map((user, i) => (
             <div key={i} className="py-2 px-1 hover:bg-slate-300 rounded-md">
               <div className="flex justify-between">
                 <div className="flex">
@@ -103,7 +103,7 @@ const FriendRequest = () => {
           ))}
         </>
       ) : (
-        <p className="py-1 text-center">No friend request available...</p>
+        <></>
       )}
     </>
   );

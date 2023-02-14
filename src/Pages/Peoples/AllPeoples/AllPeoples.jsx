@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {
   useAddFriendMutation,
   useGetAllUserQuery,
   useGetUserByEmailQuery,
-} from "../../app/fetures/userApi/userSlice";
-import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+} from "../../../app/fetures/userApi/userSlice";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
-const AddFriend = () => {
-  const [restPeople, setRestPeople] = useState([]);
+const AllPeoples = () => {
   const { user } = useContext(AuthContext);
+  const [restPeople, setRestPeople] = useState([]);
+
   const { data: users, isError, isLoading } = useGetAllUserQuery();
 
   const [addfriend] = useAddFriendMutation();
@@ -98,74 +99,50 @@ const AddFriend = () => {
   }
 
   return (
-    <div className="mt-6">
-      <hr className="border-b border-gray-400 my-5 opacity-60" />
-      <div className="flex justify-between">
-        <h4 className="font-semibold pl-2 text-lg">Peoples you may know</h4>
-        <Link to={"/peoples"}>
-          <p className="mr-1 text-[#ff059b]">See all</p>
-        </Link>
-      </div>
-      {restPeople?.length ? (
-        <>
-          {" "}
-          {restPeople?.slice(0, 4)?.map((user, i) => (
-            <div key={i} className="py-4 px-1 hover:bg-slate-300 rounded-md">
-              <div className="flex justify-between items-center">
-                <div className="flex">
-                  {user?.profileImg ? (
-                    <Link to={`/profile/${user.email}`}>
+    <div className="bg-white flex-1 p-5  overflow-y-auto h-[100vh]">
+      <h4 className="text-xl font-semibold mt-11">Peoples you know may</h4>
+      <div className="grid lg:grid-cols-4 md:grid-cols-2  mt-3 lg:gap-10 md:gap-8 gap-6">
+        {restPeople?.length ? (
+          <>
+            {restPeople?.map((friend) => (
+              <div className="rounded-xl border-2 overflow-hidden">
+                <div>
+                  {friend?.profileImg ? (
+                    <Link to={`/profile/${friend?.email}`}>
                       <img
-                        className="lg:h-12 lg:w-12 h-10 w-10 rounded-full"
-                        src={user?.profileImg}
+                        className="max-h-[240px] w-full"
+                        src={friend.profileImg}
                         alt=""
                       />
                     </Link>
                   ) : (
-                    <Link to={`/profile/${user.email}`}>
+                    <Link to={`/profile/${friend?.email}`}>
                       <img
-                        className="lg:h-12 lg:w-12 h-10 w-10 rounded-full"
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
+                        className="max-h-[240px] w-full"
+                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
                         alt=""
                       />
                     </Link>
                   )}
-
-                  <div className="ml-3">
-                    <Link to={`/profile/${user.email}`}>
-                      <p className="text-base font-semibold hover:underline">
-                        {user?.name?.length > 20
-                          ? `${user?.name.slice(0, 20)}...`
-                          : user.name}
-                      </p>
-                    </Link>
-                    <div className="text-xs flex items-center">
-                      <img
-                        className="w-4 h-4 rounded-full mr-2"
-                        src={user?.profileImg}
-                        alt=""
-                      />
-                      <p>1 mutual friend</p>
-                    </div>
-                  </div>
                 </div>
-                <div>
+                <div className="p-4">
+                  <h4 className="text-xl mb-2">{friend?.name}</h4>
                   <button
-                    onClick={() => handleAddFriend(user?._id)}
-                    className="bg-[#ff059b] text-gray-100 text-sm px-2 py-[6px] mr-2 rounded-md inline-block"
+                    onClick={() => handleAddFriend(friend._id)}
+                    className="bg-[#ff059b] w-full text-gray-100 text-sm px-2 py-[6px] mr-2 rounded-md inline-block"
                   >
                     Add friend
                   </button>
                 </div>
               </div>
-            </div>
-          ))}
-        </>
-      ) : (
-        <p className="p-1 text-center">No pleople available</p>
-      )}
+            ))}
+          </>
+        ) : (
+          <p className=" lg:text-lg ">No peoples available</p>
+        )}
+      </div>
     </div>
   );
 };
 
-export default AddFriend;
+export default AllPeoples;

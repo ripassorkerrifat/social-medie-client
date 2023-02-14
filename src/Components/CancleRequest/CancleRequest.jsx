@@ -29,10 +29,10 @@ const CancleRequest = () => {
 
   return (
     <>
-      <h5 className="text-gray-800 font-semibold text-lg">Sent Request</h5>
       {currentUser?.requests?.length ? (
         <>
-          {currentUser?.requests?.map((user, i) => (
+          <h5 className="text-gray-800 font-semibold text-lg">Sent Request</h5>
+          {currentUser?.requests?.slice(0, 3)?.map((user, i) => (
             <div key={i} className="py-2 px-1 hover:bg-slate-300 rounded-md">
               <div className="flex justify-between">
                 <div className="flex">
@@ -91,7 +91,7 @@ const CancleRequest = () => {
           ))}
         </>
       ) : (
-        <p className="pt-1 text-center">No requested...</p>
+        <></>
       )}
     </>
   );

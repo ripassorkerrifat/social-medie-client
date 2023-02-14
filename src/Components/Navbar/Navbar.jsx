@@ -2,10 +2,13 @@ import React, { Fragment } from "react";
 import "./navbar.scss";
 import { ImSearch } from "react-icons/im";
 import { BsMessenger } from "react-icons/bs";
-import { IoMdNotifications } from "react-icons/io";
+import { IoMdNotifications, IoIosPeople } from "react-icons/io";
 import { AiFillHome, AiFillSetting } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
+import { GoRequestChanges } from "react-icons/go";
 import { FiLogIn } from "react-icons/fi";
+import { FaUserFriends } from "react-icons/fa";
+import { MdEventSeat } from "react-icons/md";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -29,6 +32,26 @@ const Navbar = () => {
       link: "/my-profile",
       name: "Profile",
       icon: <CgProfile className="mr-2 h-5 w-5" aria-hidden="true" />,
+    },
+    {
+      link: "friends",
+      name: "Friends",
+      icon: <FaUserFriends className="mr-2 h-5 w-5" aria-hidden="true" />,
+    },
+    {
+      link: "peoples",
+      name: "Peoples",
+      icon: <IoIosPeople className="mr-2 h-5 w-5" aria-hidden="true" />,
+    },
+    {
+      link: "sent-req",
+      name: "Sent Request",
+      icon: <GoRequestChanges className="mr-2 h-5 w-5" aria-hidden="true" />,
+    },
+    {
+      link: "all-req",
+      name: "Friend Request",
+      icon: <MdEventSeat className="mr-2 h-5 w-5" aria-hidden="true" />,
     },
     {
       link: "",

@@ -7,12 +7,12 @@ const Foloower = ({ data, posts }) => {
 
   const follower = data?.friends?.length;
   const friend = data?.friends?.length;
-  console.log(follower);
-  console.log(friend);
+  // console.log(follower);
+  // console.log(friend);
 
   useEffect(() => {
     if (follower > 1 && friend > 1) {
-      console.log("dukce");
+      // console.log("dukce");
       const result = follower + friend;
       setFollowers(result);
     } else if (follower) {

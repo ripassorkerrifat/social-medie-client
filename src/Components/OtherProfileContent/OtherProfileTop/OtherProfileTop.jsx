@@ -137,13 +137,14 @@ const OtherProfileTop = ({ data }) => {
                 {email !== currentUser?.email && (
                   <>
                     {" "}
-                    <button
+                    <label
+                      htmlFor="chat-modal"
                       className="inline-flex  bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
-      md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
+          md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
                     >
                       <BsMessenger className="inline-block md:text-xl text-lg mr-1" />{" "}
                       Message
-                    </button>
+                    </label>
                     <button
                       onClick={() => handleAddFriend(data._id)}
                       className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md  mr-2"
@@ -158,13 +159,14 @@ const OtherProfileTop = ({ data }) => {
 
             {isFriend && email !== currentUser?.email ? (
               <>
-                <button
+                <label
+                  htmlFor="chat-modal"
                   className="inline-flex  bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
           md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
                 >
                   <BsMessenger className="inline-block md:text-xl text-lg mr-1" />{" "}
                   Message
-                </button>
+                </label>
                 <button
                   onClick={() => handleDeleteFriend(data._id)}
                   className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
@@ -178,13 +180,14 @@ const OtherProfileTop = ({ data }) => {
             )}
             {isFollowing && (
               <>
-                <button
+                <label
+                  htmlFor="chat-modal"
                   className="inline-flex  bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
           md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
                 >
                   <BsMessenger className="inline-block md:text-xl text-lg mr-1" />{" "}
                   Message
-                </button>
+                </label>
 
                 <button
                   onClick={() => handleCancleRequest(data._id)}
@@ -197,13 +200,14 @@ const OtherProfileTop = ({ data }) => {
             )}
             {isFollowers && (
               <>
-                <button
+                <label
+                  htmlFor="chat-modal"
                   className="inline-flex  bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
           md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
                 >
                   <BsMessenger className="inline-block md:text-xl text-lg mr-1" />{" "}
                   Message
-                </button>
+                </label>
                 <button
                   onClick={() => handleAcceptRequest(data._id)}
                   className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"

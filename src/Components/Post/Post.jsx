@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { BiWorld, BiComment } from "react-icons/bi";
 import { AiOutlineLike } from "react-icons/ai";
 import { RiShareForwardLine } from "react-icons/ri";
@@ -40,8 +40,6 @@ const Post = ({ posts, isError }) => {
     { name: "Sad", img: sad1, id: "5" },
     { name: "Angry", img: angry1, id: "6" },
   ];
-
-  useEffect(() => {});
 
   const [addReact] = useAddReactMutation();
   const [removeReact] = useRemoveReactMutation();

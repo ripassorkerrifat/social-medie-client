@@ -11,8 +11,8 @@ const RightSideBar = () => {
       <div className=" p-[12px] mt-[50px]">
         <FriendRequest />
         <Birhtday />
-        <Online />
         <CancleRequest />
+        <Online />
       </div>
     </div>
   );

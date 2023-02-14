@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { AiFillHome, AiFillSave, AiFillSetting } from "react-icons/ai";
+import { AiFillHome, AiFillSetting } from "react-icons/ai";
 import { MdEventSeat } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { IoIosPeople } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import { FaUserFriends } from "react-icons/fa";
-import { BsFillCameraVideoFill } from "react-icons/bs";
 import "./sidebar.scss";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import AddFriend from "../AddFriend/AddFriend";
+import { GoRequestChanges } from "react-icons/go";
 
 const Sidebar = () => {
   const { logout } = useContext(AuthContext);
@@ -18,7 +18,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sideContainer max-w-[370px]">
+    <div className="sideContainer lg:max-w-[350px] md:max-w-[300px]">
       <div className="sidebarWrapper">
         <ul className="sidebarList">
           <Link to={"/"} className="sidebarListItem">
@@ -30,26 +30,23 @@ const Sidebar = () => {
             <span className="sidebarText">Profile</span>
           </Link>
 
-          <li className="sidebarListItem">
-            <BsFillCameraVideoFill className="sidebarIcon" />
-            <span className="sidebarText">Videos</span>
-          </li>
-          <li className="sidebarListItem">
+          <Link to={"/friends"} className="sidebarListItem">
             <FaUserFriends className="sidebarIcon" />
             <span className="sidebarText">Friends</span>
-          </li>
-          <li className="sidebarListItem">
+          </Link>
+          <Link to={"/peoples"} className="sidebarListItem">
             <IoIosPeople className="sidebarIcon" />
             <span className="sidebarText">Peoples</span>
-          </li>
-          <li className="sidebarListItem">
-            <AiFillSave className="sidebarIcon" />
-            <span className="sidebarText">Saved</span>
-          </li>
-          <li className="sidebarListItem">
+          </Link>
+
+          <Link to={"/sent-req"} className="sidebarListItem">
+            <GoRequestChanges className="sidebarIcon" />
+            <span className="sidebarText">Sent request</span>
+          </Link>
+          <Link to={"/all-req"} className="sidebarListItem">
             <MdEventSeat className="sidebarIcon" />
-            <span className="sidebarText">Events</span>
-          </li>
+            <span className="sidebarText">Friend request</span>
+          </Link>
           <li className="sidebarListItem">
             <AiFillSetting className="sidebarIcon" />
             <span className="sidebarText"> Setting & privacy</span>

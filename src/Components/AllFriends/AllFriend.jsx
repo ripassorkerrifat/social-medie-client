@@ -6,7 +6,7 @@ const AllFriend = ({ data }) => {
     <div className="mt-6">
       <h4 className="text-lg font-semibold">Friends</h4>
 
-      {data?.friends.length ? (
+      {data?.friends?.length ? (
         <div className="grid lg:grid-cols-3 grid-cols-2 lg:gap-3 gap-1 mt-2 lg:text-base text-sm">
           {data?.friends?.map((d, i) => (
             <div key={i}>
@@ -29,7 +29,7 @@ const AllFriend = ({ data }) => {
               )}
 
               <h5>
-                {d.name.length > 10 ? `${d.name.slice(0, 10)}....` : d.name}{" "}
+                {d?.name?.length > 10 ? `${d.name.slice(0, 10)}....` : d.name}{" "}
               </h5>
             </div>
           ))}
