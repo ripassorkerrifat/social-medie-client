@@ -104,8 +104,8 @@ const AllPeoples = () => {
       <div className="grid lg:grid-cols-4 md:grid-cols-2  mt-3 lg:gap-10 md:gap-8 gap-6">
         {restPeople?.length ? (
           <>
-            {restPeople?.map((friend) => (
-              <div className="rounded-xl border-2 overflow-hidden">
+            {restPeople?.map((friend, i) => (
+              <div key={i} className="rounded-xl border-2 overflow-hidden">
                 <div>
                   {friend?.profileImg ? (
                     <Link to={`/profile/${friend?.email}`}>

@@ -32,8 +32,8 @@ const AllSentReq = () => {
       <div className="grid lg:grid-cols-4 md:grid-cols-2  mt-3 lg:gap-10 md:gap-8 gap-6">
         {currentUser?.following?.length ? (
           <>
-            {currentUser?.following?.map((friend) => (
-              <div className="rounded-xl border-2 overflow-hidden">
+            {currentUser?.following?.map((friend, i) => (
+              <div key={i} className="rounded-xl border-2 overflow-hidden">
                 <div>
                   {friend?.profileImg ? (
                     <Link to={`/profile/${friend?.email}`}>

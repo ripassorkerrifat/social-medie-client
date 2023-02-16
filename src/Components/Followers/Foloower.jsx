@@ -3,15 +3,11 @@ import React, { useEffect, useState } from "react";
 const Foloower = ({ data, posts }) => {
   const [followers, setFollowers] = useState(0);
 
-  console.log(data);
-
-  const follower = data?.friends?.length;
+  const follower = data?.followers?.length;
   const friend = data?.friends?.length;
-  // console.log(follower);
-  // console.log(friend);
 
   useEffect(() => {
-    if (follower > 1 && friend > 1) {
+    if (follower > 0 && friend > 0) {
       // console.log("dukce");
       const result = follower + friend;
       setFollowers(result);

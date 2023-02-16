@@ -10,12 +10,20 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import AddFriend from "../AddFriend/AddFriend";
 import { GoRequestChanges } from "react-icons/go";
+import {
+  useGetAllUserQuery,
+  useGetUserByEmailQuery,
+} from "../../app/fetures/userApi/userSlice";
 
 const Sidebar = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
   const handleLogOut = () => {
     logout().then();
   };
+
+  const { data: currentUser } = useGetUserByEmailQuery(user.email);
+
+  const { data: users, isError, isLoading } = useGetAllUserQuery();
 
   return (
     <div className="sideContainer lg:max-w-[350px] md:max-w-[300px]">
@@ -58,7 +66,12 @@ const Sidebar = () => {
         </ul>
 
         <div>
-          <AddFriend />
+          <AddFriend
+            currentUser={currentUser}
+            users={users}
+            isError={isError}
+            isLoading={isLoading}
+          />
         </div>
       </div>
     </div>

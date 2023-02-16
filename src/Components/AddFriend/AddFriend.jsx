@@ -1,21 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  useAddFriendMutation,
-  useGetAllUserQuery,
-  useGetUserByEmailQuery,
-} from "../../app/fetures/userApi/userSlice";
+import { useAddFriendMutation } from "../../app/fetures/userApi/userSlice";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import SmallSpiner from "../Spiner/SmallSpiner";
 
-const AddFriend = () => {
-  const [restPeople, setRestPeople] = useState([]);
+const AddFriend = ({ currentUser, users, isError, isLoading }) => {
   const { user } = useContext(AuthContext);
-  const { data: users, isError, isLoading } = useGetAllUserQuery();
+  const [restPeople, setRestPeople] = useState([]);
 
   const [addfriend] = useAddFriendMutation();
 
   const otherPeople = users?.filter((u) => u.email !== user?.email);
-  const { data: currentUser } = useGetUserByEmailQuery(user.email);
 
   const friends = currentUser?.friends;
   const following = currentUser?.following;
@@ -41,6 +36,15 @@ const AddFriend = () => {
         ({ _id: id1 }) => !friends?.some(({ id: id2 }) => id2 === id1)
       );
       setRestPeople(restPeopleByFriends);
+    } else if (following?.length && followers?.length) {
+      const restPeopleByFollowing = otherPeople?.filter(
+        ({ _id: id1 }) => !following?.some(({ id: id2 }) => id2 === id1)
+      );
+      const restPeopleByFollowers = restPeopleByFollowing?.filter(
+        ({ _id: id1 }) => !followers?.some(({ id: id2 }) => id2 === id1)
+      );
+      console.log("okaa");
+      setRestPeople(restPeopleByFollowers);
     } else if (followers?.length && friends?.length) {
       const restPeopleByFollowers = otherPeople?.filter(
         ({ _id: id1 }) => !followers?.some(({ id: id2 }) => id2 === id1)
@@ -91,7 +95,7 @@ const AddFriend = () => {
   };
 
   if (isLoading) {
-    return;
+    return <SmallSpiner />;
   }
   if (isError) {
     return <p>Something went wrong...</p>;
@@ -99,16 +103,18 @@ const AddFriend = () => {
 
   return (
     <div className="mt-6">
-      <hr className="border-b border-gray-400 my-5 opacity-60" />
-      <div className="flex justify-between">
-        <h4 className="font-semibold pl-2 text-lg">Peoples you may know</h4>
-        <Link to={"/peoples"}>
-          <p className="mr-1 text-[#ff059b]">See all</p>
-        </Link>
-      </div>
       {restPeople?.length ? (
         <>
-          {" "}
+          <hr className="border-b border-gray-400 my-5 opacity-60" />
+          <div className="flex justify-between">
+            <h4 className="font-semibold pl-2 text-lg">Peoples you may know</h4>
+            {restPeople?.length > 4 && (
+              <Link to={"/peoples"}>
+                <p className="mr-1 text-[#ff059b]">See all</p>
+              </Link>
+            )}
+          </div>
+
           {restPeople?.slice(0, 4)?.map((user, i) => (
             <div key={i} className="py-4 px-1 hover:bg-slate-300 rounded-md">
               <div className="flex justify-between items-center">
@@ -162,7 +168,7 @@ const AddFriend = () => {
           ))}
         </>
       ) : (
-        <p className="p-1 text-center">No pleople available</p>
+        <></>
       )}
     </div>
   );

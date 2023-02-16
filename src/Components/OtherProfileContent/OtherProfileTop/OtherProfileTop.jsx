@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { BsMessenger } from "react-icons/bs";
 import { FcAcceptDatabase } from "react-icons/fc";
 import { MdDelete, MdOutlineCancel, MdPersonAdd } from "react-icons/md";
@@ -11,8 +11,11 @@ import {
   useGetUserByEmailQuery,
 } from "../../../app/fetures/userApi/userSlice";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
+import Chat from "../../Chat/Chat";
 
 const OtherProfileTop = ({ data }) => {
+  const [oppositeUserEmail, setOppositeUserEmail] = useState("");
+
   const { user } = useContext(AuthContext);
   const { data: currentUser } = useGetUserByEmailQuery(user?.email);
 
@@ -136,9 +139,9 @@ const OtherProfileTop = ({ data }) => {
               <>
                 {email !== currentUser?.email && (
                   <>
-                    {" "}
                     <label
                       htmlFor="chat-modal"
+                      onClick={() => setOppositeUserEmail(data.email)}
                       className="inline-flex  bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
           md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
                     >
@@ -161,6 +164,7 @@ const OtherProfileTop = ({ data }) => {
               <>
                 <label
                   htmlFor="chat-modal"
+                  onClick={() => setOppositeUserEmail(data.email)}
                   className="inline-flex  bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
           md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
                 >
@@ -182,6 +186,7 @@ const OtherProfileTop = ({ data }) => {
               <>
                 <label
                   htmlFor="chat-modal"
+                  onClick={() => setOppositeUserEmail(data.email)}
                   className="inline-flex  bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
           md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
                 >
@@ -202,6 +207,7 @@ const OtherProfileTop = ({ data }) => {
               <>
                 <label
                   htmlFor="chat-modal"
+                  onClick={() => setOppositeUserEmail(data.email)}
                   className="inline-flex  bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm md:px-4 
           md:py-[6px] px-1 py-1 md:mr-4 rounded-md md:mt-0 mt-2  mr-2 "
                 >
@@ -220,6 +226,12 @@ const OtherProfileTop = ({ data }) => {
           </div>
         </div>
       </div>
+      {oppositeUserEmail && (
+        <Chat
+          oppositeUserEmail={oppositeUserEmail}
+          setOppositeUserEmail={setOppositeUserEmail}
+        />
+      )}
     </div>
   );
 };

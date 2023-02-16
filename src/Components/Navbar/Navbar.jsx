@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import "./navbar.scss";
 import { ImSearch } from "react-icons/im";
 import { BsMessenger } from "react-icons/bs";
@@ -17,6 +17,7 @@ import ChatBox from "../ChatBox/ChatBox";
 import Chat from "../Chat/Chat";
 
 const Navbar = () => {
+  const [oppositeUserEmail, setOppositeUserEmail] = useState("");
   const { logout, user } = useContext(AuthContext);
   const handleLogOut = () => {
     logout().then();
@@ -103,8 +104,8 @@ const Navbar = () => {
               >
                 <Menu.Items className="absolute -right-[100px] top-[38px]  mt-2 md: md:w-[350px] w-[300px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg shadow-[#080808] focus:outline-none">
                   <Menu.Item>
-                    <div className="h-[93vh] overflow-scroll p-3">
-                      <ChatBox />
+                    <div className="max-h-[93vh] overflow-scroll p-3">
+                      <ChatBox setOppositeUserEmail={setOppositeUserEmail} />
                     </div>
                   </Menu.Item>
                 </Menu.Items>
@@ -199,9 +200,14 @@ const Navbar = () => {
               </Transition>
             </Menu>
           </div>
+          {oppositeUserEmail && (
+            <Chat
+              oppositeUserEmail={oppositeUserEmail}
+              setOppositeUserEmail={setOppositeUserEmail}
+            />
+          )}
         </div>
       </div>
-      <Chat />
     </div>
   );
 };
