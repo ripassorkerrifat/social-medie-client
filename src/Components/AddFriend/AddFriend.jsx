@@ -8,7 +8,7 @@ const AddFriend = ({ currentUser, users, isError, isLoading }) => {
   const { user } = useContext(AuthContext);
   const [restPeople, setRestPeople] = useState([]);
 
-  const [addfriend] = useAddFriendMutation();
+  const [addfriend, { isLoading: addLoad }] = useAddFriendMutation();
 
   const otherPeople = users?.filter((u) => u.email !== user?.email);
 
@@ -157,6 +157,7 @@ const AddFriend = ({ currentUser, users, isError, isLoading }) => {
                 </div>
                 <div>
                   <button
+                    disabled={addLoad}
                     onClick={() => handleAddFriend(user?._id)}
                     className="bg-[#ff059b] text-gray-100 text-sm px-2 py-[6px] mr-2 rounded-md inline-block"
                   >

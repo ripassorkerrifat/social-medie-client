@@ -38,6 +38,7 @@ export const usersApi = createApi({
         method: "PUT",
         headers: {
           "Content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("socail-token")}`,
         },
         body: sender,
       }),
@@ -50,6 +51,7 @@ export const usersApi = createApi({
         method: "PUT",
         headers: {
           "Content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("socail-token")}`,
         },
         body: sender,
       }),
@@ -62,6 +64,7 @@ export const usersApi = createApi({
         method: "PUT",
         headers: {
           "Content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("socail-token")}`,
         },
         body: sender,
       }),
@@ -74,6 +77,7 @@ export const usersApi = createApi({
         method: "PUT",
         headers: {
           "Content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("socail-token")}`,
         },
         body: sender,
       }),
@@ -86,6 +90,7 @@ export const usersApi = createApi({
         method: "PUT",
         headers: {
           "Content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("socail-token")}`,
         },
         body: sender,
       }),

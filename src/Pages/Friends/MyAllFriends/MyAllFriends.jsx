@@ -40,7 +40,7 @@ const MyAllFriends = () => {
                   {friend?.profileImg ? (
                     <Link to={`/profile/${friend?.email}`}>
                       <img
-                        className="max-h-[240px] w-full"
+                        className="h-[200px] w-full"
                         src={friend.profileImg}
                         alt=""
                       />
@@ -48,7 +48,7 @@ const MyAllFriends = () => {
                   ) : (
                     <Link to={`/profile/${friend?.email}`}>
                       <img
-                        className="max-h-[240px] w-full"
+                        className="h-[200px] w-full"
                         src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
                         alt=""
                       />

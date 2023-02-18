@@ -13,7 +13,7 @@ const AllPeoples = () => {
 
   const { data: users, isError, isLoading } = useGetAllUserQuery();
 
-  const [addfriend] = useAddFriendMutation();
+  const [addfriend, { isLoading: addLoading }] = useAddFriendMutation();
 
   const otherPeople = users?.filter((u) => u.email !== user?.email);
   const { data: currentUser } = useGetUserByEmailQuery(user.email);
@@ -110,7 +110,7 @@ const AllPeoples = () => {
                   {friend?.profileImg ? (
                     <Link to={`/profile/${friend?.email}`}>
                       <img
-                        className="max-h-[240px] w-full"
+                        className="h-[200px] w-full"
                         src={friend.profileImg}
                         alt=""
                       />
@@ -118,7 +118,7 @@ const AllPeoples = () => {
                   ) : (
                     <Link to={`/profile/${friend?.email}`}>
                       <img
-                        className="max-h-[240px] w-full"
+                        className="h-[200px] w-full"
                         src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
                         alt=""
                       />
@@ -128,6 +128,7 @@ const AllPeoples = () => {
                 <div className="p-4">
                   <h4 className="text-xl mb-2">{friend?.name}</h4>
                   <button
+                    disabled={addLoading}
                     onClick={() => handleAddFriend(friend._id)}
                     className="bg-[#ff059b] w-full text-gray-100 text-sm px-2 py-[6px] mr-2 rounded-md inline-block"
                   >

@@ -48,12 +48,13 @@ const Login = () => {
             const user = result.user;
             saveUserAndsetToken(user);
             action.resetForm();
+            navigate("/");
             updateUserProfile(name)
               .then((data) => {
                 saveUserAndsetToken(user);
-                toast.success("Created user succesfully..!!");
-                navigate("/");
                 setLoading(false);
+
+                toast.success("Created user succesfully..!!");
                 // verifyEmail()
                 //   .then(() => {
                 //     toast.success(

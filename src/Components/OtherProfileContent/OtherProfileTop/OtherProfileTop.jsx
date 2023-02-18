@@ -23,7 +23,7 @@ const OtherProfileTop = ({ data }) => {
   const pathname = location.pathname;
   const email = pathname.split("/")[2];
 
-  const [addFriend] = useAddFriendMutation();
+  const [addFriend, { isLoading }] = useAddFriendMutation();
   const [cancleReq] = useCancleRequestMutation();
   const [accpetReq] = useAcceptRequestMutation();
   const [deleteFrn] = useDeleteFriendMutation();
@@ -149,6 +149,7 @@ const OtherProfileTop = ({ data }) => {
                       Message
                     </label>
                     <button
+                      disabled={isLoading}
                       onClick={() => handleAddFriend(data._id)}
                       className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md  mr-2"
                     >

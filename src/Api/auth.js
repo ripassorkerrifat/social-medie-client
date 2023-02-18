@@ -3,7 +3,7 @@ export const saveUserAndsetToken = (user) => {
     email: user.email,
     name: user.displayName,
   };
-  fetch(`http://localhost:5000/user/${user.email}`, {
+  fetch(`https://social-media-server-livid.vercel.app/user/${user.email}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",

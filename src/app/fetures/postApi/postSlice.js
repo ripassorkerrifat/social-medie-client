@@ -10,6 +10,9 @@ export const postsApi = createApi({
     getAllPost: builder.query({
       query: () => ({
         url: "posts",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("socail-token")}`,
+        },
       }),
       providesTags: ["Posts"],
     }),
@@ -17,6 +20,9 @@ export const postsApi = createApi({
     getPostByEmail: builder.query({
       query: (email) => ({
         url: `posts/${email}`,
+        headers: {
+          authorization: `bearer ${localStorage.getItem("socail-token")}`,
+        },
       }),
       providesTags: ["ProfilePosts"],
     }),
@@ -27,6 +33,7 @@ export const postsApi = createApi({
         method: "POST",
         headers: {
           "Content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("user-token")}`,
         },
         body: post,
       }),
