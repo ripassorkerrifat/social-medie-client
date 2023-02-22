@@ -22,7 +22,7 @@ const ProfileTop = ({ data }) => {
           />
         ) : (
           <div className="relative bg-gray-800 lg:h-[350px] md:h-[300px] h-[200px] flex justify-center items-center">
-            <h4 className="text-[#ff059b] font-semibold lg:text-5xl md:text-3xl">
+            <h4 className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-[#a624d1] font-semibold lg:text-5xl md:text-3xl">
               Add your cover photo
             </h4>
           </div>
@@ -65,7 +65,7 @@ const ProfileTop = ({ data }) => {
           <label
             htmlFor="cover-photo-modal"
             onClick={() => setPhotoTitle("profilePhoto")}
-            className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
+            className="inline-flex bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-[#a624d1]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
           >
             <CiEdit className="inline-block md:text-xl text-lg  " />
             Edit profile

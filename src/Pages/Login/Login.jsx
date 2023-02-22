@@ -46,13 +46,12 @@ const Login = () => {
         createUser(email, password)
           .then((result) => {
             const user = result.user;
-            saveUserAndsetToken(user);
-            action.resetForm();
-            navigate("/");
             updateUserProfile(name)
               .then((data) => {
                 saveUserAndsetToken(user);
                 setLoading(false);
+                action.resetForm();
+                navigate("/");
 
                 toast.success("Created user succesfully..!!");
                 // verifyEmail()
@@ -88,9 +87,10 @@ const Login = () => {
         .then((result) => {
           const user = result.user;
           saveUserAndsetToken(user);
+          navigate(from, { replace: true });
           action.resetForm();
           setLoading(false);
-          navigate(from, { replace: true });
+
           toast.success("Login succesfully..!!");
         })
         .catch((err) => {

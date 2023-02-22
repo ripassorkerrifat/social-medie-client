@@ -13,7 +13,7 @@ const Online = () => {
         >
           <div className="relative">
             <img
-              className="h-11 w-11 rounded-full border-2 border-[#ff059b]"
+              className="h-11 w-11 rounded-full border-2 border-[#a624d1]"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4dk4UI8851PK6MaEJ8rwcKzfhNdYqEkZmvGv8wLRUSbtqmg23Fsi2NvZ6VL51ehm5WIU&usqp=CAU"
               alt=""
             />

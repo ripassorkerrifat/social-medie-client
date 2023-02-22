@@ -22,7 +22,7 @@
 .sideContainer .sidebarWrapper .sidebarList .sidebarListItem .sidebarIcon {
   margin: 0px 10px;
   font-size: 23px;
-  color: #ff059b;
+  color: #a624d1;
 }
 .sideContainer .sidebarWrapper .sidebarList .sidebarListItem .sidebarText {
   font-size: 18px;
@@ -50,4 +50,4 @@
   .sidebarListItem:hover .sidebarText {
     display: block;
   }
-}/*# sourceMappingURL=sidebar.css.map */
+} /*# sourceMappingURL=sidebar.css.map */

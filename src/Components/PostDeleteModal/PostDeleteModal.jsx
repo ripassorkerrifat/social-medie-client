@@ -46,7 +46,7 @@ const PostDeleteModal = ({ id, setShowDeleteModal }) => {
             <div className="flex flex-row justify-center items-center">
               <button
                 onClick={handleDeletePost}
-                className="bg-[#ff059b] text-gray-100 text-sm px-7 py-[6px] mr-4 rounded-md inline-block"
+                className="bg-[#a624d1] text-gray-100 text-sm px-7 py-[6px] mr-4 rounded-md inline-block"
               >
                 Yes
               </button>

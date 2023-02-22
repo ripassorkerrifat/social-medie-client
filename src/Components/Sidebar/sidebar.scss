@@ -21,7 +21,7 @@
         .sidebarIcon {
           margin: 0px 10px;
           font-size: 21px;
-          color: #ff059b;
+          color: #a624d1;
         }
         .sidebarText {
           font-size: 16px;
@@ -34,14 +34,14 @@
 }
 
 ::-webkit-scrollbar {
-  // width: 5px;
-  display: none;
+  width: 8px;
+  // display: none;
 }
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 ::-webkit-scrollbar-thumb {
-  background: gray;
+  background: #d6d4c5;
 }
 
 // responsivensss

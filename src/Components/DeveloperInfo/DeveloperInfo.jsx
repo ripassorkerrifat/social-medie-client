@@ -14,7 +14,7 @@ const DeveloperInfo = () => {
       <a
         href={resume}
         download
-        className="bg-[#ff059b] w-full text-center text-gray-100 text-sm px-3 py-[6px] mr-2 rounded-md inline-block mb-4"
+        className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-[#a624d1] w-full text-center text-gray-100 text-sm px-3 py-[6px] mr-2 rounded-md inline-block mb-4"
       >
         Get Resume
       </a>

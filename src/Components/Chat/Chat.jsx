@@ -60,13 +60,13 @@ const Chat = ({ oppositeUserEmail, setOppositeUserEmail }) => {
                 <div className="relative">
                   {oppositeUser?.profileImg ? (
                     <img
-                      className="h-11 w-11 rounded-full border-2 border-[#ff059b]"
+                      className="h-11 w-11 rounded-full border-2 border-[#a624d1]"
                       src={oppositeUser?.profileImg}
                       alt=""
                     />
                   ) : (
                     <img
-                      className="h-11 w-11 rounded-full border-2 border-[#ff059b]"
+                      className="h-11 w-11 rounded-full border-2 border-[#a624d1]"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
                       alt=""
                     />
@@ -113,13 +113,13 @@ const Chat = ({ oppositeUserEmail, setOppositeUserEmail }) => {
                 <div className="flex-none flex flex-col space-y-1 mr-4">
                   {user.profileImg ? (
                     <img
-                      className="h-10 w-10 rounded-full border-2 border-[#ff059b]"
+                      className="h-10 w-10 rounded-full border-2 border-[#a624d1]"
                       src={oppositeUser?.profileImg}
                       alt=""
                     />
                   ) : (
                     <img
-                      className="h-10 w-10 rounded-full border-2 border-[#ff059b]"
+                      className="h-10 w-10 rounded-full border-2 border-[#a624d1]"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
                       alt=""
                     />
@@ -139,19 +139,19 @@ const Chat = ({ oppositeUserEmail, setOppositeUserEmail }) => {
               <div className="flex items-center flex-row-reverse mb-4">
                 <div className="flex-none flex flex-col space-y-1 ml-4">
                   <img
-                    className="h-10 w-10 rounded-full border-2 border-[#ff059b]"
+                    className="h-10 w-10 rounded-full border-2 border-[#a624d1]"
                     src={rifat}
                     alt=""
                   />
                 </div>
-                <div className="flex-1 bg-[#ff059b] text-gray-100 p-2 rounded-lg mb-2 relative">
+                <div className="flex-1 bg-[#a624d1] text-gray-100 p-2 rounded-lg mb-2 relative">
                   <div>
                     I have not implemented the real-time chat system as it has
                     some deployment-related issues. Deploying it requires a
                     premium website, so I didn't implement it. But I can
                     implement it.
                   </div>
-                  <div className="absolute right-0 top-1/2 transform translate-x-1/2 rotate-45 w-2 h-2 bg-[#ff059b]"></div>
+                  <div className="absolute right-0 top-1/2 transform translate-x-1/2 rotate-45 w-2 h-2 bg-[#a624d1]"></div>
                 </div>
               </div>
               {/* my text end */}
@@ -160,13 +160,13 @@ const Chat = ({ oppositeUserEmail, setOppositeUserEmail }) => {
                 <div className="flex-none flex flex-col space-y-1 mr-4">
                   {user.profileImg ? (
                     <img
-                      className="h-10 w-10 rounded-full border-2 border-[#ff059b]"
+                      className="h-10 w-10 rounded-full border-2 border-[#a624d1]"
                       src={oppositeUser?.profileImg}
                       alt=""
                     />
                   ) : (
                     <img
-                      className="h-10 w-10 rounded-full border-2 border-[#ff059b]"
+                      className="h-10 w-10 rounded-full border-2 border-[#a624d1]"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkA7r1pd3h80Lq9uOByb2ALq5FoOAe-Mq0j3_EZzmOo4tXO0CUkRHQrbXMruyClSGA87E&usqp=CAU"
                       alt=""
                     />
@@ -184,14 +184,14 @@ const Chat = ({ oppositeUserEmail, setOppositeUserEmail }) => {
               <div className="flex items-center flex-row-reverse mb-4">
                 <div className="flex-none flex flex-col space-y-1 ml-4">
                   <img
-                    className="h-10 w-10 rounded-full border-2 border-[#ff059b]"
+                    className="h-10 w-10 rounded-full border-2 border-[#a624d1]"
                     src={rifat}
                     alt=""
                   />
                 </div>
-                <div className="flex-1 bg-[#ff059b] text-gray-100 p-2 rounded-lg mb-2 relative">
+                <div className="flex-1 bg-[#a624d1] text-gray-100 p-2 rounded-lg mb-2 relative">
                   <div>Yeah! Thank you,,,,,</div>
-                  <div className="absolute right-0 top-1/2 transform translate-x-1/2 rotate-45 w-2 h-2 bg-[#ff059b]"></div>
+                  <div className="absolute right-0 top-1/2 transform translate-x-1/2 rotate-45 w-2 h-2 bg-[#a624d1]"></div>
                 </div>
               </div>
               {/* my text end */}
@@ -200,13 +200,13 @@ const Chat = ({ oppositeUserEmail, setOppositeUserEmail }) => {
             {/* bottom section  */}
             <div className="flex items-center border-t p-2">
               <div className="flex items-baseline">
-                <button className="inline-flex bg-[#ff059b] rounded-full p-1.5 text-gray-100 mr-1">
+                <button className="inline-flex bg-[#a624d1] rounded-full p-1.5 text-gray-100 mr-1">
                   <AiFillPlusCircle size={17} />
                 </button>
-                <button className="inline-flex bg-[#ff059b] rounded-full p-1.5 text-gray-100 mr-1">
+                <button className="inline-flex bg-[#a624d1] rounded-full p-1.5 text-gray-100 mr-1">
                   <FaPhotoVideo size={17} />
                 </button>
-                <button className="inline-flex bg-[#ff059b] rounded-full p-1.5 text-gray-100 ">
+                <button className="inline-flex bg-[#a624d1] rounded-full p-1.5 text-gray-100 ">
                   <BsFillEmojiLaughingFill size={17} />
                 </button>
               </div>

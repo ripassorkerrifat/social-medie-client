@@ -92,7 +92,7 @@ const PersonalInfo = ({ data }) => {
         <label
           htmlFor="profile-edit-modal"
           onClick={() => setOpenModal(true)}
-          className="bg-[#ff059b]  text-center w-full mt-3 text-gray-200 text-sm px-4 py-[6px] mr-4 rounded-md inline-block "
+          className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-[#a624d1]  text-center w-full mt-3 text-gray-200 text-sm px-4 py-[6px] mr-4 rounded-md inline-block "
         >
           Add/Edit Info
         </label>

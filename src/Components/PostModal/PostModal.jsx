@@ -179,7 +179,7 @@ const PostModal = ({ setOpenModal }) => {
               <BsEmojiFrown
                 onClick={() => setPicker(!picker)}
                 size={24}
-                className="inline-block mb-2 text-right text-[#ff059b] z-50"
+                className="inline-block mb-2 text-right text-[#a624d1] z-50"
               />
               {picker && (
                 <div className="absolute rounded-lg bg-white z-50 md:right-10 md:top-[227px] top-[228px]">
@@ -187,7 +187,7 @@ const PostModal = ({ setOpenModal }) => {
                 </div>
               )}
             </label>
-            <div className=" bg-white  m-auto border-2 border-dashed border-[#ff059b] rounded-lg">
+            <div className=" bg-white  m-auto border-2 border-dashed border-[#a624d1] rounded-lg">
               {file ? (
                 <div className=" relative">
                   <img
@@ -206,7 +206,7 @@ const PostModal = ({ setOpenModal }) => {
                 <div className=" m-3 hover:bg-slate-200 duration-300 rounded-lg">
                   <label htmlFor="file">
                     <div className="w-full flex justify-center items-center flex-col p-3 py-6">
-                      <FiUploadCloud className="text-3xl inline-block text-center text-[#ff059b]" />
+                      <FiUploadCloud className="text-3xl inline-block text-center text-[#a624d1]" />
                       <p className="text-gray-800">Add Photos/Videos</p>
                     </div>
                     <input

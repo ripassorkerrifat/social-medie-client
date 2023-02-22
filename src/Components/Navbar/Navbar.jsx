@@ -66,7 +66,7 @@ const Navbar = () => {
       <div className="leftside">
         <Link
           to={"/"}
-          className="font-semibold text-[#ff059b] lg:text-3xl md:text-2xl text-xl md:px-6 py-2"
+          className="font-semibold text-[#a624d1] lg:text-3xl md:text-2xl text-xl md:px-6 py-2"
         >
           R<span className="text-gray-400">S</span>R Media
         </Link>
@@ -158,7 +158,7 @@ const Navbar = () => {
                             to={`${item.link}`}
                             className={`${
                               active
-                                ? "bg-[#ff059b] text-white"
+                                ? "bg-[#a624d1] text-white"
                                 : "text-gray-900"
                             } group flex w-full items-center rounded-md px-2 py-2 text-base`}
                           >
@@ -177,7 +177,7 @@ const Navbar = () => {
                         <Link
                           onClick={handleLogOut}
                           className={`${
-                            active ? "bg-[#ff059b] text-white" : "text-gray-900"
+                            active ? "bg-[#a624d1] text-white" : "text-gray-900"
                           } group flex w-full items-center rounded-md px-2 py-2 text-base`}
                         >
                           {active ? (

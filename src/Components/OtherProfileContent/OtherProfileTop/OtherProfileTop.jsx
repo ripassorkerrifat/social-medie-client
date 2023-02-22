@@ -102,7 +102,7 @@ const OtherProfileTop = ({ data }) => {
             />
           ) : (
             <div className="relative bg-gray-800 lg:h-[350px] md:h-[300px] h-[200px] flex justify-center items-center">
-              <h4 className="text-[#ff059b] text-center font-semibold lg:text-5xl md:text-3xl">
+              <h4 className="text-[#a624d1] text-center font-semibold lg:text-5xl md:text-3xl">
                 No cover photo uploaded...
               </h4>
             </div>
@@ -151,7 +151,7 @@ const OtherProfileTop = ({ data }) => {
                     <button
                       disabled={isLoading}
                       onClick={() => handleAddFriend(data._id)}
-                      className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md  mr-2"
+                      className="inline-flex bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-[#a624d1]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md  mr-2"
                     >
                       <MdPersonAdd className="inline-block md:text-xl text-lg  " />{" "}
                       Add Friend
@@ -174,7 +174,7 @@ const OtherProfileTop = ({ data }) => {
                 </label>
                 <button
                   onClick={() => handleDeleteFriend(data._id)}
-                  className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
+                  className="inline-flex bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-[#a624d1]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
                 >
                   <MdDelete className="inline-block md:text-xl text-lg  " />
                   Delete Friend
@@ -197,7 +197,7 @@ const OtherProfileTop = ({ data }) => {
 
                 <button
                   onClick={() => handleCancleRequest(data._id)}
-                  className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
+                  className="inline-flex bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-[#a624d1]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
                 >
                   <MdOutlineCancel className="inline-block md:text-xl text-lg  " />
                   Cancel
@@ -217,7 +217,7 @@ const OtherProfileTop = ({ data }) => {
                 </label>
                 <button
                   onClick={() => handleAcceptRequest(data._id)}
-                  className="inline-flex bg-[#ff059b]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
+                  className="inline-flex bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-[#a624d1]  text-gray-200 text-sm md:px-4 px-1 py-1 md:mt-2 md:py-[6px] md:mr-4 rounded-md mr-2"
                 >
                   <FcAcceptDatabase className="inline-block md:text-xl text-lg  " />
                   Accept

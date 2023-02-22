@@ -126,7 +126,7 @@ const ProfileEditModal = ({ setOpenModal, data }) => {
           </div>
           <button
             type="submit"
-            className="bg-[#ff059b]  text-center w-full mt-3 text-gray-200 text-sm px-4 py-[8px]  rounded-md inline-block "
+            className="bg-[#a624d1]  text-center w-full mt-3 text-gray-200 text-sm px-4 py-[8px]  rounded-md inline-block "
           >
             {isLoading ? <Loader /> : " Add/Edit Info"}
           </button>

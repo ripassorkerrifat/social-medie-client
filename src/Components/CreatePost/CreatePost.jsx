@@ -46,7 +46,7 @@ const CreatePost = () => {
           htmlFor="post-modal"
           className="flex items-center hover:bg-gray-300 rounded-lg p-2"
         >
-          <TbVideoPlus className="inline-block md:text-3xl text-2xl text-[#ff059b]" />
+          <TbVideoPlus className="inline-block md:text-3xl text-2xl text-[#a624d1]" />
           <span className="inline-block font-semibold ml-2 ">
             Live <span className="hidden md:inline-block">Video</span>
           </span>

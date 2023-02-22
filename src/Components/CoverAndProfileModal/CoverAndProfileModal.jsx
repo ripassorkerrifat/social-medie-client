@@ -192,7 +192,7 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
                 </div>
               </>
             )}
-            <div className=" bg-white  m-auto border-2 border-dashed border-[#ff059b] rounded-lg">
+            <div className=" bg-white  m-auto border-2 border-dashed border-[#a624d1] rounded-lg">
               {image ? (
                 <div className=" relative">
                   <img
@@ -211,7 +211,7 @@ const CoverModal = ({ setPhotoTitle, photoTitle }) => {
                 <div className=" m-3 hover:bg-slate-200 duration-300 rounded-lg">
                   <label htmlFor="file">
                     <div className="w-full flex justify-center items-center flex-col p-3 py-6">
-                      <FiUploadCloud className="text-3xl inline-block text-center text-[#ff059b]" />
+                      <FiUploadCloud className="text-3xl inline-block text-center text-[#a624d1]" />
                       <p className="text-gray-800">Upload Photo</p>
                     </div>
                     <input

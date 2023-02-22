@@ -35,7 +35,7 @@ const PostActions = ({ post }) => {
                     htmlFor="delete-post"
                     onClick={() => setShowDeleteModal(true)}
                     className={`${
-                      active ? "bg-[#ff059b] text-white" : "text-gray-900"
+                      active ? "bg-[#a624d1] text-white" : "text-gray-900"
                     } group inline-flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     {active ? (
@@ -53,7 +53,7 @@ const PostActions = ({ post }) => {
                     htmlFor="update-post"
                     onClick={() => setShowUpdateModal(true)}
                     className={`${
-                      active ? "bg-[#ff059b] text-white" : "text-gray-900"
+                      active ? "bg-[#a624d1] text-white" : "text-gray-900"
                     } group inline-flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     {active ? (
