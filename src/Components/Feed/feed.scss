@@ -1,10 +1,9 @@
 .feedContainer {
-  flex: 6;
-  height: 100vh;
-  background: white;
-  overflow-y: auto;
-  .feedWrapper {
-    margin-top: 50px;
-    padding: 20px;
-  }
+   flex: 6;
+   height: 100vh;
+   background: white;
+   overflow-y: auto;
+   .feedWrapper {
+      margin-top: 50px;
+   }
 }

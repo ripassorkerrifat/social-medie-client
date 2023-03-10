@@ -1,114 +1,114 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const postsApi = createApi({
-  reducerPath: "postsApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "https://social-media-server-livid.vercel.app/",
-  }),
-  tagTypes: ["Posts", "ProfilePosts"],
-  endpoints: (builder) => ({
-    getAllPost: builder.query({
-      query: () => ({
-        url: "posts",
+   reducerPath: "postsApi",
+   baseQuery: fetchBaseQuery({
+      baseUrl: "https://social-media-server-livid.vercel.app/",
+   }),
+   tagTypes: ["Posts", "ProfilePosts"],
+   endpoints: (builder) => ({
+      getAllPost: builder.query({
+         query: () => ({
+            url: "posts",
+         }),
+         providesTags: ["Posts"],
       }),
-      providesTags: ["Posts"],
-    }),
 
-    getPostByEmail: builder.query({
-      query: (email) => ({
-        url: `posts/${email}`,
+      getPostByEmail: builder.query({
+         query: (email) => ({
+            url: `posts/${email}`,
+         }),
+         providesTags: ["ProfilePosts"],
       }),
-      providesTags: ["ProfilePosts"],
-    }),
 
-    addPost: builder.mutation({
-      query: (post) => ({
-        url: "post",
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: post,
+      addPost: builder.mutation({
+         query: (post) => ({
+            url: "post",
+            method: "POST",
+            headers: {
+               "Content-type": "application/json",
+            },
+            body: post,
+         }),
+         invalidatesTags: ["Posts", "ProfilePosts"],
       }),
-      invalidatesTags: ["Posts", "ProfilePosts"],
-    }),
 
-    updateProfilePhoto: builder.mutation({
-      query: (post) => ({
-        url: "post",
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: post,
+      updateProfilePhoto: builder.mutation({
+         query: (post) => ({
+            url: "post",
+            method: "POST",
+            headers: {
+               "Content-type": "application/json",
+            },
+            body: post,
+         }),
+         invalidatesTags: ["Posts", "ProfilePosts"],
       }),
-      invalidatesTags: ["Posts", "ProfilePosts"],
-    }),
-    updatePost: builder.mutation({
-      query: (post) => ({
-        url: `update/${post._id}`,
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: post,
+      updatePost: builder.mutation({
+         query: (post) => ({
+            url: `update/${post._id}`,
+            method: "PUT",
+            headers: {
+               "Content-type": "application/json",
+            },
+            body: post,
+         }),
+         invalidatesTags: ["Posts", "ProfilePosts"],
       }),
-      invalidatesTags: ["Posts", "ProfilePosts"],
-    }),
 
-    deletePost: builder.mutation({
-      query: (id) => ({
-        url: `post/${id}`,
-        method: "DELETE",
+      deletePost: builder.mutation({
+         query: (id) => ({
+            url: `post/${id}`,
+            method: "DELETE",
+         }),
+         invalidatesTags: ["ProfilePosts"],
       }),
-      invalidatesTags: ["ProfilePosts"],
-    }),
 
-    addComment: builder.mutation({
-      query: (commemt) => ({
-        url: `comment/${commemt.id}`,
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: commemt,
+      addComment: builder.mutation({
+         query: (commemt) => ({
+            url: `comment/${commemt.id}`,
+            method: "PUT",
+            headers: {
+               "Content-type": "application/json",
+            },
+            body: commemt,
+         }),
+         invalidatesTags: ["Posts", "ProfilePosts"],
       }),
-      invalidatesTags: ["Posts", "ProfilePosts"],
-    }),
 
-    addReact: builder.mutation({
-      query: (react) => ({
-        url: `react/${react.id}`,
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: react,
+      addReact: builder.mutation({
+         query: (react) => ({
+            url: `react/${react.id}`,
+            method: "PUT",
+            headers: {
+               "Content-type": "application/json",
+            },
+            body: react,
+         }),
+         invalidatesTags: ["Posts", "ProfilePosts"],
       }),
-      invalidatesTags: ["Posts", "ProfilePosts"],
-    }),
 
-    removeReact: builder.mutation({
-      query: (react) => ({
-        url: `delete/${react.id}`,
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: react,
+      removeReact: builder.mutation({
+         query: (react) => ({
+            url: `delete/${react.id}`,
+            method: "DELETE",
+            headers: {
+               "Content-type": "application/json",
+            },
+            body: react,
+         }),
+         invalidatesTags: ["Posts", "ProfilePosts"],
       }),
-      invalidatesTags: ["Posts", "ProfilePosts"],
-    }),
-  }),
+   }),
 });
 
 export const {
-  useGetAllPostQuery,
-  useGetPostByEmailQuery,
-  useUpdatePostMutation,
-  useAddPostMutation,
-  useDeletePostMutation,
-  useAddCommentMutation,
-  useAddReactMutation,
-  useRemoveReactMutation,
+   useGetAllPostQuery,
+   useGetPostByEmailQuery,
+   useUpdatePostMutation,
+   useAddPostMutation,
+   useDeletePostMutation,
+   useAddCommentMutation,
+   useAddReactMutation,
+   useRemoveReactMutation,
 } = postsApi;

@@ -7,20 +7,20 @@ import Stories from "../Stories/Stories";
 import "./feed.scss";
 
 const Feed = () => {
-  const { data: posts, isLoading, isError } = useGetAllPostQuery();
+   const { data: posts, isLoading, isError } = useGetAllPostQuery();
 
-  if (isLoading) {
-    return <Loader />;
-  }
-  return (
-    <div className="feedContainer">
-      <div className="feedWrapper">
-        <Stories />
-        <CreatePost />
-        <Post posts={posts} isError={isError} />
+   if (isLoading) {
+      return <Loader />;
+   }
+   return (
+      <div className="feedContainer">
+         <div className="feedWrapper md:p-5 p-3">
+            <Stories />
+            <CreatePost />
+            <Post posts={posts} isError={isError} />
+         </div>
       </div>
-    </div>
-  );
+   );
 };
 
 export default Feed;

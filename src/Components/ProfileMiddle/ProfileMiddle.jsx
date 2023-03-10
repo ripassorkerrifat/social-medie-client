@@ -6,16 +6,16 @@ import ProfileTop from "../ProfileTop/ProfileTop";
 import "./profileMiddle.css";
 
 const ProfileMiddle = ({ data, posts, isError }) => {
-  return (
-    <div className="feedContainer">
-      <div className="p-5">
-        <ProfileTop data={data} />
-        <Foloower posts={posts} data={data} />
-        <CreatePost />
-        <Post posts={posts} isError={isError} />
+   return (
+      <div className="feedContainer">
+         <div className="md:p-5 p-3 mt-11">
+            <ProfileTop data={data} />
+            <Foloower posts={posts} data={data} />
+            <CreatePost />
+            <Post posts={posts} isError={isError} />
+         </div>
       </div>
-    </div>
-  );
+   );
 };
 
 export default ProfileMiddle;

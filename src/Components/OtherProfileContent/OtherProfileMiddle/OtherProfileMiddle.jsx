@@ -5,15 +5,15 @@ import OtherProfileTop from "../OtherProfileTop/OtherProfileTop";
 import "./otherProfileMiddle.css";
 
 const OtherProfileMiddle = ({ data, posts, isError }) => {
-  return (
-    <div className="feedContainer">
-      <div className="p-5 mt-7">
-        <OtherProfileTop data={data} />
-        <Foloower posts={posts} data={data} />
-        <Post posts={posts} isError={isError} />
+   return (
+      <div className="feedContainer">
+         <div className="md:p-5 p-3 mt-11">
+            <OtherProfileTop data={data} />
+            <Foloower posts={posts} data={data} />
+            <Post posts={posts} isError={isError} />
+         </div>
       </div>
-    </div>
-  );
+   );
 };
 
 export default OtherProfileMiddle;
